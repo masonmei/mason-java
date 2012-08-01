@@ -3,4 +3,16 @@
   <groupId>org.personal.mason.study.apache</groupId>
   <artifactId>apache-proj-study</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+      <dependency>
+          <groupId>commons-dbutils</groupId>
+          <artifactId>commons-dbutils</artifactId>
+          <version>1.5</version>
+      </dependency>
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.21</version>
+      </dependency>
+  </dependencies>
 </project>
