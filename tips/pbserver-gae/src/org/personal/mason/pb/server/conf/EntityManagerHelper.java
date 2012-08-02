@@ -18,7 +18,7 @@ public class EntityManagerHelper {
 	static {
 		emf = EMF.get();		
 		threadLocal = new ThreadLocal<EntityManager>();
-		logger = Logger.getLogger("tmp");
+		logger = Logger.getLogger("EntityManagerHelper");
 		logger.setLevel(Level.ALL);
 	}
 		

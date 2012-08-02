@@ -1,12 +1,13 @@
 package org.personal.mason.pb.server.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,66 +17,76 @@ import javax.persistence.TemporalType;
 @Entity
 public class Resource implements BaseEntity {
 
-private static final long serialVersionUID = 7280829499314917780L;
-private Long id;
-private String resourcename;
-private Date builddate;
-private String description;
+	private static final long serialVersionUID = 7280829499314917780L;
 
-// Constructors
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String resourcename;
+	private Date builddate;
+	private String description;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Relation relation;
 
-/** default constructor */
-public Resource() {
-}
+	// Constructors
 
-/** minimal constructor */
-public Resource(String resourcename) {
-	this.resourcename = resourcename;
-}
+	/** default constructor */
+	public Resource() {
+	}
 
-/** full constructor */
-public Resource(String resourcename, Date builddate,
-        String description) {
-	this.resourcename = resourcename;
-	this.builddate = builddate;
-	this.description = description;
-}
+	/** minimal constructor */
+	public Resource(String resourcename) {
+		this.resourcename = resourcename;
+	}
 
-// Property accessors
-@Override
-@Id
-@GeneratedValue(strategy = IDENTITY)
-public Long getId() {
-	return this.id;
-}
+	/** full constructor */
+	public Resource(String resourcename, Date builddate, String description) {
+		this.resourcename = resourcename;
+		this.builddate = builddate;
+		this.description = description;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	// Property accessors
+	@Override
+	public Long getId() {
+		return this.id;
+	}
 
-public String getResourcename() {
-	return this.resourcename;
-}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-public void setResourcename(String resourcename) {
-	this.resourcename = resourcename;
-}
+	public String getResourcename() {
+		return this.resourcename;
+	}
 
-@Temporal(TemporalType.DATE)
-public Date getBuilddate() {
-	return this.builddate;
-}
+	public void setResourcename(String resourcename) {
+		this.resourcename = resourcename;
+	}
 
-public void setBuilddate(Date builddate) {
-	this.builddate = builddate;
-}
+	@Temporal(TemporalType.DATE)
+	public Date getBuilddate() {
+		return this.builddate;
+	}
 
-public String getDescription() {
-	return this.description;
-}
+	public void setBuilddate(Date builddate) {
+		this.builddate = builddate;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Relation getRelation() {
+		return relation;
+	}
+
+	public void setRelation(Relation relation) {
+		this.relation = relation;
+	}
 
 }

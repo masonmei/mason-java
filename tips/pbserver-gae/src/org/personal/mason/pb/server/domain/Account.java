@@ -1,7 +1,5 @@
 package org.personal.mason.pb.server.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,6 +22,9 @@ public class Account implements BaseEntity {
 // Fields
 
 private static final long serialVersionUID = 6713930970706941265L;
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 private Relation relation;
 private String account;
@@ -30,6 +32,8 @@ private String email;
 private String username;
 private String secret;
 private Timestamp createdate;
+
+@OneToMany(cascade = CascadeType.ALL, mappedBy="account")
 private Set<Relation> relations = new HashSet<Relation>(0);
 
 // Constructors
@@ -59,8 +63,6 @@ public Account(Relation relation, String account, String email,
 
 // Property accessors
 @Override
-@Id
-@GeneratedValue(strategy = IDENTITY)
 public Long getId() {
 	return this.id;
 }
@@ -118,7 +120,6 @@ public void setCreatedate(Timestamp createdate) {
 	this.createdate = createdate;
 }
 
-@OneToMany(cascade = CascadeType.ALL)
 public Set<Relation> getRelations() {
 	return this.relations;
 }

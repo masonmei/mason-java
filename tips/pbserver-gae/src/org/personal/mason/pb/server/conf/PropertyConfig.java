@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyConfig {
-private static final String PROPERTYCONFIGFILE = "config/config.properties";
+private static final String PROPERTYCONFIGFILE = "config.properties";
 private static Properties configProp = new Properties();
 static {
 	try {
@@ -20,8 +20,4 @@ public static Properties getConfigProp() {
 	return configProp;
 }
 
-public static void main(String[] args) {
-	String property = PropertyConfig.getConfigProp().getProperty("ACCOUNTEXPIRETIME");
-	System.out.println(property);
-}
 }

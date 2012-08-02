@@ -5,8 +5,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,90 +18,101 @@ import javax.persistence.TemporalType;
 @Entity
 public class Record implements BaseEntity {
 
-private static final long serialVersionUID = -2600644981581057766L;
-// Fields
+	private static final long serialVersionUID = -2600644981581057766L;
+	// Fields
 
-private Long id;
-private String type;
-private Date startdate;
-private Date enddate;
-private String accomplishment;
-private String description;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	private Long id;
+	private String type;
+	private Date startdate;
+	private Date enddate;
+	private String accomplishment;
+	private String description;
 
-// Constructors
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Relation relation;
 
-/** default constructor */
-public Record() {
-}
+	// Constructors
 
-/** minimal constructor */
-public Record(String type, Date startdate) {
-	this.type = type;
-	this.startdate = startdate;
-}
+	/** default constructor */
+	public Record() {
+	}
 
-/** full constructor */
-public Record(String type, Date startdate, Date enddate,
-        String accomplishment, String description) {
-	this.type = type;
-	this.startdate = startdate;
-	this.enddate = enddate;
-	this.accomplishment = accomplishment;
-	this.description = description;
-}
+	/** minimal constructor */
+	public Record(String type, Date startdate) {
+		this.type = type;
+		this.startdate = startdate;
+	}
 
-// Property accessors
-@Override
-@Id
-@GeneratedValue(strategy = IDENTITY)
-public Long getId() {
-	return this.id;
-}
+	/** full constructor */
+	public Record(String type, Date startdate, Date enddate,
+			String accomplishment, String description) {
+		this.type = type;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.accomplishment = accomplishment;
+		this.description = description;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	// Property accessors
+	@Override
+	public Long getId() {
+		return this.id;
+	}
 
-public String getAccomplishment() {
-	return this.accomplishment;
-}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-public void setAccomplishment(String accomplishment) {
-	this.accomplishment = accomplishment;
-}
+	public String getAccomplishment() {
+		return this.accomplishment;
+	}
 
-public String getDescription() {
-	return this.description;
-}
+	public void setAccomplishment(String accomplishment) {
+		this.accomplishment = accomplishment;
+	}
 
-public void setDescription(String description) {
-	this.description = description;
-}
+	public String getDescription() {
+		return this.description;
+	}
 
-@Temporal(TemporalType.DATE)
-public Date getEnddate() {
-	return this.enddate;
-}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-public void setEnddate(Date enddate) {
-	this.enddate = enddate;
-}
+	@Temporal(TemporalType.DATE)
+	public Date getEnddate() {
+		return this.enddate;
+	}
 
-@Temporal(TemporalType.DATE)
-public Date getStartdate() {
-	return this.startdate;
-}
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
+	}
 
-public void setStartdate(Date startdate) {
-	this.startdate = startdate;
-}
+	@Temporal(TemporalType.DATE)
+	public Date getStartdate() {
+		return this.startdate;
+	}
 
-public String getType() {
-	return this.type;
-}
+	public void setStartdate(Date startdate) {
+		this.startdate = startdate;
+	}
 
-public void setType(String type) {
-	this.type = type;
-}
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Relation getRelation() {
+		return relation;
+	}
+
+	public void setRelation(Relation relation) {
+		this.relation = relation;
+	}
 
 }
