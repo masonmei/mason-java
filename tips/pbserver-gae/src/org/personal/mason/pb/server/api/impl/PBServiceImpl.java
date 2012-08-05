@@ -12,7 +12,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -40,7 +39,6 @@ public PBServiceImpl() {
 	relationManager = proxy.getProxiedRelationManager();
 	accountManager = proxy.getProxiedAccountManager();
 	activityManager = new AccountActivityManager();
-	activityManager.run();
 }
 
 @POST
@@ -131,11 +129,14 @@ public PBRelation modifyRelation(PBRelation relation, @HeaderParam("Token") Stri
 @Path("/relation/delete/{id}")
 public boolean deleteRelation(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
-		activityManager.updateAccountActivity(token);
-		return relationManager.deleteRelation(id);
+		PBAccount account = activityManager.getAccount(token);
+		if(account != null){
+			return relationManager.deleteRelation(id);
+		}
 	} catch (Exception e) {
 		return false;
 	}
+	return false;
 }
 
 @DELETE
@@ -144,11 +145,14 @@ public boolean deleteRelation(@PathParam("id") Long id, @HeaderParam("Token") St
 @Path("/record/delete/{id}")
 public boolean deleteRecord(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
-		activityManager.updateAccountActivity(token);
-		return relationManager.deleteRecord(id);
+		PBAccount account = activityManager.getAccount(token);
+		if(account != null){
+			return relationManager.deleteRecord(id);
+		}
 	} catch (Exception e) {
 		return false;
 	}
+	return false;
 }
 
 @DELETE
@@ -157,59 +161,62 @@ public boolean deleteRecord(@PathParam("id") Long id, @HeaderParam("Token") Stri
 @Path("/resource/delete/{id}")
 public boolean deleteResource(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
-		activityManager.updateAccountActivity(token);
-		relationManager.deleteResource(id);
-		return true;
+		PBAccount account = activityManager.getAccount(token);
+		if(account != null){
+			relationManager.deleteResource(id);
+			return true;
+		}
 	} catch (Exception e) {
 		return false;
 	}
+	return false;
 }
 
-@GET
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("/relation/retrieve/{type}/{value}")
-public Set<PBRelation> getRelations(@PathParam("type") String type, @PathParam("value") String value, @HeaderParam("Token") String token) {
-	String lctype = type.toLowerCase().trim();
-	PBAccount account = activityManager.getAccount(token);
-	if (account != null) {
-		Account acc = ModelConvetor.unConvertAccount(account);
-		if (lctype.equals("name")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByName(acc, value));
-		} else if (lctype.equals("cellphone")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByCellPhone(acc, value));
-		} else if (lctype.equals("phone")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByPhone(acc, value));
-		} else if (lctype.equals("contact")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByContact(acc, value));
-		} else if (lctype.equals("accomplishment")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByAccomplishment(acc, value));
-		} else if (lctype.equals("recorddesc")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByPersonalRecordDes(acc, value));
-		} else if (lctype.equals("resourcedesc")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByResourceDes(acc, value));
-		}
-	}
-	return null;
-}
-
-@GET
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("/relation/retrieve/{type}")
-public Set<PBRelation> getRelations(@PathParam("type") String type, @QueryParam("title") String title, @QueryParam("value") String value,
-        @HeaderParam("Token") String token) {
-	String lctype = type.toLowerCase().trim();
-	PBAccount account = activityManager.getAccount(token);
-	if (account != null) {
-		if (lctype.equals("accomplishment")) {
-			return ModelConvetor.convertRelations(relationManager.getRelationsByTypeAndAccomplishment(ModelConvetor.unConvertAccount(account), title, value));
-		} else if (lctype.equals("recorddesc")) {
-			return ModelConvetor
-			        .convertRelations(relationManager.getRelationsByTypeAndPersonalRecordDes(ModelConvetor.unConvertAccount(account), title, value));
-		}
-	}
-	return null;
-}
+//@GET
+//@Produces(MediaType.APPLICATION_JSON)
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Path("/relation/retrieve/{type}/{value}")
+//public Set<PBRelation> getRelations(@PathParam("type") String type, @PathParam("value") String value, @HeaderParam("Token") String token) {
+//	String lctype = type.toLowerCase().trim();
+//	PBAccount account = activityManager.getAccount(token);
+//	if (account != null) {
+//		Account acc = ModelConvetor.unConvertAccount(account);
+//		if (lctype.equals("name")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByName(acc, value));
+//		} else if (lctype.equals("cellphone")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByCellPhone(acc, value));
+//		} else if (lctype.equals("phone")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByPhone(acc, value));
+//		} else if (lctype.equals("contact")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByContact(acc, value));
+//		} else if (lctype.equals("accomplishment")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByAccomplishment(acc, value));
+//		} else if (lctype.equals("recorddesc")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByPersonalRecordDes(acc, value));
+//		} else if (lctype.equals("resourcedesc")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByResourceDes(acc, value));
+//		}
+//	}
+//	return null;
+//}
+//
+//@GET
+//@Produces(MediaType.APPLICATION_JSON)
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Path("/relation/retrieve/{type}")
+//public Set<PBRelation> getRelations(@PathParam("type") String type, @QueryParam("title") String title, @QueryParam("value") String value,
+//        @HeaderParam("Token") String token) {
+//	String lctype = type.toLowerCase().trim();
+//	PBAccount account = activityManager.getAccount(token);
+//	if (account != null) {
+//		if (lctype.equals("accomplishment")) {
+//			return ModelConvetor.convertRelations(relationManager.getRelationsByTypeAndAccomplishment(ModelConvetor.unConvertAccount(account), title, value));
+//		} else if (lctype.equals("recorddesc")) {
+//			return ModelConvetor
+//			        .convertRelations(relationManager.getRelationsByTypeAndPersonalRecordDes(ModelConvetor.unConvertAccount(account), title, value));
+//		}
+//	}
+//	return null;
+//}
 
 }
