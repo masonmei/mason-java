@@ -35,14 +35,14 @@ public boolean deleteRecord(Long id, String token);
 public boolean deleteResource(Long id, String token);
 
 
-public Set<PBRelation> getRelations(String type,
-        String value,
-        String token);
-
-
-public Set<PBRelation> getRelations(String type,
-        String title,
-        String value,
-        String token);
+//public Set<PBRelation> getRelations(String type,
+//        String value,
+//        String token);
+//
+//
+//public Set<PBRelation> getRelations(String type,
+//        String title,
+//        String value,
+//        String token);
 
 }
