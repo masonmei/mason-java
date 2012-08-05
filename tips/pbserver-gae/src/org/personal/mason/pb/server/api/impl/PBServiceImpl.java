@@ -3,6 +3,18 @@ package org.personal.mason.pb.server.api.impl;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
 import org.personal.mason.pb.server.api.PBService;
 import org.personal.mason.pb.server.api.model.PBAccount;
@@ -17,6 +29,7 @@ import org.personal.mason.pb.server.service.IServiceProxy;
 import org.personal.mason.pb.server.service.impl.ServiceProxy;
 import org.personal.mason.pb.server.utils.ModelConvetor;
 
+@Path("/pbservice/")
 public class PBServiceImpl implements PBService {
 private IRelationManager relationManager;
 private IAccountManager accountManager;
@@ -30,8 +43,11 @@ public PBServiceImpl() {
 	activityManager.run();
 }
 
-@Override
-public PBAccount createAccount(PBAccount account, HttpServletResponse response) {
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/account/create")
+public PBAccount createAccount(PBAccount account, @Context HttpServletResponse response) {
 	Account createAccount = accountManager.createAccount(ModelConvetor.unConvertAccount(account));
 	PBAccount convertAccount = ModelConvetor.convertAccount(createAccount);
 	String token = activityManager.putAccount(convertAccount);
@@ -39,24 +55,33 @@ public PBAccount createAccount(PBAccount account, HttpServletResponse response) 
 	return convertAccount;
 }
 
-@Override
-public PBAccount validateAccount(PBAccount account, HttpServletResponse response) {
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/account/validate")
+public PBAccount validateAccount(PBAccount account, @Context HttpServletResponse response) {
 	PBAccount convertAccount = ModelConvetor.convertAccount(accountManager.validateAccount(ModelConvetor.unConvertAccount(account)));
 	String token = activityManager.putAccount(convertAccount);
 	response.addHeader("Token", token);
 	return convertAccount;
 }
 
-@Override
-public PBAccount modifyAccount(PBAccount account, HttpServletResponse response) {
+@PUT
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/account/modify")
+public PBAccount modifyAccount(PBAccount account, @Context HttpServletResponse response) {
 	PBAccount convertAccount = ModelConvetor.convertAccount(accountManager.modifyAccount(ModelConvetor.unConvertAccount(account)));
 	String token = activityManager.putAccount(convertAccount);
 	response.addHeader("Token", token);
 	return convertAccount;
 }
 
-@Override
-public Set<PBRelation> listRelations(String token) {
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/list")
+public Set<PBRelation> listRelations(@HeaderParam("Token") String token) {
 	PBAccount account = activityManager.getAccount(token);
 	if (account != null) {
 		Account acc = ModelConvetor.unConvertAccount(account);
@@ -65,8 +90,11 @@ public Set<PBRelation> listRelations(String token) {
 	return null;
 }
 
-@Override
-public PBRelation addRelation(PBRelation relation, String token) {
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/add")
+public PBRelation addRelation(PBRelation relation, @HeaderParam("Token") String token) {
 	try {
 		PBAccount account = activityManager.getAccount(token);
 		if (account != null) {
@@ -80,8 +108,11 @@ public PBRelation addRelation(PBRelation relation, String token) {
 	}
 }
 
-@Override
-public PBRelation modifyRelation(PBRelation relation, String token) {
+@PUT
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/modify")
+public PBRelation modifyRelation(PBRelation relation, @HeaderParam("Token") String token) {
 	try {
 		PBAccount account = activityManager.getAccount(token);
 		if (account != null) {
@@ -94,8 +125,11 @@ public PBRelation modifyRelation(PBRelation relation, String token) {
 	}
 }
 
-@Override
-public boolean deleteRelation(Long id, String token) {
+@DELETE
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/delete/{id}")
+public boolean deleteRelation(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
 		activityManager.updateAccountActivity(token);
 		return relationManager.deleteRelation(id);
@@ -104,8 +138,11 @@ public boolean deleteRelation(Long id, String token) {
 	}
 }
 
-@Override
-public boolean deleteRecord(Long id, String token) {
+@DELETE
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/record/delete/{id}")
+public boolean deleteRecord(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
 		activityManager.updateAccountActivity(token);
 		return relationManager.deleteRecord(id);
@@ -114,8 +151,11 @@ public boolean deleteRecord(Long id, String token) {
 	}
 }
 
-@Override
-public boolean deleteResource(Long id, String token) {
+@DELETE
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/resource/delete/{id}")
+public boolean deleteResource(@PathParam("id") Long id, @HeaderParam("Token") String token) {
 	try {
 		activityManager.updateAccountActivity(token);
 		relationManager.deleteResource(id);
@@ -125,8 +165,11 @@ public boolean deleteResource(Long id, String token) {
 	}
 }
 
-@Override
-public Set<PBRelation> getRelations(String type, String value, String token) {
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/retrieve/{type}/{value}")
+public Set<PBRelation> getRelations(@PathParam("type") String type, @PathParam("value") String value, @HeaderParam("Token") String token) {
 	String lctype = type.toLowerCase().trim();
 	PBAccount account = activityManager.getAccount(token);
 	if (account != null) {
@@ -150,8 +193,12 @@ public Set<PBRelation> getRelations(String type, String value, String token) {
 	return null;
 }
 
-@Override
-public Set<PBRelation> getRelations(String type, String title, String value, String token) {
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/relation/retrieve/{type}")
+public Set<PBRelation> getRelations(@PathParam("type") String type, @QueryParam("title") String title, @QueryParam("value") String value,
+        @HeaderParam("Token") String token) {
 	String lctype = type.toLowerCase().trim();
 	PBAccount account = activityManager.getAccount(token);
 	if (account != null) {
