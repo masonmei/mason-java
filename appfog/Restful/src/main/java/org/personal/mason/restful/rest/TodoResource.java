@@ -1,4 +1,4 @@
-package org.personal.mason.restful.rest.resources;
+package org.personal.mason.restful.rest;
 
 import java.util.Collection;
 
