@@ -1,7 +1,7 @@
 package org.personal.mason.job.service;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import org.personal.mason.job.dao.IDAO;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +20,19 @@ public class DefaultService<T> implements IService<T> {
 	}
 
 	@Override
-	public Collection<T> findAll() {
+	public List<T> findAll() {
 		return dao.findAll();
 	}
 
 	@Override
-	public Collection<T> findInScope(int start, int length) {
+	public List<T> findInScope(int start, int length) {
 		return dao.findInScope(start, length);
 	}
 
+	public List<T> findByExample(final T instance){
+		return dao.findByExample(instance);
+	}
+	
 	@Override
 	@Transactional
 	public void update(T entity) {
@@ -41,6 +45,12 @@ public class DefaultService<T> implements IService<T> {
 		dao.delete(entity);
 	}
 
+	@Override
+	@Transactional
+	public void deleteById(Serializable id) {
+		dao.deleteById(id);
+	}
+	
 	@Override
 	@Transactional
 	public void save(T entity) {

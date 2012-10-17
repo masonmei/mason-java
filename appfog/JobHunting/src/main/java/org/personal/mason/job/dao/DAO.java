@@ -17,7 +17,7 @@ import org.hibernate.criterion.Example;
 
 public class DAO<T> implements IDAO<T> {
 
-private final Log log = LogFactory.getLog(this.getClass().getSimpleName() + "DAO");
+protected final Log log = LogFactory.getLog(this.getClass().getSimpleName());
 
 protected EntityManager entityManager;
 protected Class<T> clazz;
