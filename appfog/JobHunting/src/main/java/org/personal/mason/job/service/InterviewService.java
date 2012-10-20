@@ -1,5 +1,6 @@
 package org.personal.mason.job.service;
 
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.InterviewDao;
 import org.personal.mason.job.domain.Interview;
 
@@ -12,8 +13,12 @@ public InterviewDao getInterviewDao() {
 }
 
 public void setInterviewDao(InterviewDao interviewDao) {
-	super.setDao(interviewDao);
 	this.interviewDao = interviewDao;
+}
+
+@Override
+public DAO<Interview> getDao() {
+	return interviewDao;
 }
 
 }

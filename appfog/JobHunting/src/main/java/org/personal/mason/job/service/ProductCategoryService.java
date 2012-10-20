@@ -2,6 +2,7 @@ package org.personal.mason.job.service;
 
 import java.util.List;
 
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.ProductCategoryDao;
 import org.personal.mason.job.domain.ProductCategory;
 
@@ -14,8 +15,12 @@ public ProductCategoryDao getProductCategoryDao() {
 }
 
 public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
-	super.setDao(productCategoryDao);
 	this.productCategoryDao = productCategoryDao;
+}
+
+@Override
+public DAO<ProductCategory> getDao() {
+	return productCategoryDao;
 }
 
 public List<ProductCategory> getProductCategoryRoots() {

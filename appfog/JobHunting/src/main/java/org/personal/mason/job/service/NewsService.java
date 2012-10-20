@@ -1,5 +1,6 @@
 package org.personal.mason.job.service;
 
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.NewsDao;
 import org.personal.mason.job.domain.News;
 
@@ -12,8 +13,12 @@ public NewsDao getNewsDao() {
 }
 
 public void setNewsDao(NewsDao newsDao) {
-	super.setDao(newsDao);
 	this.newsDao = newsDao;
+}
+
+@Override
+public DAO<News> getDao() {
+	return newsDao;
 }
 
 }

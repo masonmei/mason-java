@@ -1,15 +1,26 @@
 package org.personal.mason.job.service;
 
+import javax.annotation.Resource;
+
 import org.jasypt.util.password.PasswordEncryptor;
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.UserDao;
 import org.personal.mason.job.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service("userService")
 public class UserService extends DefaultService<User> {
 
+@Resource
 private UserDao userDao;
 
+@Autowired
 private PasswordEncryptor passwordEncryptor;
+
+public UserService() {
+}
 
 public void setPasswordEncryptor(PasswordEncryptor passwordEncryptor) {
 	this.passwordEncryptor = passwordEncryptor;
@@ -19,7 +30,9 @@ public void setUserDao(UserDao userDao) {
 	this.userDao = userDao;
 }
 
-public UserService() {
+@Override
+public DAO<User> getDao() {
+	return userDao;
 }
 
 public boolean verifyUser(User user) {
@@ -34,4 +47,5 @@ public void save(User entity) {
 	entity.setPassword(passwordEncryptor.encryptPassword(entity.getPassword()));
 	super.save(entity);
 }
+
 }

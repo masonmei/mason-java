@@ -1,5 +1,6 @@
 package org.personal.mason.job.service;
 
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.LabelDao;
 import org.personal.mason.job.domain.Label;
 
@@ -12,8 +13,12 @@ public LabelDao getLabelDao() {
 }
 
 public void setLabelDao(LabelDao labelDao) {
-	super.setDao(labelDao);
 	this.labelDao = labelDao;
+}
+
+@Override
+public DAO<Label> getDao() {
+	return labelDao;
 }
 
 }

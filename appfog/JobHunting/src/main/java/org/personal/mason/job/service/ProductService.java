@@ -1,5 +1,6 @@
 package org.personal.mason.job.service;
 
+import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.ProductDao;
 import org.personal.mason.job.domain.Product;
 
@@ -12,8 +13,13 @@ public ProductDao getProductDao() {
 }
 
 public void setProductDao(ProductDao productDao) {
-	super.setDao(productDao);
 	this.productDao = productDao;
 }
+
+@Override
+public DAO<Product> getDao() {
+	return productDao;
+}
+
 
 }
