@@ -38,7 +38,7 @@ public String process() {
 		} else {
 			labels = labelService.findInScope(page * pageSize, pageSize);
 		}
-		
+
 		return SUCCESS;
 	} catch (Exception e) {
 		log.debug("cannot get labels", e);

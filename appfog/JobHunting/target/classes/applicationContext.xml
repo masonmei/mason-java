@@ -1,66 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xsi:schemaLocation="
-            http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd
-            http://www.springframework.org/schema/aop
-            http://www.springframework.org/schema/aop/spring-aop.xsd
-            http://www.springframework.org/schema/tx
-            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-            http://www.springframework.org/schema/jdbc
-            http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
-            http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-    
-    <!-- scans the classpath for annotated components (including @Repostory 
-    and @Service  that will be auto-registered as Spring beans  -->          
-    <context:component-scan base-package="org.personal.mason.job" />
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- methods or classes needing to run in a complete transaction will
-    be annotated with Transactional -->
-    <tx:annotation-driven />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.1.100/jobhunting?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="rdisfun"/>
+    </bean>
 
- 	<!-- Creates a data source that can provide a connection to in-memory embedded database populated 
-	with test data
-	see: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/ch12s08.html   -->
-   <jdbc:embedded-database id="dataSource">
-        <jdbc:script location="classpath:schema.sql"/>
-        <jdbc:script location="classpath:test-data.sql"/>
-    </jdbc:embedded-database>
-
-    
-    <!-- This will ensure that hibernate or jpa exceptions are automatically translated into
-         Spring's generic DataAccessException hierarchy for those classes annotated with Repository
-         For example see PersonDaoJpa-->
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-    
     <!-- JPA Entity Manager Factory -->
-    <bean id="entityManagerFactory" 
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:dataSource-ref="dataSource"
-          p:persistenceXmlLocation="META-INF/persistence.xml" 
-    	  p:persistenceUnitName="springJpaPersistenceUnit" />          
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="jobhunting"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+    </bean>
 
-    
-    <!-- bean post-processor for JPA annotations -->
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 
- 
-    <!-- Transaction Config -->
-    <bean id="transactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
+    <bean id="entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 
-    <!-- use declarative transaction management  -->
-    <tx:annotation-driven  transaction-manager="transactionManager"/>
-    
-      
-    
+    <tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 
- </beans>
+    <bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor" autowire="byName">
+    </bean>
+
+    <!-- Service -->
+    <bean id="companyService" class="org.personal.mason.job.service.CompanyService" autowire="byName"/>
+    <bean id="interviewService" class="org.personal.mason.job.service.InterviewService" autowire="byName"/>
+    <bean id="interviewMaterialService" class="org.personal.mason.job.service.InterviewMaterialService" autowire="byName"/>
+    <bean id="jobService" class="org.personal.mason.job.service.JobService" autowire="byName"/>
+    <bean id="labelService" class="org.personal.mason.job.service.LabelService" autowire="byName"/>
+    <bean id="newsService" class="org.personal.mason.job.service.NewsService" autowire="byName"/>
+    <bean id="offerService" class="org.personal.mason.job.service.OfferService" autowire="byName"/>
+    <bean id="productCategoryService" class="org.personal.mason.job.service.ProductCategoryService" autowire="byName"/>
+    <bean id="productService" class="org.personal.mason.job.service.ProductService" autowire="byName"/>
+    <bean id="userService" class="org.personal.mason.job.service.UserService" autowire="byName"/>
+
+    <!-- DAO -->
+    <bean id="companyDao" class="org.personal.mason.job.dao.CompanyDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Company"/>
+    </bean>
+
+    <bean id="interviewDao" class="org.personal.mason.job.dao.InterviewDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Interview"/>
+    </bean>
+
+    <bean id="interviewMaterialDao" class="org.personal.mason.job.dao.InterviewMaterialDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.InterviewMaterial"/>
+    </bean>
+
+    <bean id="jobDao" class="org.personal.mason.job.dao.JobDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Job"/>
+    </bean>
+
+    <bean id="labelDao" class="org.personal.mason.job.dao.LabelDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Label"/>
+    </bean>
+
+    <bean id="newsDao" class="org.personal.mason.job.dao.NewsDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.News"/>
+    </bean>
+
+    <bean id="offerDao" class="org.personal.mason.job.dao.OfferDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Offer"/>
+    </bean>
+
+    <bean id="productCategoryDao" class="org.personal.mason.job.dao.ProductCategoryDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.ProductCategory"/>
+    </bean>
+
+    <bean id="productDao" class="org.personal.mason.job.dao.ProductDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.Product"/>
+    </bean>
+
+    <bean id="userDao" class="org.personal.mason.job.dao.UserDao" autowire="byName">
+        <property name="entityManager" ref="entityManagerFactory"/>
+        <property name="clazz" value="org.personal.mason.job.domain.User"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <bean></bean>
+</beans>

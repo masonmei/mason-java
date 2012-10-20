@@ -5,7 +5,7 @@ import org.personal.mason.job.service.CompanyService;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-public class SaveCompanyAction extends AbstractAction implements ModelDriven<Company>{
+public class SaveCompanyAction extends AbstractAction implements ModelDriven<Company> {
 
 private static final long serialVersionUID = -4433915271636666179L;
 

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
@@ -21,15 +20,6 @@ protected final Log log = LogFactory.getLog(this.getClass().getSimpleName());
 
 protected EntityManager entityManager;
 protected Class<T> clazz;
-
-@PersistenceContext
-public void setEntityManager(EntityManager entityManager) {
-	this.entityManager = entityManager;
-}
-
-public void setClazz(Class<T> clazz) {
-	this.clazz = clazz;
-}
 
 public T findById(Serializable id) {
 	log.debug("start find entity [" + clazz.getSimpleName() + "] with id [" + id + "]");
@@ -47,7 +37,7 @@ public List<T> findAll() {
 	return findByCriteria(-1, -1);
 }
 
-public List<T> findInScope(int start, int length){
+public List<T> findInScope(int start, int length) {
 	return findByCriteria(start, length);
 }
 
@@ -165,21 +155,21 @@ public long countByExample(String exampleInstance) {
 public void save(T entity) {
 	log.debug("start save entity [" + entity + "]");
 	try {
-	    entityManager.persist(entity);
-	    log.debug("end delete entity [" + entity + "]");
-    } catch (Exception e) {
-	    log.debug("exception delete entity [" + entity + "]");
-    }
+		entityManager.persist(entity);
+		log.debug("end delete entity [" + entity + "]");
+	} catch (Exception e) {
+		log.debug("exception delete entity [" + entity + "]");
+	}
 }
 
 public void udpate(T entity) {
 	log.debug("start update entity [" + entity + "]");
 	try {
-	    entityManager.merge(entity);
-	    log.debug("end update entity [" + entity + "]");
-    } catch (Exception e) {
-    	log.debug("exception delete entity [" + entity + "]");
-    }
+		entityManager.merge(entity);
+		log.debug("end update entity [" + entity + "]");
+	} catch (Exception e) {
+		log.debug("exception delete entity [" + entity + "]");
+	}
 }
 
 public void delete(T entity) {

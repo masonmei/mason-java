@@ -37,7 +37,7 @@ public String process() {
 		} else {
 			jobs = jobService.findInScope(page * pageSize, pageSize);
 		}
-		
+
 		return SUCCESS;
 	} catch (Exception e) {
 		log.debug("cannot get jobs", e);

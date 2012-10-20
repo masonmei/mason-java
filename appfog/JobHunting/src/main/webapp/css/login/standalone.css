@@ -1,0 +1,19 @@
+body {
+	padding: 50px 80px;
+	font-family: "Lucida Grande", "bitstream vera sans", "trebuchet ms",
+		sans-serif, verdana;
+	background-image: -moz-linear-gradient(top, #000000, #111111);
+	background-image: -ms-linear-gradient(top, #000000, #111111);
+	background-image: -o-linear-gradient(top, #000000, #111111);
+	background-image: -webkit-linear-gradient(top, #000000, #111111);
+	background-image: linear-gradient(to bottom, #000000, #111111);
+}
+
+/* get rid of those system borders being generated for A tags */
+a:active {
+	outline: none;
+}
+
+:focus {
+	-moz-outline-style: none;
+}

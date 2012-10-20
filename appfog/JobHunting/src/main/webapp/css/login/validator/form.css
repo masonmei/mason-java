@@ -1,0 +1,135 @@
+/* form style */
+#loginForm {
+	background: #333 url(../../../images/h300.png) repeat-x;
+	padding: 10px 15px;
+	color: #eee;
+	width: 450px;
+	margin: 0 auto;
+	position: relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	position: relative;
+}
+
+#registerForm {
+	background: #333;
+	padding: 10px 15px;
+	color: #eee;
+	width: 300px;
+	margin: 0 auto;
+	position: relative;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+/* nested fieldset */
+#loginForm fieldset {
+	border: 5;
+	margin: 0;
+	padding: 5;
+	background: #333333 url(../../../images/logo-medium.png) no-repeat
+		scroll 240px 40px;
+}
+
+#registerForm fieldset {
+	border: 5;
+	margin: 10px;
+	padding: 10;
+}
+
+/* typography */
+h3 {
+	color: #eee;
+	margin-top: 0px;
+}
+
+p {
+	font-size: 11px;
+}
+
+/* input field */
+#loginForm input {
+	border: 1px solid #444;
+	background-color: #666;
+	padding: 4px;
+	color: #ddd;
+	font-size: 12px;
+	/* CSS3 spicing */
+	text-shadow: 1px 1px 1px #000;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.inputField {
+	width: 220px;
+}
+
+input:focus {
+	color: #fff;
+	background-color: #777;
+}
+
+input:active {
+	background-color: #888;
+}
+
+/* button */
+button {
+	outline: 0;
+	border: 1px solid #666;
+	width: 80px;
+	cursor: pointer;
+}
+
+#loginForm a {
+	font-size: 12px;
+	font: bold;
+	text-decoration: underline;
+	color: silver;
+	height: 100%;
+	display: inline-block;
+	cursor: pointer;
+}
+
+/* error message */
+.error {
+	height: 15px;
+	background-color: #FFFE36;
+	font-size: 11px;
+	border: 1px solid #E1E16D;
+	padding: 4px 10px;
+	color: #000;
+	display: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-topleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	-moz-box-shadow: 0 0 6px #ddd;
+	-webkit-box-shadow: 0 0 6px #ddd;
+}
+
+.error p {
+	margin: 0;
+}
+
+/* field label */
+label {
+	display: block;
+	font-size: 11px;
+	color: #ccc;
+}
+
+#savepassword label {
+	display: block;
+	float: left;
+}
+
+#savepassword input {
+	margin: 0 5px;
+}
+
+#validation img {
+	padding-right: 5px;
+}

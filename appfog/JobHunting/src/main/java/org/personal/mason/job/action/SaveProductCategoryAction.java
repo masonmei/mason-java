@@ -18,11 +18,11 @@ public void setProductCategoryService(ProductCategoryService productCategoryServ
 	this.productCategoryService = productCategoryService;
 }
 
-public boolean isSuccess(){
+public boolean isSuccess() {
 	return this.success;
 }
 
-public String getMsg(){
+public String getMsg() {
 	return this.msg;
 }
 

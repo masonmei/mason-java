@@ -1,9 +1,19 @@
 package org.personal.mason.job.dao;
 
-import org.personal.mason.job.domain.Interview;
-import org.springframework.stereotype.Repository;
+import javax.persistence.EntityManager;
 
-@Repository("interviewDao")
+import org.personal.mason.job.domain.Interview;
+
 public class InterviewDao extends DAO<Interview> {
 
+public InterviewDao() {
+}
+
+public void setEntityManager(EntityManager entityManager) {
+	this.entityManager = entityManager;
+}
+
+public void setClazz(Class<Interview> clazz) {
+	this.clazz = clazz;
+}
 }

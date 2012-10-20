@@ -52,11 +52,11 @@ public String process() {
 		Label label = new Label();
 		label.setLabelName(labelName);
 		List<Label> labels = labelService.findByExample(label);
-		if(labels == null || labels.isEmpty()){
+		if (labels == null || labels.isEmpty()) {
 			msg = "no label with this name";
 			return null;
 		}
-		
+
 		if (pageSize <= 0 || page <= 0) {
 			companies = companyService.findByLabel(labels.get(0));
 		} else {

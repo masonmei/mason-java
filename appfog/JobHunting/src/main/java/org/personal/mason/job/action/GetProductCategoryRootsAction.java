@@ -22,11 +22,11 @@ public void setProductCategoryService(ProductCategoryService productCategoryServ
 @Override
 public String process() {
 	try {
-	    productCategories = productCategoryService.getProductCategoryRoots();
-	    return SUCCESS;
-    } catch (Exception e) {
-    	log.debug("failed to get productCategoryRoots", e);
-    }
+		productCategories = productCategoryService.getProductCategoryRoots();
+		return SUCCESS;
+	} catch (Exception e) {
+		log.debug("failed to get productCategoryRoots", e);
+	}
 	return null;
 }
 

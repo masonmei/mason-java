@@ -34,7 +34,7 @@ public String process() {
 		success = true;
 	} catch (Exception e) {
 		log.debug("save label failed", e);
-    }
+	}
 	return "result";
 }
 

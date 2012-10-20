@@ -38,7 +38,7 @@ public String process() {
 		} else {
 			interviews = interviewService.findInScope(page * pageSize, pageSize);
 		}
-		
+
 		return SUCCESS;
 	} catch (Exception e) {
 		log.debug("cannot get interviews", e);

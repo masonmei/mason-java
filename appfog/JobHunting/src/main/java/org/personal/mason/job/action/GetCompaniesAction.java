@@ -8,7 +8,6 @@ import org.personal.mason.job.service.CompanyService;
 public class GetCompaniesAction extends AbstractAction {
 private static final long serialVersionUID = 4139719727279663575L;
 
-
 private CompanyService companyService;
 private List<Company> companies;
 private int page;
@@ -38,7 +37,7 @@ public String process() {
 		} else {
 			companies = companyService.findInScope(page * pageSize, pageSize);
 		}
-		
+
 		return SUCCESS;
 	} catch (Exception e) {
 		log.debug("cannot get companies", e);

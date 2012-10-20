@@ -25,18 +25,18 @@ public void setInterviewService(InterviewService interviewService) {
 @Override
 public String process() {
 	try {
-	    String parameter = request.getParameter("id");
-	    if (parameter != null) {
-	    	interviewService.deleteById(Long.parseLong(parameter));
-	    	msg = "delete success";
-	    	success = true;
-	    	return SUCCESS;
-	    }
-	    msg = "nothing to delete";
-	    success = true;
-    } catch (NumberFormatException e) {
-	    log.debug("delete failed", e);
-    }
+		String parameter = request.getParameter("id");
+		if (parameter != null) {
+			interviewService.deleteById(Long.parseLong(parameter));
+			msg = "delete success";
+			success = true;
+			return SUCCESS;
+		}
+		msg = "nothing to delete";
+		success = true;
+	} catch (NumberFormatException e) {
+		log.debug("delete failed", e);
+	}
 	return null;
 }
 
