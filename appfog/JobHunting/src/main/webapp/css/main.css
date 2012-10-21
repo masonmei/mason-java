@@ -1,0 +1,12 @@
+#banner {
+	margin: 10px 0px 2px 0px;
+	width: auto;
+	background: silver;
+	height: 80px;
+}
+
+#menubar {
+	margin: 0px 0px 2px 0px;
+	width:100%;
+	background: blue;
+}

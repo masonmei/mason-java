@@ -51,7 +51,7 @@
         p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <bean id="entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean"
-        p:entityManagerFactory-ref="entityManagerFactory"/>
+        p:entityManagerFactory-ref="entityManagerFactory" scope="prototype"/>
 
     <!-- use declarative transaction management -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>

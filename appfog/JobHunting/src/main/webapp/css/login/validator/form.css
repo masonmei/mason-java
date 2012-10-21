@@ -4,37 +4,39 @@
 	padding: 10px 15px;
 	color: #eee;
 	width: 450px;
-	margin: 0 auto;
+	margin: auto;
+	margin-top:200px;
 	position: relative;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	position: relative;
 }
 
 #registerForm {
-	background: #333;
-	padding: 10px 15px;
+	background: #333 url(../../../images/w300.png) repeat-y;
+	padding: 5px 10px;
 	color: #eee;
-	width: 300px;
-	margin: 0 auto;
+	width: 270px;
+	margin: auto;
+	margin-top:200px;
 	position: relative;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+	height: auto;
 }
 
 /* nested fieldset */
 #loginForm fieldset {
-	border: 5;
-	margin: 0;
-	padding: 5;
+	border: 5px;
+	margin: 3px;
+	padding: 5px;
 	background: #333333 url(../../../images/logo-medium.png) no-repeat
 		scroll 240px 40px;
 }
 
 #registerForm fieldset {
-	border: 5;
+	border: 5px;
 	margin: 10px;
-	padding: 10;
+	padding: 10px;
 }
 
 /* typography */
@@ -44,6 +46,7 @@ h3 {
 }
 
 p {
+	margin:3px;
 	font-size: 11px;
 }
 
@@ -51,7 +54,19 @@ p {
 #loginForm input {
 	border: 1px solid #444;
 	background-color: #666;
-	padding: 4px;
+	padding: 2px;
+	color: #ddd;
+	font-size: 12px;
+	/* CSS3 spicing */
+	text-shadow: 1px 1px 1px #000;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+#registerForm input {
+	border: 1px solid #444;
+	background-color: #666;
+	padding: 2px;
 	color: #ddd;
 	font-size: 12px;
 	/* CSS3 spicing */
@@ -62,6 +77,7 @@ p {
 
 .inputField {
 	width: 220px;
+	height: 20px;
 }
 
 input:focus {
@@ -75,20 +91,16 @@ input:active {
 
 /* button */
 button {
-	outline: 0;
+	outline: 2;
 	border: 1px solid #666;
 	width: 80px;
 	cursor: pointer;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
 }
 
-#loginForm a {
-	font-size: 12px;
-	font: bold;
-	text-decoration: underline;
-	color: silver;
-	height: 100%;
-	display: inline-block;
-	cursor: pointer;
+button:HOVER{
+	background-color: activecaption;
 }
 
 /* error message */
@@ -130,6 +142,27 @@ label {
 	margin: 0 5px;
 }
 
-#validation img {
+#validationCode {
+	padding-top:5px;
 	padding-right: 5px;
+	border:3px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+}
+
+a {
+	font-size: 12px;
+	font: bold;
+	text-decoration: underline;
+	color: silver;
+	display: inline-block;
+	cursor: pointer;
+}
+
+a:FOCUS{
+	color: olive;
+}
+
+a:HOVER {
+	color: olive;
 }

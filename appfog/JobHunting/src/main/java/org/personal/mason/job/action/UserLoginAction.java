@@ -5,9 +5,7 @@ import javax.servlet.http.Cookie;
 import org.personal.mason.job.domain.User;
 import org.personal.mason.job.service.UserService;
 
-import com.opensymphony.xwork2.ModelDriven;
-
-public class UserLoginAction extends AbstractAction implements ModelDriven<User> {
+public class UserLoginAction extends AbstractAction {
 
 private static final long serialVersionUID = 3446529593029200967L;
 private static final int expiry = 24 * 3600 * 14;
@@ -15,28 +13,59 @@ private static final int expiry = 24 * 3600 * 14;
 private UserService userService;
 private User user = new User();
 private String validationCode;
-private boolean keepLogin;
+private Boolean keepLogin;
 private String msg;
 private boolean success;
 
-public String getMsg() {
-	return msg;
-}
-
-public boolean isSuccess() {
-	return success;
+public UserService getUserService() {
+	return userService;
 }
 
 public void setUserService(UserService userService) {
 	this.userService = userService;
 }
 
+public User getUser() {
+	return user;
+}
+
+public void setUser(User user) {
+	this.user = user;
+}
+
+public String getValidationCode() {
+	return validationCode;
+}
+
 public void setValidationCode(String validationCode) {
 	this.validationCode = validationCode;
 }
 
-public void setKeepLogin(boolean keepLogin) {
+public Boolean getKeepLogin() {
+	return keepLogin;
+}
+
+public void setKeepLogin(Boolean keepLogin) {
 	this.keepLogin = keepLogin;
+	if(keepLogin == null){
+		this.keepLogin = Boolean.FALSE;
+	}
+}
+
+public String getMsg() {
+	return msg;
+}
+
+public void setMsg(String msg) {
+	this.msg = msg;
+}
+
+public boolean isSuccess() {
+	return success;
+}
+
+public void setSuccess(boolean success) {
+	this.success = success;
 }
 
 @Override
@@ -46,22 +75,27 @@ public String process() {
 		if (!sessionValidationCode.equalsIgnoreCase(validationCode)) {
 			success = false;
 			msg = "Validation Code not Correct";
-			return "result";
+			return "input";
 		}
 		if (userService.verifyUser(user)) {
 			success = true;
-			if (keepLogin) {
+			setEmailToSession();
+			if (keepLogin != null && keepLogin) {
 				keepLogin();
 			}
-			msg = "login success";
 		} else {
 			success = false;
 			msg = "username or password incorrect";
+			return "input";
 		}
 	} catch (Exception e) {
 		log.debug("login failed", e);
 	}
 	return "result";
+}
+
+private void setEmailToSession() {
+	session.setAttribute(SESSION_TOKEN, user.getEmail());
 }
 
 private void keepLogin() {
@@ -70,11 +104,6 @@ private void keepLogin() {
 	Cookie cookie = new Cookie("JSESSIOINID", session.getId());
 	cookie.setMaxAge(expiry);
 	response.addCookie(cookie);
-}
-
-@Override
-public User getModel() {
-	return user;
 }
 
 }

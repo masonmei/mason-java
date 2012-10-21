@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public abstract class AbstractAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, ServletContextAware {
 
 private static final long serialVersionUID = -3435748590670497867L;
-private static final String SESSION_TOKEN = "accountid";
+protected static final String SESSION_TOKEN = "accountid";
 
 protected final Log log = LogFactory.getLog(this.getClass());
 

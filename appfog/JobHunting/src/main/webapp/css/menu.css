@@ -1,0 +1,40 @@
+
+
+#menubar ul.menus li {
+	float: left;
+	list-style: none;
+	margin-right: 1px;
+	width: 120px;
+	text-align: center;
+}
+
+#menubar ul.menus li a {
+	padding: 5px 10px;
+	display: block;
+	color: silver;
+	background: blue;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#menubar ul.menus li a:HOVER {
+	background: gray;
+	color: white;
+}
+
+#menus ul.children {
+	display: none;
+	padding: 0;
+	margin: 0;
+}
+
+#menus ul.children li {
+	float: none;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+
+#menus ul.children li a {
+	width: 100px;
+}

@@ -13,16 +13,32 @@ private List<Company> companies;
 private int page;
 private int pageSize;
 
+public CompanyService getCompanyService() {
+	return companyService;
+}
+
 public void setCompanyService(CompanyService companyService) {
 	this.companyService = companyService;
 }
 
 public List<Company> getCompanies() {
-	return this.companies;
+	return companies;
+}
+
+public void setCompanies(List<Company> companies) {
+	this.companies = companies;
+}
+
+public int getPage() {
+	return page;
 }
 
 public void setPage(int page) {
 	this.page = page;
+}
+
+public int getPageSize() {
+	return pageSize;
 }
 
 public void setPageSize(int pageSize) {
@@ -32,8 +48,9 @@ public void setPageSize(int pageSize) {
 @Override
 public String process() {
 	try {
+		
 		if (pageSize <= 0 || page < 0) {
-			companies = companyService.findAll();
+			companies = companyService.findInScope(0, 10);
 		} else {
 			companies = companyService.findInScope(page * pageSize, pageSize);
 		}

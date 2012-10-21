@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 
 import org.personal.mason.job.utils.ImageUtils;
 import org.personal.mason.job.utils.StringUtils;
@@ -26,11 +27,18 @@ public String process() {
 	session.setMaxInactiveInterval(600);
 	session.setAttribute("validationcode", validationcode);
 	try {
-		ImageIO.write(generateImage, "JPEG", response.getOutputStream());
+		ServletOutputStream outputStream = response.getOutputStream();
+		ImageIO.write(generateImage, "JPEG", outputStream);
+		outputStream.flush();
+		outputStream.close();
+		outputStream = null;
+		
+		response.flushBuffer();
+		
 	} catch (IOException e) {
 		log.debug("could not write image", e);
 	}
-	return "result";
+	return null;
 }
 
 }

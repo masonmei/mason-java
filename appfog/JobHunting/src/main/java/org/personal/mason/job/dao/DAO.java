@@ -44,9 +44,10 @@ public List<T> findInScope(int start, int length) {
 private List<T> findByCriteria(int start, int length) {
 	log.debug("start find entities of class [" + clazz.getSimpleName() + "]");
 	try {
+		entityManager = entityManager.getEntityManagerFactory().createEntityManager();
 		Session delegate = (Session) entityManager.getDelegate();
 		Criteria criteria = delegate.createCriteria(clazz);
-		if (start > 0) {
+		if (start >= 0) {
 			criteria.setFirstResult(start);
 		}
 		if (length > 0) {
@@ -69,6 +70,7 @@ public List<T> findByExample(T exampleInstance) {
 public List<T> findByExample(T exampleInstance, int start, int length) {
 	log.debug("start find entities of class [" + clazz.getSimpleName() + "] by example [" + exampleInstance + "]");
 	try {
+		entityManager = entityManager.getEntityManagerFactory().createEntityManager();
 		Session session = (Session) entityManager.getDelegate();
 		Criteria criteria = session.createCriteria(clazz);
 		Example example = Example.create(exampleInstance);

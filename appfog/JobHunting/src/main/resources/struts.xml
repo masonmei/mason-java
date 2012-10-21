@@ -92,6 +92,16 @@
         <action name="register" class="org.personal.mason.job.action.RegisterAction">
             <result name="result">/jsp/register.jsp</result>
         </action>
+        
+        <action name="login" class="org.personal.mason.job.action.UserLoginAction">
+            <result name="input">/index.jsp</result>
+            <result name="result">/jsp/main.jsp</result>
+        </action>
+        
+        <action name="getCompanies" class="org.personal.mason.job.action.DeleteCompanyAction">
+            <result name="success">/jsp/companies.jsp</result>
+        </action>
+        
     </package>
 
 </struts>
