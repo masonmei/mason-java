@@ -75,7 +75,7 @@ public String process() {
 		userService.save(user);
 		msg = "register success";
 		success = true;
-
+		return SUCCESS;
 	} catch (Exception e) {
 		log.debug("regist failed", e);
 	}
