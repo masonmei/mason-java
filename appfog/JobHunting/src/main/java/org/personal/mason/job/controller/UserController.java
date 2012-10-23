@@ -21,7 +21,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String toIndex() {
+	public String index() {
 		return "index";
 	}
 

@@ -47,7 +47,7 @@
 			</p>
 			<button type="submit">Login</button>
 			<button type="reset">Reset</button>
-			<a href="register.jsp">register</a>
+			<a href="register">register</a>
 		</fieldset>
 	</form>
 </body>

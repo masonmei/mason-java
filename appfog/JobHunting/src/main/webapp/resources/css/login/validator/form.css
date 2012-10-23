@@ -1,6 +1,6 @@
 /* form style */
 #loginForm {
-	background: #333 url(/resources/images/h300.png) repeat-x;
+	background: #333 url(h300.png) repeat-x;
 	padding: 10px 15px;
 	color: #eee;
 	width: 450px;
@@ -12,7 +12,7 @@
 }
 
 #registerForm {
-	background: #333 url(/resources/images/w300.png) repeat-y;
+	background: #333 url(w300.png) repeat-y;
 	padding: 5px 10px;
 	color: #eee;
 	width: 270px;
@@ -29,7 +29,7 @@
 	border: 5px;
 	margin: 3px;
 	padding: 5px;
-	background: #333333 url(/resources/images/logo-medium.png) no-repeat
+	background: #333333 url(logo-medium.png) no-repeat
 		scroll 240px 40px;
 }
 
