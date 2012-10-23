@@ -12,6 +12,7 @@
     <!-- scans the classpath for annotated components (including @Repostory and @Service that will be auto-registered as 
         Spring beans -->
     <context:component-scan base-package="org.personal.mason.job"/>
+    <context:annotation-config/>
 
     <!-- methods or classes needing to run in a complete transaction will be annotated with Transactional -->
     <tx:annotation-driven/>
@@ -20,9 +21,9 @@
         http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/ch12s08.html -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.1.100/jobhunting?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="url" value="jdbc:mysql://localhost/jobhunting?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <property name="username" value="root"/>
-        <property name="password" value="rdisfun"/>
+        <property name="password" value=""/>
     </bean>
 
 
