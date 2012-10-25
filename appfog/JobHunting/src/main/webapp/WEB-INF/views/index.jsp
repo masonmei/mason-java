@@ -1,5 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,45 +11,46 @@
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/app/common.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/standalone.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login/validator/form.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login/form.css"/>">
 </head>
 <body>
 
-	<form id="loginForm" novalidate="novalidate" method="post"
-		action="login">
+	<f:form id="loginForm" method="post" action="login" modelAttribute="userForm">
 		<fieldset>
 			<h3>Job Hunting Login</h3>
-			<div class="message-header">
-				<c:if test="${not empty msg }">
-					<div id="message" class="message">${msg }</div>
-				</c:if>
+			<div class="header">		  		
+		  		<s:bind path="*">
+		  			<c:if test="${status.error}">
+				  		<div id="message" class="error">please fix the following errors</div>
+		  			</c:if>
+		  		</s:bind>
 			</div>
 			<p>
-				<label>Email*</label> <input type="email" name="user.email"
-					required="required" class="inputField" />
+				<label>Email* <f:errors path="email" cssClass="error" /></label> 
+				<f:input path="email" class="inputField" alt="enter your email" />
 			</p>
 			<p>
-				<label>Password*</label> <input type="password" name="user.password"
-					required="required" class="inputField">
+				<label>Password* <f:errors path="password" cssClass="error" /></label> 
+				<f:password path="password" class="inputField" alt="enter password"/>
 			</p>
 			<p>
-				<label>Validation Code*</label> <input type="text"
-					name="validationCode" required="required" class="inputField">
+				<label>Validation Code* <f:errors path="validationCode" cssClass="error" /></label> 
+				<f:input path="validationCode" class="inputField" alt="enter validation code"/>
 			</p>
-			<p id="validation">
-				<img src="validationCode" id="validationCode"
+			<p>
+				<img src="validationCode" id="validation"
 					onclick="javascript:refreshValidationCodeImage();" /><a
 					onclick="javascript:refreshValidationCodeImage();">Change
 					Image?</a>
 			</p>
 			<p id="savepassword">
-				<label>Keep me login </label> <input type="checkbox"
-					name="keepLogin" value="true" />
+				<label>Keep me login </label> 
+				<f:checkbox path="keepLogin" value="true" />
 			</p>
 			<button type="submit">Login</button>
 			<button type="reset">Reset</button>
 			<a href="register">register</a>
 		</fieldset>
-	</form>
+	</f:form>
 </body>
 </html>
