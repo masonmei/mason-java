@@ -56,7 +56,7 @@ public class UserController {
 				return null;
 			}
 						
-			User user = new User(userForm.getEmail(), userForm.getPassword(), userForm.getName());
+			User user = new User(userForm.getEmail(), userForm.getName(), userForm.getPassword());
 			userService.save(user);
 			return "redirect:/index";
 		} catch (Exception e) {

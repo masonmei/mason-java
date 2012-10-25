@@ -9,19 +9,12 @@ import org.personal.mason.job.domain.User;
 
 public class UserDao extends DAO<User> {
 
-private EntityManager entityManager;
-
 public UserDao() {
 }
 
 @PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
-}
-
-@Override
-protected EntityManager getEntityManager() {
-	return entityManager;
 }
 
 @Override
@@ -39,4 +32,5 @@ public String getPassword(User user) {
 	}
 	return null;
 }
+
 }

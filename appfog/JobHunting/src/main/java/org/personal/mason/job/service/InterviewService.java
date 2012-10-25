@@ -1,5 +1,7 @@
 package org.personal.mason.job.service;
 
+import javax.annotation.Resource;
+
 import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.InterviewDao;
 import org.personal.mason.job.domain.Interview;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class InterviewService extends DefaultService<Interview> {
 
+@Resource
 private InterviewDao interviewDao;
 
 public InterviewDao getInterviewDao() {

@@ -2,6 +2,8 @@ package org.personal.mason.job.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.personal.mason.job.dao.CompanyDao;
 import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.domain.Company;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompanyService extends DefaultService<Company> {
 
+@Resource
 private CompanyDao companyDao;
 
 public CompanyDao getCompanyDao() {

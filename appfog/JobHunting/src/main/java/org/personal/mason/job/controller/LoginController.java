@@ -72,7 +72,7 @@ public class LoginController {
 					response.addCookie(cookie);
 				}
 
-				return "welcome";
+				return "redirect:/welcome";
 			} else {
 				result.addError(new ObjectError("*", "username or password incorrect"));
 				return "index";
@@ -83,5 +83,10 @@ public class LoginController {
 		}
 
 		return "index";
+	}
+
+	@RequestMapping(value="welcome", method = RequestMethod.GET)
+	public String welcome(){
+		return "welcome";
 	}
 }

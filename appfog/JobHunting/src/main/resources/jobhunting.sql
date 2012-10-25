@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : utf-8
 
- Date: 10/22/2012 19:57:54 PM
+ Date: 10/25/2012 21:47:51 PM
 */
 
 SET NAMES utf8;
@@ -177,7 +177,8 @@ CREATE TABLE `user` (
   `name` varchar(255) DEFAULT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `email` (`email`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

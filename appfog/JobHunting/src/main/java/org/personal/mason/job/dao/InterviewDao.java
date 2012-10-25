@@ -7,18 +7,12 @@ import org.personal.mason.job.domain.Interview;
 
 public class InterviewDao extends DAO<Interview> {
 
-private EntityManager entityManager;
 public InterviewDao() {
 }
 
 @PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
-}
-
-@Override
-protected EntityManager getEntityManager() {
-	return entityManager;
 }
 
 @Override

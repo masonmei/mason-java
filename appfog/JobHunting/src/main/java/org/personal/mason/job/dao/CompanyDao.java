@@ -14,18 +14,12 @@ import org.personal.mason.job.domain.Label;
 
 public class CompanyDao extends DAO<Company> {
 
-private EntityManager entityManager;
 public CompanyDao() {
 }
 
 @PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
-}
-
-@Override
-protected EntityManager getEntityManager() {
-	return entityManager;
 }
 
 @Override

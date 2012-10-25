@@ -13,8 +13,6 @@ import org.personal.mason.job.domain.ProductCategory;
 
 public class ProductCategoryDao extends DAO<ProductCategory> {
 
-private EntityManager entityManager;
-
 public ProductCategoryDao() {
 }
 
@@ -23,10 +21,6 @@ public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
 }
 
-@Override
-protected EntityManager getEntityManager() {
-	return entityManager;
-}
 @Override
 protected Class<ProductCategory> getClazz() {
 	return ProductCategory.class;

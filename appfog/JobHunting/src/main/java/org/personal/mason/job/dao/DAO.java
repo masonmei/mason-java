@@ -13,18 +13,20 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class DAO<T> implements IDAO<T> {
 
 protected final Log log = LogFactory.getLog(this.getClass().getSimpleName());
 
-protected abstract EntityManager getEntityManager();
+protected EntityManager entityManager;
 protected abstract Class<T> getClazz();
 
+@Transactional(readOnly=true)
 public T findById(Serializable id) {
 	log.debug("start find entity [" + getClazz().getSimpleName() + "] with id [" + id + "]");
 	try {
-		final T result = getEntityManager().find(getClazz(), id);
+		final T result = entityManager.find(getClazz(), id);
 		log.debug("end find entity [" + getClazz().getSimpleName() + "] with id [" + id + "]");
 		return result;
 	} catch (Exception e) {
@@ -33,10 +35,12 @@ public T findById(Serializable id) {
 	return null;
 }
 
+@Transactional(readOnly=true)
 public List<T> findAll() {
 	return findByCriteria(-1, -1);
 }
 
+@Transactional(readOnly=true)
 public List<T> findInScope(int start, int length) {
 	return findByCriteria(start, length);
 }
@@ -44,7 +48,7 @@ public List<T> findInScope(int start, int length) {
 private List<T> findByCriteria(int start, int length) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
-		Session delegate = (Session) getEntityManager().getDelegate();
+		Session delegate = (Session) entityManager.getDelegate();
 		Criteria criteria = delegate.createCriteria(getClazz());
 		if (start >= 0) {
 			criteria.setFirstResult(start);
@@ -62,14 +66,16 @@ private List<T> findByCriteria(int start, int length) {
 	}
 }
 
+@Transactional(readOnly=true)
 public List<T> findByExample(T exampleInstance) {
 	return findByExample(exampleInstance, -1, -1);
 }
 
+@Transactional(readOnly=true)
 public List<T> findByExample(T exampleInstance, int start, int length) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] by example [" + exampleInstance + "]");
 	try {
-		Session session = (Session) getEntityManager().getDelegate();
+		Session session = (Session) entityManager.getDelegate();
 		Criteria criteria = session.createCriteria(getClazz());
 		Example example = Example.create(exampleInstance);
 		criteria.add(example);
@@ -91,10 +97,11 @@ public List<T> findByExample(T exampleInstance, int start, int length) {
 
 }
 
+@Transactional(readOnly=true)
 public List<T> findByNamedQuery(String name, Object... params) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query [" + name + "]");
 	try {
-		Query query = getEntityManager().createNamedQuery(name);
+		Query query = entityManager.createNamedQuery(name);
 
 		for (int i = 0; i < params.length; i++) {
 			query.setParameter(i + 1, params[i]);
@@ -110,10 +117,11 @@ public List<T> findByNamedQuery(String name, Object... params) {
 	}
 }
 
+@Transactional(readOnly=true)
 public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends Object> params) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param [" + name + "]");
 	try {
-		Query query = getEntityManager().createNamedQuery(name);
+		Query query = entityManager.createNamedQuery(name);
 
 		for (final Map.Entry<String, ? extends Object> param : params.entrySet()) {
 			query.setParameter(param.getKey(), param.getValue());
@@ -129,19 +137,21 @@ public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends
 	}
 }
 
+@Transactional(readOnly=true)
 public long countAll() {
 	try {
 		final StringBuffer quertStr = new StringBuffer("SELECT count(o) from ");
 		quertStr.append(getClazz().getSimpleName()).append(" o ");
-		final Query query = getEntityManager().createQuery(quertStr.toString());
+		final Query query = entityManager.createQuery(quertStr.toString());
 		return (Long) query.getSingleResult();
 	} catch (Exception e) {
 		return -1;
 	}
 }
 
+@Transactional(readOnly=true)
 public long countByExample(String exampleInstance) {
-	Session session = (Session) getEntityManager().getDelegate();
+	Session session = (Session) entityManager.getDelegate();
 	Criteria criteria = session.createCriteria(getClazz());
 	Example example = Example.create(exampleInstance);
 	criteria.add(example);
@@ -152,40 +162,44 @@ public long countByExample(String exampleInstance) {
 	return -1;
 }
 
+@Transactional
 public void save(T entity) {
 	log.debug("start save entity [" + entity + "]");
 	try {
-		getEntityManager().persist(entity);
+		entityManager.persist(entity);
 		log.debug("end delete entity [" + entity + "]");
 	} catch (Exception e) {
 		log.debug("exception delete entity [" + entity + "]");
 	}
 }
 
+@Transactional
 public void udpate(T entity) {
 	log.debug("start update entity [" + entity + "]");
 	try {
-		getEntityManager().merge(entity);
+		entityManager.merge(entity);
 		log.debug("end update entity [" + entity + "]");
 	} catch (Exception e) {
 		log.debug("exception delete entity [" + entity + "]");
 	}
 }
 
+@Transactional
 public void delete(T entity) {
 	log.debug("exception delete entity [" + entity + "]");
 	try {
-		getEntityManager().remove(entity);
+		entityManager.remove(entity);
 		log.debug("exception delete entity [" + getClazz() + "]");
 	} catch (Exception e) {
 		log.debug("exception delete entity [" + getClazz() + "]", e);
 	}
 }
 
+@Transactional
 public void deleteById(Serializable id) {
 	log.debug("start delete entity [" + getClazz() + "] by id [" + id + "]");
 	try {
-		getEntityManager().remove(findById(id));
+		entityManager.remove(findById(id));
 		log.debug("end delete entity [" + getClazz() + "] by id [" + id + "]");
 	} catch (Exception e) {
 		log.debug("exception delete entity [" + getClazz() + "] by id [" + id + "]", e);
