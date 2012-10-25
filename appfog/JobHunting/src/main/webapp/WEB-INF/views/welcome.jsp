@@ -56,7 +56,7 @@
 		</div>
 	</header>
 
-	<section>Hello World</section>
+	<section><iframe width="100%" height="100%" src='<s:url value="/company/list"/>'></iframe></section>
 
 	<footer> This is the footer. </footer>
 </body>

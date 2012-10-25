@@ -3,20 +3,30 @@ package org.personal.mason.job.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.personal.mason.job.domain.User;
 
 public class UserDao extends DAO<User> {
 
+private EntityManager entityManager;
+
 public UserDao() {
 }
 
+@PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
 }
 
-public void setClazz(Class<User> clazz) {
-	this.clazz = clazz;
+@Override
+protected EntityManager getEntityManager() {
+	return entityManager;
+}
+
+@Override
+protected Class<User> getClazz() {
+	return User.class;
 }
 
 public String getPassword(User user) {

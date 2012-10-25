@@ -1,25 +1,27 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Job Hunting</title>
 </head>
-<body background="#000000">
+<body>
 	<h1>All Companies</h1>
 	<div>
-		<table border="6">
-			<thead>
+		<c:if test="${!empty companies}">
+			<table border="6">
+
 				<tr>
-					<td></td>
-					<td>Company Name</td>
-					<td>Province</td>
-					<td>City</td>
-					<td>Business Type</td>
-					<td>Scale</td>
-					<td />
+					<th>&nbsp;</th>
+					<th>Company Name</th>
+					<th>Province</th>
+					<th>City</th>
+					<th>Business Type</th>
+					<th>Scale</th>
+					<th>&nbsp;</th>
 				</tr>
-			</thead>
-			<tbody>
+
 				<c:forEach var="com" items="${companies }">
 					<tr>
 						<td hidden="true">${com.id }</td>
@@ -28,11 +30,12 @@
 						<td>${com.city }</td>
 						<td>${com.businessType }</td>
 						<td>${com.scale }</td>
-						<td><a>News</a><a>Products</a><a>Jobs</a></td>
+						<td><a >News</a><a>Products</a><a>Jobs</a></td>
 					</tr>
 				</c:forEach>
-			</tbody>
-		</table>
+
+			</table>
+		</c:if>
 	</div>
 </body>
 </html>

@@ -61,10 +61,8 @@
 
 	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor" />
 
-	<bean id="userDao" class="org.personal.mason.job.dao.UserDao">
-		<property name="entityManager" ref="entityManager" />
-		<property name="clazz" value="org.personal.mason.job.domain.User" />
-	</bean>
+	<bean id="userDao" class="org.personal.mason.job.dao.UserDao"/>
+	<bean id="companyDao" class="org.personal.mason.job.dao.CompanyDao"/>
 
 	<mvc:annotation-driven />
 

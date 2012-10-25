@@ -3,7 +3,8 @@ package org.personal.mason.job.service;
 import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.dao.LabelDao;
 import org.personal.mason.job.domain.Label;
-
+import org.springframework.stereotype.Service;
+@Service
 public class LabelService extends DefaultService<Label> {
 
 private LabelDao labelDao;

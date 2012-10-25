@@ -3,6 +3,7 @@ package org.personal.mason.job.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -13,22 +14,30 @@ import org.personal.mason.job.domain.Label;
 
 public class CompanyDao extends DAO<Company> {
 
+private EntityManager entityManager;
 public CompanyDao() {
 }
 
+@PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
 }
 
-public void setClazz(Class<Company> clazz) {
-	this.clazz = clazz;
+@Override
+protected EntityManager getEntityManager() {
+	return entityManager;
+}
+
+@Override
+protected Class<Company> getClazz() {
+	return Company.class;
 }
 
 public List<Company> findByLabel(Label label, int start, int length) {
-	log.debug("start find entities of class [" + clazz.getSimpleName() + "]");
+	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
 		Session delegate = (Session) entityManager.getDelegate();
-		Criteria criteria = delegate.createCriteria(clazz, "com");
+		Criteria criteria = delegate.createCriteria(getClazz(), "com");
 		criteria.createAlias("com.companyLabels", "cls");
 		criteria.add(Restrictions.eq("cls.label", label));
 		if (start > 0) {
@@ -40,10 +49,10 @@ public List<Company> findByLabel(Label label, int start, int length) {
 
 		@SuppressWarnings("unchecked")
 		final List<Company> result = criteria.list();
-		log.debug("end find entities of class [" + clazz.getSimpleName() + "]");
+		log.debug("end find entities of class [" + getClazz().getSimpleName() + "]");
 		return result;
 	} catch (HibernateException e) {
-		log.debug("exception find entities of class [" + clazz.getSimpleName() + "]", e);
+		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "]", e);
 		return null;
 	}
 }

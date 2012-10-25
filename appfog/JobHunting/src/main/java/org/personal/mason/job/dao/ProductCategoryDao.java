@@ -3,6 +3,7 @@ package org.personal.mason.job.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -12,47 +13,55 @@ import org.personal.mason.job.domain.ProductCategory;
 
 public class ProductCategoryDao extends DAO<ProductCategory> {
 
+private EntityManager entityManager;
+
 public ProductCategoryDao() {
 }
 
+@PersistenceContext
 public void setEntityManager(EntityManager entityManager) {
 	this.entityManager = entityManager;
 }
 
-public void setClazz(Class<ProductCategory> clazz) {
-	this.clazz = clazz;
+@Override
+protected EntityManager getEntityManager() {
+	return entityManager;
+}
+@Override
+protected Class<ProductCategory> getClazz() {
+	return ProductCategory.class;
 }
 
 public List<ProductCategory> getProductCategoryRoots() {
-	log.debug("start find entities of class [" + clazz.getSimpleName() + "]");
+	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
 		Session delegate = (Session) entityManager.getDelegate();
-		Criteria criteria = delegate.createCriteria(clazz, "pc");
+		Criteria criteria = delegate.createCriteria(getClazz(), "pc");
 		criteria.add(Restrictions.isNull("pc.productCategory"));
 
 		@SuppressWarnings("unchecked")
 		final List<ProductCategory> result = criteria.list();
-		log.debug("end find entities of class [" + clazz.getSimpleName() + "]");
+		log.debug("end find entities of class [" + getClazz().getSimpleName() + "]");
 		return result;
 	} catch (HibernateException e) {
-		log.debug("exception find entities of class [" + clazz.getSimpleName() + "]", e);
+		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "]", e);
 		return null;
 	}
 }
 
 public List<ProductCategory> getProduCategoryChildren(ProductCategory productCategory) {
-	log.debug("start find entities of class [" + clazz.getSimpleName() + "]");
+	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
 		Session delegate = (Session) entityManager.getDelegate();
-		Criteria criteria = delegate.createCriteria(clazz, "pc");
+		Criteria criteria = delegate.createCriteria(getClazz(), "pc");
 		criteria.add(Restrictions.eq("pc.productCategory", productCategory));
 
 		@SuppressWarnings("unchecked")
 		final List<ProductCategory> result = criteria.list();
-		log.debug("end find entities of class [" + clazz.getSimpleName() + "]");
+		log.debug("end find entities of class [" + getClazz().getSimpleName() + "]");
 		return result;
 	} catch (HibernateException e) {
-		log.debug("exception find entities of class [" + clazz.getSimpleName() + "]", e);
+		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "]", e);
 		return null;
 	}
 }

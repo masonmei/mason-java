@@ -6,7 +6,9 @@ import org.personal.mason.job.dao.CompanyDao;
 import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.domain.Company;
 import org.personal.mason.job.domain.Label;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CompanyService extends DefaultService<Company> {
 
 private CompanyDao companyDao;
