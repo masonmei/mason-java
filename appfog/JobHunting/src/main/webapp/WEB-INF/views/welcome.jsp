@@ -7,57 +7,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/javascript/menu.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/standalone.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login/main.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login/menu.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/menu/menu.css"/>">
 
 </head>
 <body>
 	<header>
-		<div id="mainview">
-			<div id="banner">This is the title</div>
-
-			<nav id="menubar">
-				<ul class="menus" id="menus">
-					<li class="current-cat"><a title="Home" href="/">Home</a></li>
-					<li class="cat-item"><a href="javascript:void(0);">Company</a>
-						<ul class="children"
-							style="visibility: hidden; position: relative; overflow: hidden; display: block;">
-							<li class="cat-item"><a>News</a></li>
-							<li class="cat-item"><a>Jobs</a></li>
-							<li class="cat-item"><a>Products</a></li>
-						</ul></li>
-					<li class="cat-item"><a href="javascript:void(0);">Interview</a>
-						<ul class="children"
-							style="visibility: hidden; position: relative; overflow: hidden; display: block;">
-							<li class="cat-item"><a>News</a></li>
-							<li class="cat-item"><a>Jobs</a></li>
-							<li class="cat-item"><a>Products</a></li>
-						</ul></li>
-					<li class="cat-item"><a href="javascript:void(0);">Material</a>
-						<ul class="children"
-							style="visibility: hidden; position: relative; overflow: hidden; display: block;">
-							<li class="cat-item"><a>News</a></li>
-							<li class="cat-item"><a>Jobs</a></li>
-							<li class="cat-item"><a>Products</a></li>
-						</ul></li>
-					<li class="cat-item"><a href="javascript:void(0);">Offer</a>
-						<ul class="children"
-							style="visibility: hidden; position: relative; overflow: hidden; display: block;">
-							<li class="cat-item"><a>News</a></li>
-							<li class="cat-item"><a>Jobs</a></li>
-							<li class="cat-item"><a>Products</a></li>
-						</ul></li>
-				</ul>
-			</nav>
-
-			<div style="width: auto; background: blue;"></div>
-		</div>
+		<div id="banner">This is the title</div>
 	</header>
 
-	<section><iframe width="100%" height="100%" src='<s:url value="company/list"/>'></iframe></section>
 
+	<nav>
+		<div class="container">
+			<ul id="nav">
+				<li><a href="welcome">Home</a></li>
+				<li><a class="hsubs" href="company/list" target="iframe">Company</a>
+					<ul class="subs">
+						<li><a href="#">News</a></li>
+						<li><a href="#">Jobs</a></li>
+						<li><a href="#">Products</a></li>
+					</ul></li>
+				<li><a class="hsubs" href="interview/list" target="iframe">Interview</a></li>
+				<li><a class="hsubs" href="meterial/list" target="iframe">Material</a></li>
+				<li><a class="hsubs" href="offer/list" target="iframe">Offer</a></li>
+			</ul>
+		</div>
+
+		<div style="width: auto; background: blue;"></div>
+	</nav>
+	<section>
+		<iframe name="iframe" width="100%" height="100%" src='<s:url value="company/list"/>' frameborder="0"></iframe>
+	</section>
 	<footer> This is the footer. </footer>
 </body>
 </html>

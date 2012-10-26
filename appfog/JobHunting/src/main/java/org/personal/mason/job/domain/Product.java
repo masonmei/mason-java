@@ -62,7 +62,7 @@ public void setCompany(Company company) {
 	this.company = company;
 }
 
-@ManyToOne(fetch = FetchType.LAZY)
+@ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "category_id")
 public ProductCategory getProductCategory() {
 	return this.productCategory;

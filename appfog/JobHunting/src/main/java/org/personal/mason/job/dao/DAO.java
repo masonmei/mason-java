@@ -150,7 +150,7 @@ public long countAll() {
 }
 
 @Transactional(readOnly=true)
-public long countByExample(String exampleInstance) {
+public long countByExample(T exampleInstance) {
 	Session session = (Session) entityManager.getDelegate();
 	Criteria criteria = session.createCriteria(getClazz());
 	Example example = Example.create(exampleInstance);

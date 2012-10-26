@@ -10,7 +10,7 @@
 
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/app/common.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/standalone.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login/form.css"/>">
 </head>
 <body>

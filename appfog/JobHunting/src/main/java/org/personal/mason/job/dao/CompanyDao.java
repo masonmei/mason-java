@@ -34,7 +34,7 @@ public List<Company> findByLabel(Label label, int start, int length) {
 		Criteria criteria = delegate.createCriteria(getClazz(), "com");
 		criteria.createAlias("com.companyLabels", "cls");
 		criteria.add(Restrictions.eq("cls.label", label));
-		if (start > 0) {
+		if (start >= 0) {
 			criteria.setFirstResult(start);
 		}
 		if (length > 0) {

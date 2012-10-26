@@ -20,4 +20,8 @@ public void delete(T entity);
 public void deleteById(Serializable id);
 
 public void save(T entity);
+
+public long countAll();
+
+public long countByExample(T instance);
 }

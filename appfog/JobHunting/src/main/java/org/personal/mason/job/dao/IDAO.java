@@ -20,7 +20,7 @@ List<T> findByNamedQueryAndNamedParams(final String name, final Map<String, ? ex
 
 long countAll();
 
-long countByExample(final String exampleInstance);
+long countByExample(final T exampleInstance);
 
 void save(final T entity);
 
