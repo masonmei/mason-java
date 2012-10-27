@@ -8,7 +8,7 @@
 <title>Job Hunting</title>
 </head>
 <body>
-<c:choose>
+	<c:choose>
 		<c:when test="${!empty product}">
 			<div>
 				<div>
