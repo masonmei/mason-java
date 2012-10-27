@@ -28,12 +28,10 @@
 						<li><a href="#">Products</a></li>
 					</ul></li>
 				<li><a class="hsubs" href="interview/list" target="iframe">Interview</a></li>
-				<li><a class="hsubs" href="meterial/list" target="iframe">Material</a></li>
+				<li><a class="hsubs" href="interviewMaterial/list" target="iframe">Material</a></li>
 				<li><a class="hsubs" href="offer/list" target="iframe">Offer</a></li>
 			</ul>
 		</div>
-
-		<div style="width: auto; background: blue;"></div>
 	</nav>
 	<section>
 		<iframe name="iframe" width="100%" height="100%" src='<s:url value="company/list"/>' frameborder="0"></iframe>

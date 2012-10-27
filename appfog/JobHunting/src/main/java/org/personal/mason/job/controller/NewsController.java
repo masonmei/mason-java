@@ -1,18 +1,24 @@
 package org.personal.mason.job.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.personal.mason.job.domain.Company;
 import org.personal.mason.job.domain.News;
 import org.personal.mason.job.service.CompanyService;
 import org.personal.mason.job.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 @RequestMapping("/news")
@@ -32,8 +38,15 @@ public void setNewsService(NewsService newsService) {
 	this.newsService = newsService;
 }
 
+@InitBinder
+public void InitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	dateFormat.setLenient(false);
+	binder.registerCustomEditor(Date.class, null, new CustomDateEditor(dateFormat, true));
+}
+
 @RequestMapping(value = "/list", method = RequestMethod.GET)
-public String listCompanyNewsList(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
+public String listCompanyNews(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
 	Company company = companyService.findById(companyId);
 	if (start == null || start < 0) {
 		start = 0;
@@ -70,8 +83,8 @@ public String viewCompanyNews(@RequestParam("id") Long id, Map<String, Object> m
 	return "news";
 }
 
-@RequestMapping(value = "/delete" )
-public String deleteNews(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
+@RequestMapping(value = "/delete")
+public String deleteCompanyNews(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
 	newsService.deleteById(id);
 	return "redirect:/news/list?companyId=" + companyId;
 }

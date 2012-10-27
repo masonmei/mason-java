@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,40 +8,60 @@
 <title>Job Hunting</title>
 </head>
 <body>
-<c:choose>
+	<c:choose>
 		<c:when test="${!empty offer}">
-			<f:form method="post" action="save?companyId=${companyId }" modelAttribute="offer">
+			<f:form method="post" action="save"	modelAttribute="offer">
 				<div>
 					<div>
 						<div>Offer Name</div>
 						<div>
-							<f:input path="productName" />
+							<f:input path="offerName" />
 						</div>
 					</div>
 					<div>
 						<div>Received Date</div>
 						<div>
-							<f:select path="productCategory">
-								<f:option value="NONE" label="--- Select ---" />
-								<f:options items="${categories }"/>
-							</f:select>
+							<f:input path="receivedDate" />
 						</div>
 					</div>
 					<div>
 						<div>Work Date</div>
 						<div>
-							<f:textarea path="shortDesc" />
+							<f:input path="workDate" />
 						</div>
 					</div>
 					<div>
 						<div>Salary</div>
 						<div>
-							<f:textarea path="description" />
+							<f:input path="salary" />
 						</div>
 					</div>
-					
 					<div>
-						<input type="submit" value="Save"/>		
+						<div>Salary Description</div>
+						<div>
+							<f:input path="salaryDescription" />
+						</div>
+					</div>
+					<div>
+						<div>Company</div>
+						<div>
+							<f:input path="company" />
+						</div>
+					</div>
+					<div>
+						<div>Working Place</div>
+						<div>
+							<f:input path="workplace" />
+						</div>
+					</div>
+					<div>
+						<div>Note</div>
+						<div>
+							<f:textarea path="note" />
+						</div>
+					</div>
+					<div>
+						<input type="submit" value="Save" />
 					</div>
 				</div>
 			</f:form>

@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>All Interviews</h1>
+	<div><a href='<c:url value="/offer/add"/>'>Add</a></div>
 	<div>
 		<c:choose>
 			<c:when test="${!empty offers}">

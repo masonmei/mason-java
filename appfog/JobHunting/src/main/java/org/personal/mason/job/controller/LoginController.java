@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.personal.mason.job.domain.User;
 import org.personal.mason.job.service.UserService;
+import org.personal.mason.job.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes(value={"userForm"})
 public class LoginController {
-	static final String SESSION_TOKEN = "accountid";
-	private static final int expiry = 24 * 3600 * 14;
 	private static final Log log = LogFactory.getLog(LoginController.class);
 
 	@Autowired
@@ -63,12 +62,12 @@ public class LoginController {
 			User user = new User(userForm.getEmail(), userForm.getPassword());
 
 			if (userService.verifyUser(user)) {
-				session.setAttribute(SESSION_TOKEN, user.getEmail());
+				session.setAttribute(Constants.SESSION_TOKEN, user.getEmail());
 				if (userForm.isKeepLogin()) {
-					session.setMaxInactiveInterval(expiry);
+					session.setMaxInactiveInterval(Constants.EXPIRY);
 					session.setAttribute("email", userForm.getEmail());
 					Cookie cookie = new Cookie("JSESSIOINID", session.getId());
-					cookie.setMaxAge(expiry);
+					cookie.setMaxAge(Constants.EXPIRY);
 					response.addCookie(cookie);
 				}
 
@@ -88,5 +87,11 @@ public class LoginController {
 	@RequestMapping(value="welcome", method = RequestMethod.GET)
 	public String welcome(){
 		return "welcome";
+	}
+	
+	@RequestMapping(value={"logout"}, method=RequestMethod.GET)
+	public String logout(HttpSession session, HttpServletResponse response){
+		session.removeAttribute(Constants.SESSION_TOKEN);
+		return "index";
 	}
 }

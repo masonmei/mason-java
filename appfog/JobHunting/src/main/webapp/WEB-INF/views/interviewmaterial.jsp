@@ -9,36 +9,36 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${!empty material}">
+		<c:when test="${!empty interviewMaterial}">
 			<div>
 				<div>
 					<div>Question</div>
 					<div>
-						<label>${material.question }</label>
+						<label>${interviewMaterial.question }</label>
 					</div>
 				</div>
 				<div>
 					<div>Weight</div>
 					<div>
-						<label>${material.weight }</label>
+						<label>${interviewMaterial.weight }</label>
 					</div>
 				</div>
 				<div>
 					<div>Add Date</div>
 					<div>
-						<label>${material.addDate }</label>
+						<label>${interviewMaterial.addDate }</label>
 					</div>
 				</div>
 				<div>
 					<div>Type</div>
 					<div>
-						<label>${material.type }</label>
+						<label>${interviewMaterial.type }</label>
 					</div>
 				</div>
 				<div>
 					<div>Answer</div>
 					<div>
-						<label>${material.answer }</label>
+						<label>${interviewMaterial.answer }</label>
 					</div>
 				</div>
 			</div>

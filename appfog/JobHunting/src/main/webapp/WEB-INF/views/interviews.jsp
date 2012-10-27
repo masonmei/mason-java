@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>All Interviews</h1>
+	<div><a href='<c:url value="/interview/add"/>'>Add</a></div>
 	<div>
 		<c:choose>
 			<c:when test="${!empty interviews}">
@@ -25,7 +26,7 @@
 					<c:forEach var="interview" items="${interviews }">
 						<tr>
 							<td hidden="true">${interview.id }</td>
-							<td>${interview.interviewName }</td>
+							<td><a href='<c:url value="/interview/view?id=${interview.id }"/>'>${interview.interviewName }</a></td>
 							<td>${interview.date }</td>
 							<td>${interview.location }</td>
 							<td>${interview.notes }</td>

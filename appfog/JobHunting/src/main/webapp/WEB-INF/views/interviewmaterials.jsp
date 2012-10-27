@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>All Materials</h1>
+	<div><a href='<c:url value="/interviewMaterial/add"/>'>Add</a></div>
 	<div>
 		<c:choose>
 			<c:when test="${!empty interviewMaterials}">
@@ -25,11 +26,11 @@
 					<c:forEach var="mat" items="${interviewMaterials }">
 						<tr>
 							<td hidden="true">${mat.id }</td>
-							<td>${mat.question }</td>
+							<td><a href='<c:url value="/interviewMaterial/view?id=${mat.id }"/>'>${mat.question }</a></td>
 							<td>${mat.weight }</td>
 							<td>${mat.addDate }</td>
 							<td>${mat.type }</td>
-							<td><a href='<c:url value="/meterial/answer?id=${mat.id }"/>'>Answer</a></td>
+							<td><a href='<c:url value="/interviewMaterial/answer?id=${mat.id }"/>'>Answer</a></td>
 						</tr>
 					</c:forEach>
 				</table>

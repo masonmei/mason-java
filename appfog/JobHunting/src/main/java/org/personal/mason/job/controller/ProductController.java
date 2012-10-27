@@ -19,77 +19,77 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/product")
 public class ProductController {
-	@Autowired
-	private CompanyService companyService;
+@Autowired
+private CompanyService companyService;
 
-	@Autowired
-	private ProductService productService;
-	
-	@Autowired
-	private ProductCategoryService productCategoryService;
+@Autowired
+private ProductService productService;
 
-	public void setCompanyService(CompanyService companyService) {
-		this.companyService = companyService;
+@Autowired
+private ProductCategoryService productCategoryService;
+
+public void setCompanyService(CompanyService companyService) {
+	this.companyService = companyService;
+}
+
+public void setProductService(ProductService productService) {
+	this.productService = productService;
+}
+
+public void setProductCategoryService(ProductCategoryService productCategoryService) {
+	this.productCategoryService = productCategoryService;
+}
+
+@RequestMapping(value = "/list", method = RequestMethod.GET)
+public String listCompanyProducts(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
+	Company company = companyService.findById(companyId);
+	if (start == null || start < 0) {
+		start = 0;
 	}
 
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
+	if (length == null || length <= 0) {
+		length = 10;
 	}
-	
-	public void setProductCategoryService(ProductCategoryService productCategoryService) {
-	    this.productCategoryService = productCategoryService;
-    }
+	List<Product> companyProducts = productService.findCompanyProducts(company, start, length);
+	map.put("company", company);
+	map.put("companyProducts", companyProducts);
+	return "products";
+}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String listCompanyProductsList(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
-		Company company = companyService.findById(companyId);
-		if (start == null || start < 0) {
-			start = 0;
+@RequestMapping(value = "/add", method = RequestMethod.GET)
+public String addCompanyProduct(@RequestParam("companyId") Long companyId, Map<String, Object> map) {
+	map.put("companyId", companyId);
+	map.put("product", new Product());
+	List<ProductCategory> roots = productCategoryService.getProductCategoryRoots();
+	Map<String, ProductCategory> categories = new HashMap<String, ProductCategory>();
+	if (roots != null) {
+		for (ProductCategory productCategory : roots) {
+			categories.put(productCategory.getCategoryName(), productCategory);
 		}
-
-		if (length == null || length <= 0) {
-			length = 10;
-		}
-		List<Product> companyProducts = productService.findCompanyProducts(company, start, length);
-		map.put("company", company);
-		map.put("companyProducts", companyProducts);
-		return "products";
 	}
+	map.put("categories", categories);
+	return "product_edit";
+}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String addCompanyJob(@RequestParam("companyId") Long companyId, Map<String, Object> map) {
-		map.put("companyId", companyId);
-		map.put("product", new Product());
-		List<ProductCategory> roots = productCategoryService.getProductCategoryRoots();
-		Map<String, ProductCategory> categories = new HashMap<String, ProductCategory>();
-		if(roots != null){
-			for (ProductCategory productCategory : roots) {
-	            categories.put(productCategory.getCategoryName(), productCategory);
-            }
-		}
-		map.put("categories", categories);
-		return "product_edit";
-	}
+@RequestMapping(value = "/save", method = RequestMethod.POST)
+public String saveCompanyProduct(@RequestParam("companyId") Long companyId, Product product) {
+	Company company = companyService.findById(companyId);
+	product.setCompany(company);
+	product.setProductCategory(productCategoryService.findById(product.getProductCategory().getId()));
+	productService.save(product);
+	return "redirect:/product/list?companyId=" + companyId;
+}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveCompanyJob(@RequestParam("companyId") Long companyId, Product product) {
-		Company company = companyService.findById(companyId);
-		product.setCompany(company);
-		product.setProductCategory(productCategoryService.findById(product.getProductCategory().getId()));
-		productService.save(product);
-		return "redirect:/product/list?companyId=" + companyId;
-	}
+@RequestMapping(value = "/view", method = RequestMethod.GET)
+public String viewCompanyProduct(@RequestParam("id") Long id, Map<String, Object> map) {
+	Product product = productService.findById(id);
+	map.put("product", product);
+	return "product";
+}
 
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String viewCompanyJob(@RequestParam("id") Long id, Map<String, Object> map) {
-		Product product = productService.findById(id);
-		map.put("product", product);
-		return "product";
-	}
-
-	@RequestMapping(value = "/delete" )
-	public String deleteJob(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
-		productService.deleteById(id);
-		return "redirect:/product/list?companyId=" + companyId;
-	}
+@RequestMapping(value = "/delete")
+public String deleteCompanyProduct(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
+	productService.deleteById(id);
+	return "redirect:/product/list?companyId=" + companyId;
+}
 }
