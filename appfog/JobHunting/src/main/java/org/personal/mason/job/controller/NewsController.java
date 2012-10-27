@@ -13,51 +13,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 @RequestMapping("/news")
 public class NewsController {
 
-	@Autowired
-	private CompanyService companyService;
+@Autowired
+private CompanyService companyService;
 
-	@Autowired
-	private NewsService newsService;
+@Autowired
+private NewsService newsService;
 
-	public void setCompanyService(CompanyService companyService) {
-		this.companyService = companyService;
+public void setCompanyService(CompanyService companyService) {
+	this.companyService = companyService;
+}
+
+public void setNewsService(NewsService newsService) {
+	this.newsService = newsService;
+}
+
+@RequestMapping(value = "/list", method = RequestMethod.GET)
+public String listCompanyNewsList(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
+	Company company = companyService.findById(companyId);
+	if (start == null || start < 0) {
+		start = 0;
 	}
 
-	public void setNewsService(NewsService newsService) {
-		this.newsService = newsService;
+	if (length == null || length <= 0) {
+		length = 10;
 	}
-	
-	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public String listCompanyNewsList(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map){
-		Company company = companyService.findById(companyId);
-		if (start == null || start < 0) {
-			start = 0;
-		}
+	List<News> companyNews = newsService.findCompanyNews(company, start, length);
+	map.put("company", company);
+	map.put("companyNews", companyNews);
+	return "news_list";
+}
 
-		if (length == null || length <= 0) {
-			length = 10;
-		}
-		List<News> companyNews = newsService.findCompanyNews(company, start, length);
-		map.put("company", company);
-		map.put("companyNews", companyNews);
-		return "news_list";
-	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addCompanyNews(@RequestParam("companyId") Long companyId, News news){
-		Company company = companyService.findById(companyId);
-		news.setCompany(company);
-		newsService.save(news);
-		return null;
-	}
-	
-	@RequestMapping(value="/delete")
-	public String deleteNews(@RequestParam("id") Long id){
-		newsService.deleteById(id);
-		return null;
-	}
+@RequestMapping(value = "/add", method = RequestMethod.GET)
+public String addCompanyNews(@RequestParam("companyId") Long companyId, Map<String, Object> map) {
+	map.put("companyId", companyId);
+	map.put("news", new News());
+	return "news_add";
+}
+
+@RequestMapping(value = "/save", method = RequestMethod.POST)
+public String saveCompanyNews(@RequestParam("companyId") Long companyId, News news) {
+	Company company = companyService.findById(companyId);
+	news.setCompany(company);
+	newsService.save(news);
+	return "redirect:/news/list?companyId=" + companyId;
+}
+
+@RequestMapping(value = "/view", method = RequestMethod.GET)
+public String viewCompanyNews(@RequestParam("id") Long id, Map<String, Object> map) {
+	News news = newsService.findById(id);
+	map.put("news", news);
+	return "news";
+}
+
+@RequestMapping(value = "/delete" )
+public String deleteNews(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
+	newsService.deleteById(id);
+	return "redirect:/news/list?companyId=" + companyId;
+}
 }

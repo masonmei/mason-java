@@ -23,7 +23,7 @@ private static final long serialVersionUID = 2525118754562667881L;
 private Long id;
 private ProductCategory productCategory;
 private String categoryName;
-private String desc;
+private String description;
 private Set<Product> products = new HashSet<Product>(0);
 private Set<ProductCategory> productCategories = new HashSet<ProductCategory>(0);
 
@@ -34,10 +34,10 @@ public ProductCategory(String categoryName) {
 	this.categoryName = categoryName;
 }
 
-public ProductCategory(ProductCategory productCategory, String categoryName, String desc, Set<Product> products, Set<ProductCategory> productCategories) {
+public ProductCategory(ProductCategory productCategory, String categoryName, String description, Set<Product> products, Set<ProductCategory> productCategories) {
 	this.productCategory = productCategory;
 	this.categoryName = categoryName;
-	this.desc = desc;
+	this.description = description;
 	this.products = products;
 	this.productCategories = productCategories;
 }
@@ -72,13 +72,13 @@ public void setCategoryName(String categoryName) {
 	this.categoryName = categoryName;
 }
 
-@Column(name = "desc", length = 100)
-public String getDesc() {
-	return this.desc;
+@Column(name = "description", length = 100)
+public String getDescription() {
+	return this.description;
 }
 
-public void setDesc(String desc) {
-	this.desc = desc;
+public void setDescription(String description) {
+	this.description = description;
 }
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "productCategory")

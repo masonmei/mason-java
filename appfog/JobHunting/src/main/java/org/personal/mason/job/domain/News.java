@@ -25,7 +25,7 @@ private Company company;
 private String title;
 private Date date;
 private String content;
-private String desc;
+private String description;
 
 public News() {
 }
@@ -37,12 +37,12 @@ public News(Company company, String title, Date date, String content) {
 	this.content = content;
 }
 
-public News(Company company, String title, Date date, String content, String desc) {
+public News(Company company, String title, Date date, String content, String description) {
 	this.company = company;
 	this.title = title;
 	this.date = date;
 	this.content = content;
-	this.desc = desc;
+	this.description = description;
 }
 
 @Id
@@ -94,13 +94,13 @@ public void setContent(String content) {
 	this.content = content;
 }
 
-@Column(name = "desc")
-public String getDesc() {
-	return this.desc;
+@Column(name = "description")
+public String getDescription() {
+	return this.description;
 }
 
-public void setDesc(String desc) {
-	this.desc = desc;
+public void setDescription(String description) {
+	this.description = description;
 }
 
 }

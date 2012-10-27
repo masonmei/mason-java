@@ -46,17 +46,32 @@ public class JobController {
 		return "jobs";
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addCompanyNews(@RequestParam("companyId") Long companyId, Job job){
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addCompanyJob(@RequestParam("companyId") Long companyId, Map<String, Object> map) {
+		map.put("companyId", companyId);
+		map.put("job", new Job());
+		return "job_add";
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String saveCompanyJob(@RequestParam("companyId") Long companyId, Job job) {
 		Company company = companyService.findById(companyId);
 		job.setCompany(company);
 		jobService.save(job);
-		return null;
+		return "redirect:/job/list?companyId=" + companyId;
 	}
-	
-	@RequestMapping(value="/delete")
-	public String deleteNews(@RequestParam("id") Long id){
+
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String viewCompanyJob(@RequestParam("id") Long id, Map<String, Object> map) {
+		Job job = jobService.findById(id);
+		map.put("job", job);
+		return "job";
+	}
+
+	@RequestMapping(value = "/delete" )
+	public String deleteJob(@RequestParam("id") Long id, @RequestParam("companyId") Long companyId) {
 		jobService.deleteById(id);
-		return null;
+		return "redirect:/job/list?companyId=" + companyId;
 	}
 }

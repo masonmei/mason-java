@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.personal.mason.job.domain.ProductCategory;
+import org.springframework.transaction.annotation.Transactional;
 
 public class ProductCategoryDao extends DAO<ProductCategory> {
 
@@ -26,6 +27,7 @@ protected Class<ProductCategory> getClazz() {
 	return ProductCategory.class;
 }
 
+@Transactional(readOnly=true)
 public List<ProductCategory> getProductCategoryRoots() {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
@@ -43,6 +45,7 @@ public List<ProductCategory> getProductCategoryRoots() {
 	}
 }
 
+@Transactional(readOnly=true)
 public List<ProductCategory> getProduCategoryChildren(ProductCategory productCategory) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {

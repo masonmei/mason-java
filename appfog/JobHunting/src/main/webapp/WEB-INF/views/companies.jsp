@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>All Companies</h1>
+	<div><a href='<c:url value="/company/new"/>'>New</a></div>
 	<div>
 		<c:choose>
 			<c:when test="${!empty companies}">
@@ -25,7 +26,7 @@
 					<c:forEach var="com" items="${companies }">
 						<tr>
 							<td hidden="true">${com.id }</td>
-							<td>${com.companyName }</td>
+							<td><a href='<c:url value="/company/view?id=${com.id }"/>'>${com.companyName }</a></td>
 							<td>${com.provice }</td>
 							<td>${com.city }</td>
 							<td>${com.businessType }</td>

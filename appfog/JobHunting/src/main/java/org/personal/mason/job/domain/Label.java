@@ -20,7 +20,7 @@ public class Label implements java.io.Serializable {
 private static final long serialVersionUID = -5379590302180459359L;
 private long id;
 private String labelName;
-private String desc;
+private String description;
 private Set<CompanyLabel> companyLabels = new HashSet<CompanyLabel>(0);
 
 public Label() {
@@ -31,10 +31,10 @@ public Label(long id, String labelName) {
 	this.labelName = labelName;
 }
 
-public Label(long id, String labelName, String desc, Set<CompanyLabel> companyLabels) {
+public Label(long id, String labelName, String description, Set<CompanyLabel> companyLabels) {
 	this.id = id;
 	this.labelName = labelName;
-	this.desc = desc;
+	this.description = description;
 	this.companyLabels = companyLabels;
 }
 
@@ -57,13 +57,13 @@ public void setLabelName(String labelName) {
 	this.labelName = labelName;
 }
 
-@Column(name = "desc")
-public String getDesc() {
-	return this.desc;
+@Column(name = "description")
+public String getDescription() {
+	return this.description;
 }
 
-public void setDesc(String desc) {
-	this.desc = desc;
+public void setDescription(String description) {
+	this.description = description;
 }
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "label")

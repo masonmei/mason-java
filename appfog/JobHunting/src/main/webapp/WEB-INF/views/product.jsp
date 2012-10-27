@@ -8,51 +8,33 @@
 <title>Job Hunting</title>
 </head>
 <body>
-
-	<c:choose>
-		<c:when test="${!empty company}">
+<c:choose>
+		<c:when test="${!empty product}">
 			<div>
 				<div>
-					<div>Company</div>
+					<div>Product Name</div>
 					<div>
-						<label>${company.companyName }</label>
+						<label>${product.productName }</label>
 					</div>
 				</div>
 				<div>
+					<div>Category</div>
 					<div>
-						<div>Province</div>
-						<div>
-							<label>${company.provice }</label>
-						</div>
-					</div>
-					<div>
-						<div>City</div>
-						<div>
-							<label>${company.city }</label>
-						</div>
+						<label>${product.productCategory.categoryName }</label>
 					</div>
 				</div>
 				<div>
+					<div>Short Description</div>
 					<div>
-						<div>Business Type</div>
-						<div>
-							<label>${company.businessType }</label>
-						</div>
-					</div>
-					<div>
-						<div>Scale</div>
-						<div>
-							<label>${company.scale }</label>
-						</div>
+						<label>${product.shortDesc }</label>
 					</div>
 				</div>
 				<div>
 					<div>Description</div>
 					<div>
-						<label>${company.description }</label>
+						<label>${product.description }</label>
 					</div>
 				</div>
-				<div><a href='<c:url value="/company/edit?id=${company.id }"/>'>Edit</a></div>
 			</div>
 		</c:when>
 		<c:otherwise>

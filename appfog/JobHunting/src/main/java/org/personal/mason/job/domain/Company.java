@@ -26,7 +26,7 @@ private String provice;
 private String city;
 private String businessType;
 private Integer scale;
-private String desc;
+private String description;
 private Set<CompanyLabel> companyLabels = new HashSet<CompanyLabel>(0);
 private Set<News> newses = new HashSet<News>(0);
 private Set<Product> products = new HashSet<Product>(0);
@@ -40,14 +40,14 @@ public Company(String companyName, String provice) {
 	this.provice = provice;
 }
 
-public Company(String companyName, String provice, String city, String businessType, Integer scale, String desc, Set<CompanyLabel> companyLabels,
+public Company(String companyName, String provice, String city, String businessType, Integer scale, String description, Set<CompanyLabel> companyLabels,
         Set<News> newses, Set<Product> products, Set<Job> jobs) {
 	this.companyName = companyName;
 	this.provice = provice;
 	this.city = city;
 	this.businessType = businessType;
 	this.scale = scale;
-	this.desc = desc;
+	this.description = description;
 	this.companyLabels = companyLabels;
 	this.newses = newses;
 	this.products = products;
@@ -110,13 +110,13 @@ public void setScale(Integer scale) {
 	this.scale = scale;
 }
 
-@Column(name = "desc", length = 65535)
-public String getDesc() {
-	return this.desc;
+@Column(name = "description", length = 65535)
+public String getDescription() {
+	return this.description;
 }
 
-public void setDesc(String desc) {
-	this.desc = desc;
+public void setDescription(String description) {
+	this.description = description;
 }
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")

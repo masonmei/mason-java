@@ -10,10 +10,11 @@
 <body>
 	<h1>
 		Products Of Company
-		<c:if test="${not empty company }">${company }</c:if>
+		<c:if test="${not empty company }">${company.companyName }</c:if>
 	</h1>
 
 	<div>
+		<div><a href='<c:url value="/product/add?companyId=${company.id }"/>'>Add</a></div>
 		<c:choose>
 			<c:when test="${!empty companyProducts}">
 				<table border="6">
@@ -28,10 +29,10 @@
 					<c:forEach var="prod" items="${companyProducts }">
 						<tr>
 							<td hidden="true">${prod.id }</td>
-							<td>${prod.productName }</td>
+							<td><a href='<c:url value="/product/view?id=${prod.id }"/>'>${prod.productName }</a></td>
 							<td>${prod.productCategory.categoryName }</td>
 							<td>${prod.shortDesc }</td>
-							<td><a href="/product/delete?id=${prod.id }">Delete</a></td>
+							<td><a href='<c:url value="/product/delete?id=${prod.id }&companyId=${company.id }"/>'>Delete</a></td>
 						</tr>
 					</c:forEach>
 

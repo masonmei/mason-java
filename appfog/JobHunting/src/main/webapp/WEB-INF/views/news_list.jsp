@@ -12,7 +12,7 @@
 		News Of Company
 		<c:if test="${not empty company }">${company.companyName }</c:if>
 	</h1>
-
+	<div><a href='<c:url value="/news/add?companyId=${company.id }"/>'>Add</a></div>
 	<div>
 		<c:choose>
 			<c:when test="${!empty companyNews}">
@@ -28,10 +28,10 @@
 					<c:forEach var="news" items="${companyNews }">
 						<tr>
 							<td hidden="true">${news.id }</td>
-							<td>${news.title }</td>
+							<td><a href='<c:url value="/news/view?id=${news.id }"/>'>${news.title }</a></td>
 							<td>${news.date }</td>
-							<td>${news.desc }</td>
-							<td><a href="news/delete?id=${news.id }">Delete</a></td>
+							<td>${news.description }</td>
+							<td><a href='<c:url value="/news/delete?id=${news.id }&companyId=${company.id }"/>'>Delete</a></td>
 						</tr>
 					</c:forEach>
 
