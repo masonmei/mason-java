@@ -1,2 +1,11 @@
 *.class
 *.jar
+tips/CountryInfo/.settings/org.hibernate.eclipse.console.prefs
+
+tips/CountryInfo/target/classes/META-INF/MANIFEST.MF
+
+tips/CountryInfo/target/classes/META-INF/maven/org.personal.mason.ws.client/CountryInfo/pom.properties
+
+tips/CountryInfo/target/classes/META-INF/maven/org.personal.mason.ws.client/CountryInfo/pom.xml
+
+tips/CountryInfo/.project
