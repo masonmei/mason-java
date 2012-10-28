@@ -1,14 +1,74 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<%@ page session="false"%>
+
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
+<STYLE type="text/css"
+	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css" />"></STYLE>
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>	
 <title>Job Hunting</title>
+
+<c:url var="findProvinces" value="/company/provinces"/>
+<c:url var="findCities" value="/company/cities"/>
+
 <script type="text/javascript">
-	function getCityOfProvice(this) {
-		alert(this);
+	
+	$(document).ready(function() { 
+		$('#province').change(
+				function() {
+					$.getJSON('${findCities}', {
+						province : $(this).val(),
+						ajax : 'true'
+					}, function(data) {
+						var html = '<option value="">Select City</option>';
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							html += '<option value="' + data[i].cityName + '">' + data[i].cityName + '</option>';
+						}
+						html += '</option>';
+
+						$('#city').html(html);
+					});
+				});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.getJSON('${findProvinces}', {
+					ajax : 'true'
+				}, function(data) {
+					var html = '<option value="">Select Province</option>';
+					var len = data.length;
+					for ( var i = 0; i < len; i++) {
+						html += '<option value="' + data[i].provinceName + '">' + data[i].provinceName + '</option>';
+					}
+					html += '</option>';
+
+					$('#province').html(html);
+				});
+			});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#city').change(onSelectChange);
+	});
+
+	function onSelectChange() {
+		var selected = $("#city option:selected");		
+		var output = "";
+		if(selected.val() != 0){
+			output = "You selected City " + selected.text();
+		}
+		alert(output);
 	}
 </script>
 </head>
@@ -30,19 +90,15 @@
 						<div>
 							<div>Province</div>
 							<div>
-								<f:select path="provice"
-									onchange="javascript:getCityOfProvice(this);">
-									<f:option value="NONE" label="--- Select ---" />
-									<f:options items="${provinceList }" />
+								<f:select path="provice" id="province">
 								</f:select>
 							</div>
 						</div>
 						<div>
 							<div>City</div>
 							<div>
-								<f:select path="city">
+								<f:select path="city" id="city" >
 									<f:option value="NONE" label="--- Select ---" />
-									<f:options items="${cityOfProvince }" />
 								</f:select>
 							</div>
 						</div>
@@ -67,14 +123,14 @@
 							<f:textarea path="description" />
 						</div>
 					</div>
-					
+
 					<div>
 						<c:choose>
 							<c:when test="${create }">
-								<input type="submit" value="Save"/>
+								<input type="submit" value="Save" />
 							</c:when>
 							<c:otherwise>
-								<input type="submit" value="Update"/>
+								<input type="submit" value="Update" />
 							</c:otherwise>
 						</c:choose>
 					</div>

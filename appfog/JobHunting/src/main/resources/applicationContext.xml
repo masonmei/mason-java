@@ -55,25 +55,44 @@
     <bean id="offerDao" class="org.personal.mason.job.dao.OfferDao"/>
     <bean id="productCategoryDao" class="org.personal.mason.job.dao.ProductCategoryDao"/>
     <bean id="productDao" class="org.personal.mason.job.dao.ProductDao"/>
-
-    <mvc:annotation-driven/>
+    <bean id="provinceDao" class="org.personal.mason.job.dao.ProvinceDao"/>
+    <bean id="cityDao" class="org.personal.mason.job.dao.CityDao"/>
 
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <bean class="org.springframework.http.MediaType">
+                                <constructor-arg index="0" value="text"/>
+                                <constructor-arg index="1" value="plain"/>
+                                <constructor-arg index="2" value="UTF-8"/>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <mvc:annotation-driven/>
     <mvc:view-controller path="/" view-name="index"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="org.personal.mason.job.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!-- <mvc:interceptors> -->
+    <!-- <mvc:interceptor> -->
+    <!-- <mvc:mapping path="/**"/> -->
+    <!-- <bean class="org.personal.mason.job.interceptor.LoginInterceptor"/> -->
+    <!-- </mvc:interceptor> -->
+    <!-- </mvc:interceptors> -->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
