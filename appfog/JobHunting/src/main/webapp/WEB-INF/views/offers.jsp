@@ -6,8 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+
 </head>
-<body>
+<body><div class="content">
 	<h1>All Interviews</h1>
 	<div><a href='<c:url value="/offer/add"/>'>Add</a></div>
 	<div>
@@ -44,7 +46,7 @@
 			<c:otherwise>
 				<p>No Offers</p>
 			</c:otherwise>
-		</c:choose>
+		</c:choose></div>
 	</div>
 </body>
 </html>

@@ -6,8 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+
 </head>
-<body>
+<body><div class="content">
 	<c:choose>
 		<c:when test="${!empty product}">
 			<f:form method="post" action="save?companyId=${companyId }" modelAttribute="product">
@@ -51,6 +53,6 @@
 				<label>Should Never Come to This</label>
 			</div>
 		</c:otherwise>
-	</c:choose>
+	</c:choose></div>
 </body>
 </html>

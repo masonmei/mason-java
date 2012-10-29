@@ -51,3 +51,59 @@ header .stuts span {
     margin: 10px auto;
     width: 100%;
 }
+
+.content{
+	padding:5px;
+	color: silver;
+}
+
+select {
+	background-color: gray;
+	min-width: 120px;
+	min-height: 20px;
+}
+div {
+	padding: 2px;
+}
+input {
+	background-color: gray;
+	min-width: 200px;
+	min-height: 20px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+textarea {
+	background-color: gray;
+	width: 90%;
+	min-height: 100px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.button {
+	background-color: gray;
+	min-width: 100px;
+	min-height: 20px;
+}
+
+a {
+	display: inline-block;
+	padding: 3px;
+	color: teal;
+}
+
+a:ACTIVE {
+	color: black;
+	background-color: aqua;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+}
+
+th {
+	text-shadow: black;
+	padding: 3px;
+}

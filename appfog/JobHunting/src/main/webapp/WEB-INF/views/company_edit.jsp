@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/javascript/jquery.tools.min.js" />"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">	
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+
 <title>Job Hunting</title>
 
 <c:url var="findProvinces" value="/company/provinces"/>
@@ -19,7 +22,7 @@
 		$('#province').change(
 				function() {
 					$.getJSON('${findCities}', {
-						provinceId : $(this).val(),
+						provinceName : $(this).val(),
 						ajax : 'true'
 					}, function(data) {
 						var html = '<option value="">Select City</option>';
@@ -32,13 +35,13 @@
 				});
 	});
 </script>
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 	$(document).ready(function() { 
 		var html = '<option value="">Select City</option>';
 		html += '</option>';
 		$('#city').html(html);
 	});
-</script>
+</script> --%>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -48,7 +51,7 @@
 					var html = '<option value="">Select Province</option>';
 					var len = data.length;
 					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].id + '">' + data[i].provinceName + '</option>';
+						html += '<option value="' + data[i].provinceName + '">' + data[i].provinceName + '</option>';
 					}
 					$('#province').html(html);
 				});
@@ -56,6 +59,7 @@
 </script>
 </head>
 <body>
+<div class="content">
 	<c:choose>
 		<c:when test="${!empty company}">
 			<f:form method="post" action="update" modelAttribute="company">
@@ -80,7 +84,7 @@
 						<div>
 							<div>City</div>
 							<div>
-								<f:select path="city" id="city" >									
+								<f:select path="city" id="city">									
 								</f:select>
 							</div>
 						</div>
@@ -124,6 +128,6 @@
 				<label>Should Never Come to This</label>
 			</div>
 		</c:otherwise>
-	</c:choose>
+	</c:choose></div>
 </body>
 </html>

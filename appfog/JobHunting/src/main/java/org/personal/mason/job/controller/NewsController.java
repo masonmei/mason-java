@@ -40,7 +40,7 @@ public void setNewsService(NewsService newsService) {
 
 @InitBinder
 public void InitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	dateFormat.setLenient(false);
 	binder.registerCustomEditor(Date.class, null, new CustomDateEditor(dateFormat, true));
 }

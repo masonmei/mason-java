@@ -34,7 +34,7 @@
 		</div>
 	</nav>
 	<section>
-		<iframe name="iframe" width="100%" height="100%" src='<s:url value="company/list"/>' frameborder="0"></iframe>
+		<iframe name="iframe" width="100%" height="100%" src='<s:url value="company/list"/>' frameborder="0" scrolling="no"></iframe>
 	</section>
 	<footer> This is the footer. </footer>
 </body>

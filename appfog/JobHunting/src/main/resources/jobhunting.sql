@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : utf-8
 
- Date: 10/29/2012 01:35:41 AM
+ Date: 10/30/2012 00:44:29 AM
 */
 
 SET NAMES utf8;
@@ -24,12 +24,13 @@ DROP TABLE IF EXISTS `city`;
 CREATE TABLE `city` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `city_name` varchar(64) NOT NULL,
-  `provinceId` bigint(20) NOT NULL,
+  `province_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
-  UNIQUE KEY `name` (`city_name`),
-  KEY `FK2E996BC8B2B8E0` (`provinceId`),
-  CONSTRAINT `FK2E996BC8B2B8E0` FOREIGN KEY (`provinceId`) REFERENCES `province` (`id`)
+  UNIQUE KEY `city_name` (`city_name`),
+  UNIQUE KEY `city_name_2` (`city_name`),
+  KEY `FK2E996B368B143F` (`province_id`),
+  CONSTRAINT `FK2E996B368B143F` FOREIGN KEY (`province_id`) REFERENCES `province` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2442 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -52,13 +53,13 @@ CREATE TABLE `company` (
   `scale` int(11) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `company`
 -- ----------------------------
 BEGIN;
-INSERT INTO `company` VALUES ('1', 'Company1', 'Henan', 'luohe', '2', '1000000', 'dsfadfsadfdsf'), ('2', 'company2', 'Henan', 'luohe', '3', '500000', 'fdslfjlsdlfjldsfasdf');
+INSERT INTO `company` VALUES ('1', 'Company1', '云南', '保山市 ', '2', '1000000', 'dsfadfsadfdsf'), ('2', 'company2', '吉林', '德惠市 ', '3', '500000', 'fdslfjlsdlfjldsfasdf'), ('3', 'sdfafd', '北京', '房山区 ', 'sdfsf', '234234', 'dsfdsfs'), ('4', '公司A', '内蒙古', '阿拉善右旗 ', '类型1', '10000', '这是公司A的描述'), ('5', '公司B', '内蒙古', '阿拉善右旗 ', '类型2', '100000', 'thi要洒');
 COMMIT;
 
 -- ----------------------------
@@ -180,13 +181,13 @@ CREATE TABLE `news` (
   PRIMARY KEY (`id`),
   KEY `newscompany` (`company_id`),
   CONSTRAINT `newscompany` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `news`
 -- ----------------------------
 BEGIN;
-INSERT INTO `news` VALUES ('1', 'new1', '1', '2012-10-27 02:01:57', 'this is the content of news', 'the desc of new'), ('7', 'sdfafsd', '1', '2012-10-27 00:00:00', 'safda', 'sadfasdf');
+INSERT INTO `news` VALUES ('1', 'new1', '1', '2012-10-27 02:01:57', 'this is the content of news', 'the desc of new'), ('7', 'sdfafsd', '1', '2012-10-27 00:00:00', 'safda', 'sadfasdf'), ('8', 'fwer', '1', '2012-10-11 00:00:00', 'fdasdf', 'sdaf');
 COMMIT;
 
 -- ----------------------------

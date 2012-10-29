@@ -98,9 +98,10 @@ public String updateCompany(@ModelAttribute("company") Company company) {
 }
 
 @RequestMapping(value = "/cities", method = RequestMethod.GET)
-public @ResponseBody List<City> getCitiesOfProvince(@RequestParam("provinceId") Long provinceId) {
-	Province province = provinceService.findById(provinceId);
-	if (province != null ) {
+public @ResponseBody
+List<City> getCitiesOfProvince(@RequestParam("provinceName") String provinceName) {
+	Province province = provinceService.findByProvinceName(provinceName);
+	if (province != null) {
 		List<City> cities = cityService.getByProvince(province);
 		return Collections.unmodifiableList(cities);
 	}
