@@ -1,100 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- scans the classpath for annotated components (including @Repostory and @Service that will be auto-registered as 
-        Spring beans -->
-    <context:component-scan base-package="org.personal.mason.job"/>
-    <context:annotation-config/>
+	<!-- scans the classpath for annotated components (including @Repostory 
+		and @Service that will be auto-registered as Spring beans -->
+	<context:component-scan base-package="org.personal.mason.job" />
+	<context:annotation-config />
 
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:location="classpath:jdbc.properties"/>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:jdbc.properties" />
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
-        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+	<!-- <bean id="dataSource" -->
+	<!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
+	<!-- p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" -->
+	<!-- p:username="${jdbc.username}" p:password="${jdbc.password}" /> -->
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	<!-- JPA Entity Manager Factory -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:dataSource-ref="dataSource" p:persistenceXmlLocation="classpath:META-INF/persistence.xml" />
 
-    <!-- JPA Entity Manager Factory -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-        p:dataSource-ref="dataSource" p:persistenceUnitName="jobhunting" p:jpaVendorAdapter-ref="jpaVendorAdapter"/>
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:showSql="true" p:generateDdl="true" p:databasePlatform="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
-    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:showSql="true"
-        p:generateDdl="true" p:databasePlatform="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+	<!-- bean post-processor for JPA annotations -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-    <!-- bean post-processor for JPA annotations -->
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+	<!-- Transaction Config -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory" />
 
-    <!-- Transaction Config -->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-        p:entityManagerFactory-ref="entityManagerFactory"/>
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.support.SharedEntityManagerBean"
+		p:entityManagerFactory-ref="entityManagerFactory" />
 
-    <bean id="entityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean"
-        p:entityManagerFactory-ref="entityManagerFactory"/>
+	<!-- use declarative transaction management -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
 
-    <!-- use declarative transaction management -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor" />
 
-    <bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor"/>
+	<bean id="userDao" class="org.personal.mason.job.dao.UserDao" />
+	<bean id="companyDao" class="org.personal.mason.job.dao.CompanyDao" />
+	<bean id="interviewDao" class="org.personal.mason.job.dao.InterviewDao" />
+	<bean id="interviewMaterialDao" class="org.personal.mason.job.dao.InterviewMaterialDao" />
+	<bean id="jobDao" class="org.personal.mason.job.dao.JobDao" />
+	<bean id="labelDao" class="org.personal.mason.job.dao.LabelDao" />
+	<bean id="newsDao" class="org.personal.mason.job.dao.NewsDao" />
+	<bean id="offerDao" class="org.personal.mason.job.dao.OfferDao" />
+	<bean id="productCategoryDao" class="org.personal.mason.job.dao.ProductCategoryDao" />
+	<bean id="productDao" class="org.personal.mason.job.dao.ProductDao" />
+	<bean id="provinceDao" class="org.personal.mason.job.dao.ProvinceDao" />
+	<bean id="cityDao" class="org.personal.mason.job.dao.CityDao" />
 
-    <bean id="userDao" class="org.personal.mason.job.dao.UserDao"/>
-    <bean id="companyDao" class="org.personal.mason.job.dao.CompanyDao"/>
-    <bean id="interviewDao" class="org.personal.mason.job.dao.InterviewDao"/>
-    <bean id="interviewMaterialDao" class="org.personal.mason.job.dao.InterviewMaterialDao"/>
-    <bean id="jobDao" class="org.personal.mason.job.dao.JobDao"/>
-    <bean id="labelDao" class="org.personal.mason.job.dao.LabelDao"/>
-    <bean id="newsDao" class="org.personal.mason.job.dao.NewsDao"/>
-    <bean id="offerDao" class="org.personal.mason.job.dao.OfferDao"/>
-    <bean id="productCategoryDao" class="org.personal.mason.job.dao.ProductCategoryDao"/>
-    <bean id="productDao" class="org.personal.mason.job.dao.ProductDao"/>
-    <bean id="provinceDao" class="org.personal.mason.job.dao.ProvinceDao"/>
-    <bean id="cityDao" class="org.personal.mason.job.dao.CityDao"/>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<bean class="org.springframework.http.MediaType">
+								<constructor-arg index="0" value="text" />
+								<constructor-arg index="1" value="plain" />
+								<constructor-arg index="2" value="UTF-8" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<mvc:annotation-driven />
+	<mvc:view-controller path="/" view-name="index" />
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="supportedMediaTypes">
-                        <list>
-                            <bean class="org.springframework.http.MediaType">
-                                <constructor-arg index="0" value="text"/>
-                                <constructor-arg index="1" value="plain"/>
-                                <constructor-arg index="2" value="UTF-8"/>
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
-                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
-                <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>
-            </list>
-        </property>
-    </bean>
-    <mvc:annotation-driven/>
-    <mvc:view-controller path="/" view-name="index"/>
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+	<!-- <mvc:interceptors> -->
+	<!-- <mvc:interceptor> -->
+	<!-- <mvc:mapping path="/**"/> -->
+	<!-- <bean class="org.personal.mason.job.interceptor.LoginInterceptor"/> -->
+	<!-- </mvc:interceptor> -->
+	<!-- </mvc:interceptors> -->
 
-    <!-- <mvc:interceptors> -->
-    <!-- <mvc:interceptor> -->
-    <!-- <mvc:mapping path="/**"/> -->
-    <!-- <bean class="org.personal.mason.job.interceptor.LoginInterceptor"/> -->
-    <!-- </mvc:interceptor> -->
-    <!-- </mvc:interceptors> -->
-
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 </beans>

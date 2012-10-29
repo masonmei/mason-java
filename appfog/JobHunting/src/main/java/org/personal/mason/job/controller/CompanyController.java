@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.personal.mason.job.domain.City;
 import org.personal.mason.job.domain.Company;
 import org.personal.mason.job.domain.Province;
@@ -47,8 +45,7 @@ public void setCityService(CityService cityService) {
 }
 
 @RequestMapping(value = "/list", method = RequestMethod.GET)
-public String listCompany(Integer startIndex, Integer pageSize,
-        Map<String, Object> map) {
+public String listCompany(Integer startIndex, Integer pageSize, Map<String, Object> map) {
 	if (startIndex == null || startIndex < 0) {
 		startIndex = 0;
 	}
@@ -57,8 +54,7 @@ public String listCompany(Integer startIndex, Integer pageSize,
 		pageSize = 10;
 	}
 
-	List<Company> companies = companyService.findInScope(startIndex,
-	        pageSize);
+	List<Company> companies = companyService.findInScope(startIndex, pageSize);
 	map.put("companies", companies);
 
 	return "companies";
@@ -85,11 +81,11 @@ public String editCompany(@RequestParam("id") Long id, Model model) {
 }
 
 @RequestMapping(value = "/new", method = RequestMethod.GET)
-	public String newCompany(Model model) {
-		model.addAttribute("company", new Company());
-		model.addAttribute("create", true);
-		return "company_edit";
-	}
+public String newCompany(Model model) {
+	model.addAttribute("company", new Company());
+	model.addAttribute("create", true);
+	return "company_edit";
+}
 
 @RequestMapping(value = "/update", method = RequestMethod.POST)
 public String updateCompany(@ModelAttribute("company") Company company) {
@@ -101,18 +97,20 @@ public String updateCompany(@ModelAttribute("company") Company company) {
 	return "redirect:/company/list";
 }
 
-@RequestMapping(value="/cities", method=RequestMethod.GET)
-public @ResponseBody List<City> getCitiesOfProvince(@RequestParam("province") String province, HttpServletRequest request){
-	Province pro = new Province(province);
-	List<Province> findByExample = provinceService.findByExample(pro);
-	if(findByExample != null && findByExample.size() > 0){
-		List<City> cities = cityService.getByProvince(findByExample.get(0));
+@RequestMapping(value = "/cities", method = RequestMethod.GET)
+public @ResponseBody List<City> getCitiesOfProvince(@RequestParam("provinceId") Long provinceId) {
+	Province province = provinceService.findById(provinceId);
+	if (province != null ) {
+		List<City> cities = cityService.getByProvince(province);
 		return Collections.unmodifiableList(cities);
 	}
-	return Collections.emptyList();
+	List<City> findAll = cityService.findAll().subList(0, 10);
+	return Collections.unmodifiableList(findAll);
 }
-@RequestMapping(value="/provinces", method=RequestMethod.GET)
-public @ResponseBody List<Province> getProvinces(){
+
+@RequestMapping(value = "/provinces", method = RequestMethod.GET)
+public @ResponseBody
+List<Province> getProvinces() {
 	return Collections.unmodifiableList(provinceService.findAll());
 }
 }

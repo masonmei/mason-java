@@ -3,25 +3,31 @@ package org.personal.mason.job.domain;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
-@Table(name = "province", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "province_name") })
-public class Province implements Serializable, Comparable<Province> {
+@Table(name = "province", uniqueConstraints = { @UniqueConstraint(columnNames = "province_name") })
+public class Province implements Serializable{
 
 private static final long serialVersionUID = 1520454219029832630L;
 
 private Long id;
 private String provinceName;
 
-// private Set<City> cities = new HashSet<City>(0);
+private Set<City> cities = new HashSet<City>(0);
 
 public Province() {
 }
@@ -29,6 +35,11 @@ public Province() {
 public Province(String provinceName) {
 	this.provinceName = provinceName;
 	// this.cities = cities;
+}
+
+public Province(String provinceName, Set<City> cities) {
+	this.provinceName = provinceName;
+	this.cities = cities;
 }
 
 @Id
@@ -51,19 +62,14 @@ public void setProvinceName(String provinceName) {
 	this.provinceName = provinceName;
 }
 
-//
-// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "province")
-// public Set<City> getCities() {
-// return cities;
-// }
-//
-// public void setCities(Set<City> cities) {
-// this.cities = cities;
-// }
+@JsonIgnore
+@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "province")
+public Set<City> getCities() {
+	return cities;
+}
 
-@Override
-public int compareTo(Province o) {
-	return this.provinceName.compareTo(o.provinceName);
+public void setCities(Set<City> cities) {
+	this.cities = cities;
 }
 
 @Override

@@ -9,6 +9,7 @@ import org.personal.mason.job.dao.DAO;
 import org.personal.mason.job.domain.Company;
 import org.personal.mason.job.domain.Label;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CompanyService extends DefaultService<Company> {
@@ -29,6 +30,7 @@ public void setCompanyDao(CompanyDao companyDao) {
 	this.companyDao = companyDao;
 }
 
+@Transactional(readOnly = true)
 public List<Company> findByLabel(Label label, int start, int length) {
 	return companyDao.findByLabel(label, start, length);
 }

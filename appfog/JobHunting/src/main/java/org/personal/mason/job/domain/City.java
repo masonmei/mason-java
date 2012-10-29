@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "city", uniqueConstraints = {
         @UniqueConstraint(columnNames = "city_name") })
@@ -61,8 +63,9 @@ public void setCityName(String cityName) {
 	this.cityName = cityName;
 }
 
+@JsonIgnore
 @ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "provinceId", nullable = false)
+@JoinColumn(name = "province_id", nullable = false)
 public Province getProvince() {
 	return province;
 }

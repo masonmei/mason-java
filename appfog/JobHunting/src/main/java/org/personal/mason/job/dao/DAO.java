@@ -13,7 +13,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
-import org.springframework.transaction.annotation.Transactional;
 
 public abstract class DAO<T> implements IDAO<T> {
 
@@ -22,7 +21,6 @@ protected final Log log = LogFactory.getLog(this.getClass().getSimpleName());
 protected EntityManager entityManager;
 protected abstract Class<T> getClazz();
 
-@Transactional(readOnly=true)
 public T findById(Serializable id) {
 	log.debug("start find entity [" + getClazz().getSimpleName() + "] with id [" + id + "]");
 	try {
@@ -35,12 +33,10 @@ public T findById(Serializable id) {
 	return null;
 }
 
-@Transactional(readOnly=true)
 public List<T> findAll() {
 	return findByCriteria(-1, -1);
 }
 
-@Transactional(readOnly=true)
 public List<T> findInScope(int start, int length) {
 	return findByCriteria(start, length);
 }
@@ -66,12 +62,10 @@ private List<T> findByCriteria(int start, int length) {
 	}
 }
 
-@Transactional(readOnly=true)
 public List<T> findByExample(T exampleInstance) {
 	return findByExample(exampleInstance, -1, -1);
 }
 
-@Transactional(readOnly=true)
 public List<T> findByExample(T exampleInstance, int start, int length) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] by example [" + exampleInstance + "]");
 	try {
@@ -79,7 +73,7 @@ public List<T> findByExample(T exampleInstance, int start, int length) {
 		Criteria criteria = session.createCriteria(getClazz());
 		Example example = Example.create(exampleInstance);
 		criteria.add(example);
-		if (start > 0) {
+		if (start >= 0) {
 			criteria.setFirstResult(start);
 		}
 		if (length > 0) {
@@ -97,7 +91,6 @@ public List<T> findByExample(T exampleInstance, int start, int length) {
 
 }
 
-@Transactional(readOnly=true)
 public List<T> findByNamedQuery(String name, Object... params) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query [" + name + "]");
 	try {
@@ -117,7 +110,6 @@ public List<T> findByNamedQuery(String name, Object... params) {
 	}
 }
 
-@Transactional(readOnly=true)
 public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends Object> params) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param [" + name + "]");
 	try {
@@ -137,7 +129,6 @@ public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends
 	}
 }
 
-@Transactional(readOnly=true)
 public long countAll() {
 	try {
 		final StringBuffer quertStr = new StringBuffer("SELECT count(o) from ");
@@ -149,7 +140,6 @@ public long countAll() {
 	}
 }
 
-@Transactional(readOnly=true)
 public long countByExample(T exampleInstance) {
 	Session session = (Session) entityManager.getDelegate();
 	Criteria criteria = session.createCriteria(getClazz());
@@ -162,7 +152,6 @@ public long countByExample(T exampleInstance) {
 	return -1;
 }
 
-@Transactional
 public void save(T entity) {
 	log.debug("start save entity [" + entity + "]");
 	try {
@@ -173,7 +162,6 @@ public void save(T entity) {
 	}
 }
 
-@Transactional
 public void udpate(T entity) {
 	log.debug("start update entity [" + entity + "]");
 	try {
@@ -184,7 +172,6 @@ public void udpate(T entity) {
 	}
 }
 
-@Transactional
 public void delete(T entity) {
 	log.debug("exception delete entity [" + entity + "]");
 	try {
@@ -195,7 +182,6 @@ public void delete(T entity) {
 	}
 }
 
-@Transactional
 public void deleteById(Serializable id) {
 	log.debug("start delete entity [" + getClazz() + "] by id [" + id + "]");
 	try {
