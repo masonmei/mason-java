@@ -11,7 +11,7 @@
  Target Server Version : 50528
  File Encoding         : utf-8
 
- Date: 10/30/2012 00:44:29 AM
+ Date: 10/30/2012 23:54:11 PM
 */
 
 SET NAMES utf8;
@@ -59,7 +59,7 @@ CREATE TABLE `company` (
 --  Records of `company`
 -- ----------------------------
 BEGIN;
-INSERT INTO `company` VALUES ('1', 'Company1', '云南', '保山市 ', '2', '1000000', 'dsfadfsadfdsf'), ('2', 'company2', '吉林', '德惠市 ', '3', '500000', 'fdslfjlsdlfjldsfasdf'), ('3', 'sdfafd', '北京', '房山区 ', 'sdfsf', '234234', 'dsfdsfs'), ('4', '公司A', '内蒙古', '阿拉善右旗 ', '类型1', '10000', '这是公司A的描述'), ('5', '公司B', '内蒙古', '阿拉善右旗 ', '类型2', '100000', 'thi要洒');
+INSERT INTO `company` VALUES ('1', 'Company1', '北京', '大兴区 ', '2', '1000000', 'dsfadfsadfdsf'), ('2', 'company2', '吉林', '德惠市 ', '3', '500000', 'fdslfjlsdlfjldsfasdf'), ('3', 'sdfafd', '北京', '房山区 ', 'sdfsf', '234234', 'dsfdsfs'), ('4', '公司A', '内蒙古', '阿拉善右旗 ', '类型1', '10000', '这是公司A的描述'), ('5', '公司B', '内蒙古', '阿拉善右旗 ', '类型2', '100000', 'thi要洒');
 COMMIT;
 
 -- ----------------------------
@@ -67,21 +67,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `company_label`;
 CREATE TABLE `company_label` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `company_id` bigint(20) NOT NULL,
   `label_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `companyid` (`company_id`),
-  KEY `labelid` (`label_id`),
-  CONSTRAINT `companyid` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
-  CONSTRAINT `labelid` FOREIGN KEY (`label_id`) REFERENCES `label` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`company_id`,`label_id`),
+  KEY `FK51F10CB2AA6E6F75` (`company_id`),
+  KEY `FK51F10CB22B3842D5` (`label_id`),
+  CONSTRAINT `FK51F10CB22B3842D5` FOREIGN KEY (`label_id`) REFERENCES `label` (`id`),
+  CONSTRAINT `FK51F10CB2AA6E6F75` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `company_label`
 -- ----------------------------
 BEGIN;
-INSERT INTO `company_label` VALUES ('1', '1', '1');
+INSERT INTO `company_label` VALUES ('1', '2');
 COMMIT;
 
 -- ----------------------------
@@ -156,15 +155,14 @@ DROP TABLE IF EXISTS `label`;
 CREATE TABLE `label` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `label_name` varchar(50) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `label`
 -- ----------------------------
 BEGIN;
-INSERT INTO `label` VALUES ('1', 'l1', 'desc of l1');
+INSERT INTO `label` VALUES ('1', 'l1'), ('2', 'Label'), ('3', 'Label2'), ('4', 'label3');
 COMMIT;
 
 -- ----------------------------

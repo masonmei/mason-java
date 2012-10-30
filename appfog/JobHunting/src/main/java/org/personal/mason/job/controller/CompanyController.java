@@ -98,8 +98,7 @@ public String deleteCompany(@RequestParam("id") Long id) {
 public String viewCompany(@RequestParam("id") Long id, Map<String, Object> map) {
 	Company com = companyService.findById(id);
 	map.put("company", com);
-	List<Label> labels = labelService.findByCompany(com);
-	map.put("labels", labels);
+	map.put("labels", com.getLabels());
 	return "company";
 }
 
@@ -107,8 +106,7 @@ public String viewCompany(@RequestParam("id") Long id, Map<String, Object> map) 
 public String editCompany(@RequestParam("id") Long id, Model model) {
 	Company com = companyService.findById(id);
 	model.addAttribute("company", com);
-	List<Label> labels = labelService.findByCompany(com);
-	model.addAttribute("labels",labels);
+	model.addAttribute("labels",com.getLabels());
 	return "company_edit";
 }
 
@@ -135,9 +133,11 @@ public @ResponseBody boolean addLabelToCompany(@RequestParam("label") String lab
 	if(label == null){
 		label = new Label();
 		label.setLabelName(labelName);
+		labelService.save(label);
 	}
 	
-	return companyService.addLabelToCompany(companyId, label);
+	boolean addLabelToCompany = companyService.addLabelToCompany(companyId, label);
+	return addLabelToCompany;
 }
 
 @RequestMapping(value = "/cities", method = RequestMethod.GET)

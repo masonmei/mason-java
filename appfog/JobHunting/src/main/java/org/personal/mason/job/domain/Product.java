@@ -5,6 +5,8 @@ package org.personal.mason.job.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product implements java.io.Serializable {
 private static final long serialVersionUID = -1057673805196099973L;
-private long id;
+private Long id;
 private Company company;
 private ProductCategory productCategory;
 private String productName;
@@ -27,14 +29,12 @@ private String description;
 public Product() {
 }
 
-public Product(long id, Company company, String productName) {
-	this.id = id;
+public Product(Company company, String productName) {
 	this.company = company;
 	this.productName = productName;
 }
 
-public Product(long id, Company company, ProductCategory productCategory, String productName, String shortDesc, String description) {
-	this.id = id;
+public Product(Company company, ProductCategory productCategory, String productName, String shortDesc, String description) {
 	this.company = company;
 	this.productCategory = productCategory;
 	this.productName = productName;
@@ -43,12 +43,13 @@ public Product(long id, Company company, ProductCategory productCategory, String
 }
 
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id", unique = true, nullable = false)
-public long getId() {
+public Long getId() {
 	return this.id;
 }
 
-public void setId(long id) {
+public void setId(Long id) {
 	this.id = id;
 }
 

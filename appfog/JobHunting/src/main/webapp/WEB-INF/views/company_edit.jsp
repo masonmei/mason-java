@@ -69,27 +69,9 @@
 					{label: newLabel, companyId: companyId},
 					function(data){
 						alert(data);
-					}
-				});
+					});
 			}
 		);
-	});
-
-	$(document).ready(function() { 
-		$('#province').change(
-				function() {
-					$.getJSON('${findCities}', {
-						provinceName : $(this).val(),
-						ajax : 'true'
-					}, function(data) {
-						var html = '<option value="">Select City</option>';
-						var len = data.length;
-						for ( var i = 0; i < len; i++) {
-							html += '<option value="' + data[i].cityName + '">' + data[i].cityName + '</option>';
-						}
-						$('#city').html(html);
-					});
-				});
 	});
 </script>
 </head>

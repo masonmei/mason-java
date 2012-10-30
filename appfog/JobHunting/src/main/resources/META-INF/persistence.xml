@@ -17,6 +17,7 @@
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true" />
 			<property name="hibernate.connection.characterEncoding" value="UTF-8" />
+            <property name="hibernate.transaction.flush_before_completion" value="true"/>
 		</properties>
 	</persistence-unit>
 

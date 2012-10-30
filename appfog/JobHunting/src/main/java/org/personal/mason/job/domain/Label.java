@@ -4,11 +4,14 @@ package org.personal.mason.job.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -20,33 +23,30 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Table(name = "label")
 public class Label implements java.io.Serializable {
 private static final long serialVersionUID = -5379590302180459359L;
-private long id;
+private Long id;
 private String labelName;
-private String description;
-private Set<CompanyLabel> companyLabels = new HashSet<CompanyLabel>(0);
+private Set<Company> companies = new HashSet<Company>(0);
 
 public Label() {
 }
 
-public Label(long id, String labelName) {
-	this.id = id;
+public Label(String labelName) {
 	this.labelName = labelName;
 }
 
-public Label(long id, String labelName, String description, Set<CompanyLabel> companyLabels) {
-	this.id = id;
+public Label(String labelName, Set<Company> companies) {
 	this.labelName = labelName;
-	this.description = description;
-	this.companyLabels = companyLabels;
+	this.companies = companies;
 }
 
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id", unique = true, nullable = false)
-public long getId() {
+public Long getId() {
 	return this.id;
 }
 
-public void setId(long id) {
+public void setId(Long id) {
 	this.id = id;
 }
 
@@ -59,23 +59,14 @@ public void setLabelName(String labelName) {
 	this.labelName = labelName;
 }
 
-@Column(name = "description")
-public String getDescription() {
-	return this.description;
-}
-
-public void setDescription(String description) {
-	this.description = description;
-}
-
 @JsonIgnore
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "label")
-public Set<CompanyLabel> getCompanyLabels() {
-	return this.companyLabels;
+@ManyToMany(fetch = FetchType.EAGER, mappedBy="labels")
+public Set<Company> getCompanies() {
+	return companies;
 }
 
-public void setCompanyLabels(Set<CompanyLabel> companyLabels) {
-	this.companyLabels = companyLabels;
+public void setCompanies(Set<Company> companies) {
+	this.companies = companies;
 }
 
 }

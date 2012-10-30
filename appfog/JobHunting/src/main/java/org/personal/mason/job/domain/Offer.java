@@ -3,6 +3,8 @@ package org.personal.mason.job.domain;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,7 +17,7 @@ import javax.persistence.TemporalType;
 @Table(name = "offer")
 public class Offer implements java.io.Serializable {
 private static final long serialVersionUID = -6065344463736709050L;
-private long id;
+private Long id;
 private String offerName;
 private Date receivedDate;
 private Date workDate;
@@ -28,8 +30,7 @@ private String note;
 public Offer() {
 }
 
-public Offer(long id, String offerName, Date receivedDate, int salary, String company, String workplace) {
-	this.id = id;
+public Offer(String offerName, Date receivedDate, int salary, String company, String workplace) {
 	this.offerName = offerName;
 	this.receivedDate = receivedDate;
 	this.salary = salary;
@@ -37,8 +38,7 @@ public Offer(long id, String offerName, Date receivedDate, int salary, String co
 	this.workplace = workplace;
 }
 
-public Offer(long id, String offerName, Date receivedDate, Date workDate, int salary, String salaryDescription, String company, String workplace, String note) {
-	this.id = id;
+public Offer(String offerName, Date receivedDate, Date workDate, int salary, String salaryDescription, String company, String workplace, String note) {
 	this.offerName = offerName;
 	this.receivedDate = receivedDate;
 	this.workDate = workDate;
@@ -50,12 +50,13 @@ public Offer(long id, String offerName, Date receivedDate, Date workDate, int sa
 }
 
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id", unique = true, nullable = false)
-public long getId() {
+public Long getId() {
 	return this.id;
 }
 
-public void setId(long id) {
+public void setId(Long id) {
 	this.id = id;
 }
 
