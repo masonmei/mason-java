@@ -6,9 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<script type="text/javascript" src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/menu/menu.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/menu/menu.css"/>">
 
 </head>
 <body>
@@ -28,14 +31,16 @@
 						<li><a href="#">Products</a></li>
 					</ul></li>
 				<li><a class="hsubs" href="interview/list" target="iframe">Interview</a></li>
-				<li><a class="hsubs" href="interviewMaterial/list" target="iframe">Material</a></li>
+				<li><a class="hsubs" href="interviewMaterial/list"
+					target="iframe">Material</a></li>
 				<li><a class="hsubs" href="offer/list" target="iframe">Offer</a></li>
 				<div id="lavalamp"></div>
 			</ul>
 		</div>
 	</nav>
 	<section>
-		<iframe name="iframe" width="100%" height="100%" src='<s:url value="company/list"/>' frameborder="0" scrolling="no"></iframe>
+		<iframe name="iframe" width="100%" height="100%"
+			src='<s:url value="company/list"/>' frameborder="0" scrolling="no"></iframe>
 	</section>
 	<footer> This is the footer. </footer>
 </body>

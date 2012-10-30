@@ -46,7 +46,8 @@ public void InitBinder(HttpServletRequest request, ServletRequestDataBinder bind
 }
 
 @RequestMapping(value = "/list", method = RequestMethod.GET)
-public String listCompanyNews(@RequestParam("companyId") Long companyId, Integer start, Integer length, Map<String, Object> map) {
+public String listCompanyNews(@RequestParam("companyId") Long companyId, Integer start, Integer length,
+		Map<String, Object> map) {
 	Company company = companyService.findById(companyId);
 	if (start == null || start < 0) {
 		start = 0;

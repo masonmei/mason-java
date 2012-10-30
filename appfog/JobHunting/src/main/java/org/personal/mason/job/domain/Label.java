@@ -60,7 +60,7 @@ public void setLabelName(String labelName) {
 }
 
 @JsonIgnore
-@ManyToMany(fetch = FetchType.EAGER, mappedBy="labels")
+@ManyToMany(fetch = FetchType.EAGER, mappedBy = "labels")
 public Set<Company> getCompanies() {
 	return companies;
 }

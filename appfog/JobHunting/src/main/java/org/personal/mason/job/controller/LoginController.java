@@ -20,78 +20,78 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes(value={"userForm"})
+@SessionAttributes(value = { "userForm" })
 public class LoginController {
-	private static final Log log = LogFactory.getLog(LoginController.class);
+private static final Log log = LogFactory.getLog(LoginController.class);
 
-	@Autowired
-	private UserService userService;
+@Autowired
+private UserService userService;
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
 
-	@ModelAttribute("userForm")
-	public UserForm createUserForm(){
-		return new UserForm();
-	}
-	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String root() {
-		return "redirect:/index";
-	}
-	
-	@RequestMapping(value="index", method = RequestMethod.GET)
-	public void index() {
-	}
-	
-	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(@Valid UserForm userForm, BindingResult result, HttpSession session, HttpServletResponse response) {
+@ModelAttribute("userForm")
+public UserForm createUserForm() {
+	return new UserForm();
+}
 
-		try {
-			if (result.hasErrors()) {
-				return "index";
-			}
+@RequestMapping(value = "/", method = RequestMethod.GET)
+public String root() {
+	return "redirect:/index";
+}
 
-			String validatecode = (String) session.getAttribute("validationcode");
-			if (validatecode == null || !validatecode.equalsIgnoreCase(userForm.getValidationCode())) {
-				result.addError(new ObjectError("validationCode", "validation code error"));
-				return "index";
-			}
+@RequestMapping(value = "index", method = RequestMethod.GET)
+public void index() {
+}
 
-			User user = new User(userForm.getEmail(), userForm.getPassword());
+@RequestMapping(value = "login", method = RequestMethod.POST)
+public String login(@Valid UserForm userForm, BindingResult result, HttpSession session, HttpServletResponse response) {
 
-			if (userService.verifyUser(user)) {
-				session.setAttribute(Constants.SESSION_TOKEN, user.getEmail());
-				if (userForm.isKeepLogin()) {
-					session.setMaxInactiveInterval(Constants.EXPIRY);
-					session.setAttribute("email", userForm.getEmail());
-					Cookie cookie = new Cookie("JSESSIOINID", session.getId());
-					cookie.setMaxAge(Constants.EXPIRY);
-					response.addCookie(cookie);
-				}
-
-				return "redirect:/welcome";
-			} else {
-				result.addError(new ObjectError("*", "username or password incorrect"));
-				return "index";
-			}
-		} catch (Exception e) {
-			log.debug("login failed", e);
-			result.addError(new ObjectError("*", e.getMessage()));
+	try {
+		if (result.hasErrors()) {
+			return "index";
 		}
 
-		return "index";
+		String validatecode = (String) session.getAttribute("validationcode");
+		if (validatecode == null || !validatecode.equalsIgnoreCase(userForm.getValidationCode())) {
+			result.addError(new ObjectError("validationCode", "validation code error"));
+			return "index";
+		}
+
+		User user = new User(userForm.getEmail(), userForm.getPassword());
+
+		if (userService.verifyUser(user)) {
+			session.setAttribute(Constants.SESSION_TOKEN, user.getEmail());
+			if (userForm.isKeepLogin()) {
+				session.setMaxInactiveInterval(Constants.EXPIRY);
+				session.setAttribute("email", userForm.getEmail());
+				Cookie cookie = new Cookie("JSESSIOINID", session.getId());
+				cookie.setMaxAge(Constants.EXPIRY);
+				response.addCookie(cookie);
+			}
+
+			return "redirect:/welcome";
+		} else {
+			result.addError(new ObjectError("*", "username or password incorrect"));
+			return "index";
+		}
+	} catch (Exception e) {
+		log.debug("login failed", e);
+		result.addError(new ObjectError("*", e.getMessage()));
 	}
 
-	@RequestMapping(value="welcome", method = RequestMethod.GET)
-	public String welcome(){
-		return "welcome";
-	}
-	
-	@RequestMapping(value={"logout"}, method=RequestMethod.GET)
-	public String logout(HttpSession session, HttpServletResponse response){
-		session.removeAttribute(Constants.SESSION_TOKEN);
-		return "index";
-	}
+	return "index";
+}
+
+@RequestMapping(value = "welcome", method = RequestMethod.GET)
+public String welcome() {
+	return "welcome";
+}
+
+@RequestMapping(value = { "logout" }, method = RequestMethod.GET)
+public String logout(HttpSession session, HttpServletResponse response) {
+	session.removeAttribute(Constants.SESSION_TOKEN);
+	return "index";
+}
 }

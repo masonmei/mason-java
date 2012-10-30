@@ -22,13 +22,14 @@ public void setLabelService(LabelService labelService) {
 	this.labelService = labelService;
 }
 
-@RequestMapping(value="/list", method = RequestMethod.GET)
-public @ResponseBody List<String> listLabels(){
+@RequestMapping(value = "/list", method = RequestMethod.GET)
+public @ResponseBody
+List<String> listLabels() {
 	List<Label> labels = labelService.findAll();
 	List<String> names = new ArrayList<>();
 	for (Label label : labels) {
-	    names.add(label.getLabelName());
-    }
+		names.add(label.getLabelName());
+	}
 	return names;
 }
 

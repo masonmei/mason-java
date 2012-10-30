@@ -34,7 +34,8 @@ public ProductCategory(String categoryName) {
 	this.categoryName = categoryName;
 }
 
-public ProductCategory(ProductCategory productCategory, String categoryName, String description, Set<Product> products, Set<ProductCategory> productCategories) {
+public ProductCategory(ProductCategory productCategory, String categoryName, String description, Set<Product> products,
+		Set<ProductCategory> productCategories) {
 	this.productCategory = productCategory;
 	this.categoryName = categoryName;
 	this.description = description;

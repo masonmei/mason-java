@@ -18,52 +18,52 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("/register")
-@SessionAttributes(value={"userForm"})
+@SessionAttributes(value = { "userForm" })
 public class UserController {
 
-	private static final Log log = LogFactory.getLog(UserController.class);
+private static final Log log = LogFactory.getLog(UserController.class);
 
-	@Autowired
-	private UserService userService;
+@Autowired
+private UserService userService;
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
 
-	@ModelAttribute("userForm")
-	public UserForm createUserForm(){
-		return new UserForm();
-	}
+@ModelAttribute("userForm")
+public UserForm createUserForm() {
+	return new UserForm();
+}
 
-	@RequestMapping(method = RequestMethod.GET)
-	public void toRegister() {		
-	}
+@RequestMapping(method = RequestMethod.GET)
+public void toRegister() {
+}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String register(@Valid UserForm userForm, BindingResult result, HttpSession session) {
-		try {
-			if(result.hasErrors()){
-				return null;
-			}
-			String validatecode = (String) session.getAttribute("validationcode");
-			if (validatecode == null || !validatecode.equalsIgnoreCase(userForm.getValidationCode())) {
-				result.addError(new ObjectError("validationCode", "validation code error"));
-				return null;
-			}
-
-			if (!userForm.getPasswordConfirm().equals(userForm.getPassword())) {
-				result.addError(new ObjectError("validationCode", "password not match"));
-				return null;
-			}
-						
-			User user = new User(userForm.getEmail(), userForm.getName(), userForm.getPassword());
-			userService.save(user);
-			return "redirect:/index";
-		} catch (Exception e) {
-			log.debug("regist failed", e);
-			result.addError(new ObjectError("*", "unknow error"));
+@RequestMapping(method = RequestMethod.POST)
+public String register(@Valid UserForm userForm, BindingResult result, HttpSession session) {
+	try {
+		if (result.hasErrors()) {
+			return null;
+		}
+		String validatecode = (String) session.getAttribute("validationcode");
+		if (validatecode == null || !validatecode.equalsIgnoreCase(userForm.getValidationCode())) {
+			result.addError(new ObjectError("validationCode", "validation code error"));
+			return null;
 		}
 
-		return null;
+		if (!userForm.getPasswordConfirm().equals(userForm.getPassword())) {
+			result.addError(new ObjectError("validationCode", "password not match"));
+			return null;
+		}
+
+		User user = new User(userForm.getEmail(), userForm.getName(), userForm.getPassword());
+		userService.save(user);
+		return "redirect:/index";
+	} catch (Exception e) {
+		log.debug("regist failed", e);
+		result.addError(new ObjectError("*", "unknow error"));
 	}
+
+	return null;
+}
 }

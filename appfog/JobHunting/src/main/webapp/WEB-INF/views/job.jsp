@@ -6,44 +6,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 </head>
-<body><div class="content">
-	<c:choose>
-		<c:when test="${!empty job}">
-			<div class="contentView">
-				<div>
-					<div>Job Title</div>
+<body>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty job}">
+				<div class="contentView">
 					<div>
-						<label>${job.jobTitle }</label>
+						<div>Job Title</div>
+						<div>
+							<label>${job.jobTitle }</label>
+						</div>
+					</div>
+					<div>
+						<div>Publish Date</div>
+						<div>
+							<label>${job.publishDate }</label>
+						</div>
+					</div>
+					<div>
+						<div>Request Skill</div>
+						<div>
+							<label>${job.requiredTech }</label>
+						</div>
+					</div>
+					<div>
+						<div>Content</div>
+						<div>
+							<label>${job.content }</label>
+						</div>
 					</div>
 				</div>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>Publish Date</div>
-					<div>
-						<label>${job.publishDate }</label>
-					</div>
+					<label>Should Never Come to This</label>
 				</div>
-				<div>
-					<div>Request Skill</div>
-					<div>
-						<label>${job.requiredTech }</label>
-					</div>
-				</div>
-				<div>
-					<div>Content</div>
-					<div>
-						<label>${job.content }</label>
-					</div>
-				</div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose></div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>

@@ -6,10 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 <script type="text/javascript">
 $(function() {  
@@ -29,47 +33,50 @@ $(function() {
 });
 </script>
 </head>
-<body><div class="content">
-	<c:choose>
-		<c:when test="${!empty news}">
-			<f:form method="post" action="save?companyId=${companyId }" modelAttribute="news">
+<body>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty news}">
+				<f:form method="post" action="save?companyId=${companyId }"
+					modelAttribute="news">
+					<div>
+						<div>
+							<div>News Title</div>
+							<div>
+								<f:input path="title" />
+							</div>
+						</div>
+						<div>
+							<div>Date</div>
+							<div>
+								<f:input path="date" id="datePicker" cssClass="datePicker" />
+							</div>
+						</div>
+						<div>
+							<div>Description</div>
+							<div>
+								<f:textarea path="description" />
+							</div>
+						</div>
+						<div>
+							<div>Content</div>
+							<div>
+								<f:textarea path="content" />
+							</div>
+						</div>
+
+						<div>
+							<input type="submit" value="Save" />
+						</div>
+					</div>
+				</f:form>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>
-						<div>News Title</div>
-						<div>
-							<f:input path="title" />
-						</div>
-					</div>
-					<div>
-						<div>Date</div>
-						<div>
-							<f:input path="date" id="datePicker" cssClass="datePicker"/>
-						</div>
-					</div>
-					<div>
-						<div>Description</div>
-						<div>
-							<f:textarea path="description" />
-						</div>
-					</div>
-					<div>
-						<div>Content</div>
-						<div>
-							<f:textarea path="content" />
-						</div>
-					</div>
-					
-					<div>
-						<input type="submit" value="Save"/>		
-					</div>
+					<label>Should Never Come to This</label>
 				</div>
-			</f:form>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose></div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>

@@ -19,6 +19,7 @@ public abstract class DAO<T> implements IDAO<T> {
 protected final Log log = LogFactory.getLog(this.getClass().getSimpleName());
 
 protected EntityManager entityManager;
+
 protected abstract Class<T> getClazz();
 
 public T findById(Serializable id) {
@@ -82,10 +83,12 @@ public List<T> findByExample(T exampleInstance, int start, int length) {
 
 		@SuppressWarnings("unchecked")
 		final List<T> result = criteria.list();
-		log.debug("end find entities of class [" + getClazz().getSimpleName() + "] by example [" + exampleInstance + "]");
+		log.debug("end find entities of class [" + getClazz().getSimpleName() + "] by example [" + exampleInstance
+				+ "]");
 		return result;
 	} catch (HibernateException e) {
-		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "] by example [" + exampleInstance + "]", e);
+		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "] by example ["
+				+ exampleInstance + "]", e);
 		return null;
 	}
 
@@ -105,13 +108,15 @@ public List<T> findByNamedQuery(String name, Object... params) {
 		log.debug("end find entities of class [" + getClazz().getSimpleName() + "] with named query [" + name + "]");
 		return result;
 	} catch (Exception e) {
-		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "] with named query [" + name + "]", e);
+		log.debug("exception find entities of class [" + getClazz().getSimpleName() + "] with named query [" + name
+				+ "]", e);
 		return null;
 	}
 }
 
 public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends Object> params) {
-	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param [" + name + "]");
+	log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param ["
+			+ name + "]");
 	try {
 		Query query = entityManager.createNamedQuery(name);
 
@@ -121,10 +126,12 @@ public List<T> findByNamedQueryAndNamedParams(String name, Map<String, ? extends
 
 		@SuppressWarnings("unchecked")
 		final List<T> result = (List<T>) query.getResultList();
-		log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param [" + name + "]");
+		log.debug("start find entities of class [" + getClazz().getSimpleName()
+				+ "] with named query and named param [" + name + "]");
 		return result;
 	} catch (Exception e) {
-		log.debug("start find entities of class [" + getClazz().getSimpleName() + "] with named query and named param [" + name + "]", e);
+		log.debug("start find entities of class [" + getClazz().getSimpleName()
+				+ "] with named query and named param [" + name + "]", e);
 		return null;
 	}
 }

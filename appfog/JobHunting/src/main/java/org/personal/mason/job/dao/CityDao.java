@@ -27,7 +27,7 @@ protected Class<City> getClazz() {
 	return City.class;
 }
 
-public List<City> findByProvince(Province province){
+public List<City> findByProvince(Province province) {
 	log.debug("start find entities of class [" + getClazz().getSimpleName() + "]");
 	try {
 		Session delegate = (Session) entityManager.getDelegate();

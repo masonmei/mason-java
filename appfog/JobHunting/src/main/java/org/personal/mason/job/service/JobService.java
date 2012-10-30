@@ -10,6 +10,7 @@ import org.personal.mason.job.domain.Company;
 import org.personal.mason.job.domain.Job;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class JobService extends DefaultService<Job> {
 

@@ -48,8 +48,8 @@ public Company(String companyName, String provice) {
 	this.provice = provice;
 }
 
-public Company(String companyName, String provice, String city, String businessType, Integer scale, String description, Set<Label> labels,
-        Set<News> newses, Set<Product> products, Set<Job> jobs) {
+public Company(String companyName, String provice, String city, String businessType, Integer scale, String description,
+		Set<Label> labels, Set<News> newses, Set<Product> products, Set<Job> jobs) {
 	this.companyName = companyName;
 	this.provice = provice;
 	this.city = city;
@@ -129,9 +129,7 @@ public void setDescription(String description) {
 
 @JsonIgnore
 @ManyToMany(fetch = FetchType.EAGER)
-@JoinTable(
-        joinColumns = { @JoinColumn(name = "company_id", referencedColumnName = "id") },
-        inverseJoinColumns = { @JoinColumn(name = "label_id", referencedColumnName = "id") })
+@JoinTable(joinColumns = { @JoinColumn(name = "company_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "label_id", referencedColumnName = "id") })
 public Set<Label> getLabels() {
 	return labels;
 }
@@ -140,7 +138,7 @@ public void setLabels(Set<Label> labels) {
 	this.labels = labels;
 }
 
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade=CascadeType.PERSIST)
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.PERSIST)
 public Set<News> getNewses() {
 	return this.newses;
 }

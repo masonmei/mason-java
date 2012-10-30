@@ -21,51 +21,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ValidationCodeController extends HttpServlet {
 
-	private static final long serialVersionUID = -1055204981856578491L;
-	private static final Log log = LogFactory.getLog(ValidationCodeController.class);
-	
-	private static final int WIDTH = 4;
-	private static final int HEIGHT = 20;
+private static final long serialVersionUID = -1055204981856578491L;
+private static final Log log = LogFactory.getLog(ValidationCodeController.class);
 
-	@Override
-	public void destroy() {
-		super.destroy();
+private static final int WIDTH = 4;
+private static final int HEIGHT = 20;
+
+@Override
+public void destroy() {
+	super.destroy();
+}
+
+@Override
+public void init() throws ServletException {
+	super.init();
+}
+
+@Override
+@RequestMapping("/validationCode")
+protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	response.setHeader("ragma", "No-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setDateHeader("Expires", 0);
+
+	response.setContentType("image/jpeg");
+
+	String validationcode = StringUtils.getRandomString(WIDTH);
+	BufferedImage generateImage = ImageUtils.generateImage(validationcode, WIDTH * 25 + 20, HEIGHT);
+
+	HttpSession session = request.getSession(true);
+	session.setMaxInactiveInterval(600);
+	session.setAttribute("validationcode", validationcode);
+	try {
+		ServletOutputStream outputStream = response.getOutputStream();
+		ImageIO.write(generateImage, "JPEG", outputStream);
+		outputStream.flush();
+		outputStream.close();
+		outputStream = null;
+
+		response.flushBuffer();
+
+	} catch (IOException e) {
+		log.debug("could not write image", e);
 	}
-
-	@Override
-	public void init() throws ServletException {
-		super.init();
-	}
-
-	@Override
-	@RequestMapping("/validationCode")
-	protected void service(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("ragma", "No-cache");
-		response.setHeader("Cache-Control", "no-cache");
-		response.setDateHeader("Expires", 0);
-
-		response.setContentType("image/jpeg");
-
-		String validationcode = StringUtils.getRandomString(WIDTH);
-		BufferedImage generateImage = ImageUtils.generateImage(validationcode,
-				WIDTH * 25 + 20, HEIGHT);
-
-		HttpSession session = request.getSession(true);
-		session.setMaxInactiveInterval(600);
-		session.setAttribute("validationcode", validationcode);
-		try {
-			ServletOutputStream outputStream = response.getOutputStream();
-			ImageIO.write(generateImage, "JPEG", outputStream);
-			outputStream.flush();
-			outputStream.close();
-			outputStream = null;
-
-			response.flushBuffer();
-
-		} catch (IOException e) {
-			log.debug("could not write image", e);
-		}
-	}
+}
 
 }

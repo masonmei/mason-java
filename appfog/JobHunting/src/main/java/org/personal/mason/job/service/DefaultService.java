@@ -27,6 +27,7 @@ public List<T> findAll() {
 public List<T> findInScope(int start, int length) {
 	return getDao().findInScope(start, length);
 }
+
 @Transactional(readOnly = true)
 public List<T> findByExample(final T instance) {
 	return getDao().findByExample(instance);

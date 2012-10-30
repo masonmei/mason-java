@@ -35,7 +35,7 @@ public DAO<User> getDao() {
 	return userDao;
 }
 
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public boolean verifyUser(User user) {
 	String password = userDao.getPassword(user);
 

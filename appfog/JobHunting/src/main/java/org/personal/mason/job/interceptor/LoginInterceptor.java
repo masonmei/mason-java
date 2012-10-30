@@ -13,7 +13,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 @Override
 public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 	String uri = request.getRequestURI();
-	if (!uri.contains("/resources/") && !uri.endsWith("login") && !uri.endsWith("logout") && !uri.endsWith("index") && !uri.endsWith("validationCode")) {
+	if (!uri.contains("/resources/") && !uri.endsWith("login") && !uri.endsWith("logout") && !uri.endsWith("index")
+			&& !uri.endsWith("validationCode")) {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute(Constants.SESSION_TOKEN);
 		if (email == null) {
@@ -25,12 +26,14 @@ public boolean preHandle(HttpServletRequest request, HttpServletResponse respons
 }
 
 @Override
-public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+		ModelAndView modelAndView) throws Exception {
 
 }
 
 @Override
-public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+		throws Exception {
 
 }
 

@@ -6,52 +6,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 </head>
 <body>
-<div class="content">
-	<c:choose>
-		<c:when test="${!empty interview}">
-			<div class="contentView">
-				<div>
-					<div>Interview Name</div>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty interview}">
+				<div class="contentView">
 					<div>
-						<label>${interview.interviewName }</label>
+						<div>Interview Name</div>
+						<div>
+							<label>${interview.interviewName }</label>
+						</div>
+					</div>
+					<div>
+						<div>Date</div>
+						<div>
+							<label>${interview.date }</label>
+						</div>
+					</div>
+					<div>
+						<div>Location</div>
+						<div>
+							<label>${interview.location }</label>
+						</div>
+					</div>
+					<div>
+						<div>Contact Info</div>
+						<div>
+							<label>${interview.contactInfo }</label>
+						</div>
+					</div>
+					<div>
+						<div>Notes</div>
+						<div>
+							<label>${interview.notes }</label>
+						</div>
 					</div>
 				</div>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>Date</div>
-					<div>
-						<label>${interview.date }</label>
-					</div>
+					<label>Should Never Come to This</label>
 				</div>
-				<div>
-					<div>Location</div>
-					<div>
-						<label>${interview.location }</label>
-					</div>
-				</div>
-				<div>
-					<div>Contact Info</div>
-					<div>
-						<label>${interview.contactInfo }</label>
-					</div>
-				</div>
-				<div>
-					<div>Notes</div>
-					<div>
-						<label>${interview.notes }</label>
-					</div>
-				</div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

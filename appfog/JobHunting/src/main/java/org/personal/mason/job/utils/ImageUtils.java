@@ -17,7 +17,8 @@ public static BufferedImage generateImage(String chars, int width, int height) {
 	String[] fontNames = new String[] { "Impact", "Comic Sans", "Arial", "Georgia" };
 	int[] fontTypes = new int[] { Font.ITALIC, Font.BOLD, Font.PLAIN };
 	for (int i = 0; i < chars.length(); i++) {
-		graphics.setFont(new Font(fontNames[RANDOM.nextInt(fontNames.length)], fontTypes[RANDOM.nextInt(fontTypes.length)], height));
+		graphics.setFont(new Font(fontNames[RANDOM.nextInt(fontNames.length)], fontTypes[RANDOM
+				.nextInt(fontTypes.length)], height));
 		graphics.setColor(ColorUtils.generateRandonColor(10, 100));
 		graphics.drawString(String.valueOf(chars.charAt(i)), 25 * i + 10, height - RANDOM.nextInt(height / 2));
 	}

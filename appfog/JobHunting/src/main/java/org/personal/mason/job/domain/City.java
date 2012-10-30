@@ -17,8 +17,7 @@ import javax.persistence.UniqueConstraint;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
-@Table(name = "city", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "city_name") })
+@Table(name = "city", uniqueConstraints = { @UniqueConstraint(columnNames = "city_name") })
 public class City implements Serializable, Comparable<City> {
 
 private static final long serialVersionUID = 4404772094083964627L;

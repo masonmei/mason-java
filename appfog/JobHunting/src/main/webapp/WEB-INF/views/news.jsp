@@ -6,45 +6,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 </head>
-<body><div class="content">
-<c:choose>
-		<c:when test="${!empty news}">
-			<div class="contentView">
-				<div>
-					<div>News Title</div>
+<body>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty news}">
+				<div class="contentView">
 					<div>
-						<label>${news.title }</label>
+						<div>News Title</div>
+						<div>
+							<label>${news.title }</label>
+						</div>
+					</div>
+					<div>
+						<div>Date</div>
+						<div>
+							<label>${news.date }</label>
+						</div>
+					</div>
+					<div>
+						<div>Description</div>
+						<div>
+							<label>${news.description }</label>
+						</div>
+					</div>
+					<div>
+
+						<div>Content</div>
+						<div>
+							<label>${news.content }</label>
+						</div>
 					</div>
 				</div>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>Date</div>
-					<div>
-						<label>${news.date }</label>
-					</div>
+					<label>Should Never Come to This</label>
 				</div>
-				<div>
-					<div>Description</div>
-					<div>
-						<label>${news.description }</label>
-					</div>
-				</div>
-				<div>
-				
-					<div>Content</div>
-					<div>
-						<label>${news.content }</label>
-					</div>
-				</div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose></div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>

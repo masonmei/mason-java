@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "province", uniqueConstraints = { @UniqueConstraint(columnNames = "province_name") })
-public class Province implements Serializable{
+public class Province implements Serializable {
 
 private static final long serialVersionUID = 1520454219029832630L;
 

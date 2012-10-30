@@ -106,7 +106,7 @@ public String viewCompany(@RequestParam("id") Long id, Map<String, Object> map) 
 public String editCompany(@RequestParam("id") Long id, Model model) {
 	Company com = companyService.findById(id);
 	model.addAttribute("company", com);
-	model.addAttribute("labels",com.getLabels());
+	model.addAttribute("labels", com.getLabels());
 	return "company_edit";
 }
 
@@ -127,15 +127,16 @@ public String updateCompany(@ModelAttribute("company") Company company) {
 	return "redirect:/company/list";
 }
 
-@RequestMapping(value="/label/add", method = RequestMethod.GET)
-public @ResponseBody boolean addLabelToCompany(@RequestParam("label") String labelName, @RequestParam("companyId") Long companyId){
+@RequestMapping(value = "/label/add", method = RequestMethod.GET)
+public @ResponseBody
+boolean addLabelToCompany(@RequestParam("label") String labelName, @RequestParam("companyId") Long companyId) {
 	Label label = labelService.findByLabelName(labelName);
-	if(label == null){
+	if (label == null) {
 		label = new Label();
 		label.setLabelName(labelName);
 		labelService.save(label);
 	}
-	
+
 	boolean addLabelToCompany = companyService.addLabelToCompany(companyId, label);
 	return addLabelToCompany;
 }

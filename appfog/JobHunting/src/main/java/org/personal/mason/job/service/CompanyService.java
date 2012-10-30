@@ -52,7 +52,7 @@ public List<Company> findByLabel(Label label) {
 @Transactional
 public boolean addLabelToCompany(Long companyId, Label label) {
 	Company company = companyDao.findById(companyId);
-	
+
 	boolean contain = false;
 	for (Label lab : company.getLabels()) {
 		if (lab.getLabelName().equals(label.getLabelName())) {

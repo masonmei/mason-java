@@ -38,7 +38,8 @@ public Offer(String offerName, Date receivedDate, int salary, String company, St
 	this.workplace = workplace;
 }
 
-public Offer(String offerName, Date receivedDate, Date workDate, int salary, String salaryDescription, String company, String workplace, String note) {
+public Offer(String offerName, Date receivedDate, Date workDate, int salary, String salaryDescription, String company,
+		String workplace, String note) {
 	this.offerName = offerName;
 	this.receivedDate = receivedDate;
 	this.workDate = workDate;

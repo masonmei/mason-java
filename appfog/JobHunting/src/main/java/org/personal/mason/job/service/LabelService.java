@@ -7,6 +7,7 @@ import org.personal.mason.job.dao.LabelDao;
 import org.personal.mason.job.domain.Label;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class LabelService extends DefaultService<Label> {
 

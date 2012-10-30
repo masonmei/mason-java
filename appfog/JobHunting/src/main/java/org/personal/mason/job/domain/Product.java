@@ -34,7 +34,8 @@ public Product(Company company, String productName) {
 	this.productName = productName;
 }
 
-public Product(Company company, ProductCategory productCategory, String productName, String shortDesc, String description) {
+public Product(Company company, ProductCategory productCategory, String productName, String shortDesc,
+		String description) {
 	this.company = company;
 	this.productCategory = productCategory;
 	this.productName = productName;

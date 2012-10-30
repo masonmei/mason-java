@@ -19,22 +19,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value = "interviewMaterial")
+@RequestMapping(value = "/interviewMaterial")
 public class InterviewMaterialController {
 
 @Autowired
 private InterviewMaterialService interviewMaterialService;
 
-public void setInterviewMaterialService(
-        InterviewMaterialService interviewMaterialService) {
+public void setInterviewMaterialService(InterviewMaterialService interviewMaterialService) {
 	this.interviewMaterialService = interviewMaterialService;
 }
 
 @InitBinder
 public void InitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    dateFormat.setLenient(false);
-    binder.registerCustomEditor(Date.class, null, new CustomDateEditor(dateFormat, true));
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	dateFormat.setLenient(false);
+	binder.registerCustomEditor(Date.class, null, new CustomDateEditor(dateFormat, true));
 }
 
 @RequestMapping(value = "/list", method = RequestMethod.GET)
