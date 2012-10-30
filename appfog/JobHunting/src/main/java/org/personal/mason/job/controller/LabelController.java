@@ -1,5 +1,6 @@
 package org.personal.mason.job.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.personal.mason.job.domain.Label;
@@ -22,8 +23,13 @@ public void setLabelService(LabelService labelService) {
 }
 
 @RequestMapping(value="/list", method = RequestMethod.GET)
-public @ResponseBody List<Label> listLabels(){
-	return labelService.findAll();
+public @ResponseBody List<String> listLabels(){
+	List<Label> labels = labelService.findAll();
+	List<String> names = new ArrayList<>();
+	for (Label label : labels) {
+	    names.add(label.getLabelName());
+    }
+	return names;
 }
 
 }

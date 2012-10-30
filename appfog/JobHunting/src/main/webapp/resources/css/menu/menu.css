@@ -7,7 +7,7 @@
     background: url('menu_bg.png') no-repeat scroll 0 0 transparent;
     clear: both;
     font-size: 12px;
-    height: 58px;
+    height: 52px;
     padding: 0 0 0 9px;
     position: relative;
     width: 100%;
@@ -53,7 +53,7 @@
     float: left;
     font-weight: normal;
     height: 30px;
-    padding: 23px 20px 0;
+    padding: 15px 30px 0;
     position: relative;
     text-decoration: none;
     text-shadow: 1px 1px 1px #000000;
@@ -67,7 +67,7 @@
 }
 #nav li:hover ul.subs {
     left: 0;
-    top: 53px;
+    top: 43px;
     width: 180px;
 
     -moz-transform: scaleY(1);
@@ -90,7 +90,7 @@
 #lavalamp {
     background: url('lavalamp.png') no-repeat scroll 0 0 transparent;
     height: 16px;
-    left: 13px;
+    left: 20px;
     position: absolute;
     top: 0px;
     width: 64px;
@@ -109,26 +109,26 @@
     transition-duration: 3000s;
 }
 #nav li:nth-child(1):hover ~ #lavalamp {
-    left: 13px;
+    left: 20px;
 }
 #nav li:nth-child(2):hover ~ #lavalamp {
-    left: 90px;
+    left: 125px;
 }
 #nav li:nth-child(3):hover ~ #lavalamp {
-    left: 170px;
+    left: 235px;
 }
 #nav li:nth-child(4):hover ~ #lavalamp {
-    left: 250px;
+    left: 340px;
 }
 #nav li:nth-child(5):hover ~ #lavalamp {
-    left: 330px;
+    left: 440px;
 }
-#nav li:nth-child(6):hover ~ #lavalamp {
-    left: 410px;
-}
-#nav li:nth-child(7):hover ~ #lavalamp {
-    left: 490px;
-}
-#nav li:nth-child(8):hover ~ #lavalamp {
-    left: 565px;
-}
+/* #nav li:nth-child(6):hover ~ #lavalamp { */
+/*     left: 410px; */
+/* } */
+/* #nav li:nth-child(7):hover ~ #lavalamp { */
+/*     left: 490px; */
+/* } */
+/* #nav li:nth-child(8):hover ~ #lavalamp { */
+/*     left: 565px; */
+/* } */

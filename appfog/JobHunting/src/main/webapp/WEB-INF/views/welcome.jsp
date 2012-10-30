@@ -30,6 +30,7 @@
 				<li><a class="hsubs" href="interview/list" target="iframe">Interview</a></li>
 				<li><a class="hsubs" href="interviewMaterial/list" target="iframe">Material</a></li>
 				<li><a class="hsubs" href="offer/list" target="iframe">Offer</a></li>
+				<div id="lavalamp"></div>
 			</ul>
 		</div>
 	</nav>
