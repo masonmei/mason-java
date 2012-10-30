@@ -16,6 +16,7 @@
 
 <c:url var="findProvinces" value="/company/provinces"/>
 <c:url var="findCities" value="/company/cities"/>
+<c:url var="listLabels" value="/label/list"/>
 
 <script type="text/javascript">
 	$(document).ready(function() { 
@@ -35,13 +36,7 @@
 				});
 	});
 </script>
-<%-- <script type="text/javascript">
-	$(document).ready(function() { 
-		var html = '<option value="">Select City</option>';
-		html += '</option>';
-		$('#city').html(html);
-	});
-</script> --%>
+
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -56,6 +51,17 @@
 					$('#province').html(html);
 				});
 			});
+</script>
+<script>
+	$(function(){
+		$('#addLabelAC').autocomplete({
+			source: ["123","124", "1234"]
+// 			minLength: 2,
+// 			select: function(event, ui){
+// 				alert(this.value);
+// 			}
+		});
+	});
 </script>
 </head>
 <body>
@@ -74,19 +80,28 @@
 						</div>
 					</div>
 					<div>
-						<div>
-							<div>Province</div>
+						<div>Labels</div>
+						<c:if test="${!empty labels}">
 							<div>
-								<f:select path="provice" id="province">
-								</f:select>
+								<c:forEach var="label" items="${labels }">
+									<label class="companyLabel">${label.labelName }<img src='<c:url value="/resources/images/erase.png"></c:url>'/></label>
+								</c:forEach>
 							</div>
+						</c:if>
+						<div><input id="addLabelAC"/></div>
+					</div>
+					<div>
+						<div>Province</div>
+						<div>
+							<f:select path="provice" id="province">
+							</f:select>
 						</div>
+					</div>
+					<div>
+						<div>City</div>
 						<div>
-							<div>City</div>
-							<div>
-								<f:select path="city" id="city">									
-								</f:select>
-							</div>
+							<f:select path="city" id="city">									
+							</f:select>
 						</div>
 					</div>
 					<div>

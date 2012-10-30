@@ -6,44 +6,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 </head>
-<body><div class="content">
-	<c:choose>
-		<c:when test="${!empty product}">
-			<div>
-				<div>
-					<div>Product Name</div>
+<body>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty product}">
+				<div class="contentView">
 					<div>
-						<label>${product.productName }</label>
+						<div>Product Name</div>
+						<div>
+							<label>${product.productName }</label>
+						</div>
+					</div>
+					<div>
+						<div>Category</div>
+						<div>
+							<label>${product.productCategory.categoryName }</label>
+						</div>
+					</div>
+					<div>
+						<div>Short Description</div>
+						<div>
+							<label>${product.shortDesc }</label>
+						</div>
+					</div>
+					<div>
+						<div>Description</div>
+						<div>
+							<label>${product.description }</label>
+						</div>
 					</div>
 				</div>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>Category</div>
-					<div>
-						<label>${product.productCategory.categoryName }</label>
-					</div>
+					<label>Should Never Come to This</label>
 				</div>
-				<div>
-					<div>Short Description</div>
-					<div>
-						<label>${product.shortDesc }</label>
-					</div>
-				</div>
-				<div>
-					<div>Description</div>
-					<div>
-						<label>${product.description }</label>
-					</div>
-				</div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose></div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>

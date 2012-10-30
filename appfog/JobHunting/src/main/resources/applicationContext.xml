@@ -37,7 +37,8 @@
 
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
-		p:showSql="true" p:generateDdl="true" p:databasePlatform="org.hibernate.dialect.MySQL5InnoDBDialect" />
+		p:showSql="true" p:generateDdl="true"
+		p:databasePlatform="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
 	<!-- bean post-processor for JPA annotations -->
 	<bean
@@ -49,6 +50,10 @@
 
 	<bean id="entityManager"
 		class="org.springframework.orm.jpa.support.SharedEntityManagerBean"
+		p:entityManagerFactory-ref="entityManagerFactory" />
+
+	<bean id="openEntityManagerInViewInterceptor"
+		class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor"
 		p:entityManagerFactory-ref="entityManagerFactory" />
 
 	<!-- use declarative transaction management -->

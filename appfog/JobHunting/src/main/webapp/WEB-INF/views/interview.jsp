@@ -13,7 +13,7 @@
 <div class="content">
 	<c:choose>
 		<c:when test="${!empty interview}">
-			<div>
+			<div class="contentView">
 				<div>
 					<div>Interview Name</div>
 					<div>

@@ -6,63 +6,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 </head>
 <body>
-<div class="content">
-	<c:choose>
-		<c:when test="${!empty company}">
-			<div>
-				<div>
-					<div>Company</div>
+	<div class="content">
+		<c:choose>
+			<c:when test="${!empty company}">
+				<div class="contentView">
 					<div>
-						<label>${company.companyName }</label>
-					</div>
-				</div>
-				<div>
-					<div>
-						<div>Province</div>
+						<div>Company</div>
 						<div>
-							<label>${company.provice }</label>
+							<span>${company.companyName }</span>
 						</div>
 					</div>
 					<div>
-						<div>City</div>
+						<c:if test="${!empty labels}">
+							<div>Labels</div>
+							<div>
+								<c:forEach var="label" items="${labels }">
+									<label class="companyLabel">${label.labelName }</label>
+								</c:forEach>
+							</div>
+						</c:if>
+					</div>
+					<div>
 						<div>
-							<label>${company.city }</label>
+							<div>Province</div>
+							<div>
+								<span>${company.provice }</span>
+							</div>
+						</div>
+						<div>
+							<div>City</div>
+							<div>
+								<span>${company.city }</span>
+							</div>
 						</div>
 					</div>
+					<div>
+						<div>
+							<div>Business Type</div>
+							<div>
+								<span>${company.businessType }</span>
+							</div>
+						</div>
+						<div>
+							<div>Scale</div>
+							<div>
+								<span>${company.scale }</span>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div>Description</div>
+						<div>
+							<span>${company.description }</span>
+						</div>
+					</div>
+					<div>
+						<a href='<c:url value="/company/edit?id=${company.id }"/>'>Edit</a>
+					</div>
 				</div>
+			</c:when>
+			<c:otherwise>
 				<div>
-					<div>
-						<div>Business Type</div>
-						<div>
-							<label>${company.businessType }</label>
-						</div>
-					</div>
-					<div>
-						<div>Scale</div>
-						<div>
-							<label>${company.scale }</label>
-						</div>
-					</div>
+					<span>Should Never Come to This</span>
 				</div>
-				<div>
-					<div>Description</div>
-					<div>
-						<label>${company.description }</label>
-					</div>
-				</div>
-				<div><a href='<c:url value="/company/edit?id=${company.id }"/>'>Edit</a></div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div>
-				<label>Should Never Come to This</label>
-			</div>
-		</c:otherwise>
-	</c:choose>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

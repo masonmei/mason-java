@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.personal.mason.job.domain.City;
 import org.personal.mason.job.domain.Company;
+import org.personal.mason.job.domain.Label;
 import org.personal.mason.job.domain.Province;
 import org.personal.mason.job.service.CityService;
 import org.personal.mason.job.service.CompanyService;
+import org.personal.mason.job.service.LabelService;
 import org.personal.mason.job.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,9 @@ private ProvinceService provinceService;
 @Autowired
 private CityService cityService;
 
+@Autowired
+private LabelService labelService;
+
 public void setCompanyService(CompanyService companyService) {
 	this.companyService = companyService;
 }
@@ -42,6 +47,10 @@ public void setProvinceService(ProvinceService provinceService) {
 
 public void setCityService(CityService cityService) {
 	this.cityService = cityService;
+}
+
+public void setLabelService(LabelService labelService) {
+	this.labelService = labelService;
 }
 
 @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -60,6 +69,25 @@ public String listCompany(Integer startIndex, Integer pageSize, Map<String, Obje
 	return "companies";
 }
 
+@RequestMapping(value = "/listwithlabel", method = RequestMethod.GET)
+public String listCompanyByLabel(@RequestParam("labelName") String labelName, Integer startIndex, Integer pageSize,
+		Model model) {
+	Label label = labelService.findByLabelName(labelName);
+	if (label != null) {
+		if (startIndex == null || startIndex < 0) {
+			startIndex = 0;
+		}
+
+		if (pageSize == null || pageSize <= 0) {
+			pageSize = 10;
+		}
+
+		List<Company> companies = companyService.findByLabel(label, startIndex, pageSize);
+		model.addAttribute("companies", companies);
+	}
+	return "companies";
+}
+
 @RequestMapping(value = "/delete")
 public String deleteCompany(@RequestParam("id") Long id) {
 	companyService.deleteById(id);
@@ -70,6 +98,8 @@ public String deleteCompany(@RequestParam("id") Long id) {
 public String viewCompany(@RequestParam("id") Long id, Map<String, Object> map) {
 	Company com = companyService.findById(id);
 	map.put("company", com);
+	List<Label> labels = labelService.findByCompany(com);
+	map.put("labels", labels);
 	return "company";
 }
 
@@ -77,6 +107,8 @@ public String viewCompany(@RequestParam("id") Long id, Map<String, Object> map) 
 public String editCompany(@RequestParam("id") Long id, Model model) {
 	Company com = companyService.findById(id);
 	model.addAttribute("company", com);
+	List<Label> labels = labelService.findByCompany(com);
+	model.addAttribute("labels",labels);
 	return "company_edit";
 }
 
@@ -97,6 +129,17 @@ public String updateCompany(@ModelAttribute("company") Company company) {
 	return "redirect:/company/list";
 }
 
+@RequestMapping(value="/label/add", method = RequestMethod.GET)
+public @ResponseBody boolean addLabelToCompany(@RequestParam("label") String labelName, @RequestParam("companyId") Long companyId){
+	Label label = labelService.findByLabelName(labelName);
+	if(label == null){
+		label = new Label();
+		label.setLabelName(labelName);
+	}
+	
+	return companyService.addLabelToCompany(companyId, label);
+}
+
 @RequestMapping(value = "/cities", method = RequestMethod.GET)
 public @ResponseBody
 List<City> getCitiesOfProvince(@RequestParam("provinceName") String provinceName) {
@@ -114,4 +157,5 @@ public @ResponseBody
 List<Province> getProvinces() {
 	return Collections.unmodifiableList(provinceService.findAll());
 }
+
 }

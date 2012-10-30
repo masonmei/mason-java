@@ -12,7 +12,7 @@
 <body><div class="content">
 <c:choose>
 		<c:when test="${!empty news}">
-			<div>
+			<div class="contentView">
 				<div>
 					<div>News Title</div>
 					<div>
