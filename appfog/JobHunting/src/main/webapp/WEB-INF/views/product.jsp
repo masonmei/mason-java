@@ -18,32 +18,32 @@
 					<div>
 						<div>Product Name</div>
 						<div>
-							<label>${product.productName }</label>
+							<span>${product.productName }</span>
 						</div>
 					</div>
 					<div>
 						<div>Category</div>
 						<div>
-							<label>${product.productCategory.categoryName }</label>
+							<span>${product.productCategory.categoryName }</span>
 						</div>
 					</div>
 					<div>
 						<div>Short Description</div>
 						<div>
-							<label>${product.shortDesc }</label>
+							<span>${product.shortDesc }</span>
 						</div>
 					</div>
 					<div>
 						<div>Description</div>
 						<div>
-							<label>${product.description }</label>
+							<span>${product.description }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>

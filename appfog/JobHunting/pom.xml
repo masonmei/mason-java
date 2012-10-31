@@ -19,6 +19,11 @@
             <url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
         </repository>
         <repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Framework Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Maven Repository Group</name>
             <url>https://repository.jboss.org/nexus/content/groups/public/</url>
@@ -77,6 +82,14 @@
             <artifactId>aspectjrt</artifactId>
             <version>1.6.10</version>
         </dependency>
+        
+        <!-- Cloud -->
+        <dependency>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>cloudfoundry-runtime</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+        
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>

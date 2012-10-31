@@ -18,38 +18,38 @@
 					<div>
 						<div>Question</div>
 						<div>
-							<label>${interviewMaterial.question }</label>
+							<span>${interviewMaterial.question }</span>
 						</div>
 					</div>
 					<div>
 						<div>Weight</div>
 						<div>
-							<label>${interviewMaterial.weight }</label>
+							<span>${interviewMaterial.weight }</span>
 						</div>
 					</div>
 					<div>
 						<div>Add Date</div>
 						<div>
-							<label>${interviewMaterial.addDate }</label>
+							<span>${interviewMaterial.addDate }</span>
 						</div>
 					</div>
 					<div>
 						<div>Type</div>
 						<div>
-							<label>${interviewMaterial.type }</label>
+							<span>${interviewMaterial.type }</span>
 						</div>
 					</div>
 					<div>
 						<div>Answer</div>
 						<div>
-							<label>${interviewMaterial.answer }</label>
+							<span>${interviewMaterial.answer }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>

@@ -85,7 +85,7 @@ public void setDate(Date date) {
 	this.date = date;
 }
 
-@Column(name = "content", nullable = false, length = 65535)
+@Column(name = "content", nullable = false, columnDefinition="TEXT")
 public String getContent() {
 	return this.content;
 }

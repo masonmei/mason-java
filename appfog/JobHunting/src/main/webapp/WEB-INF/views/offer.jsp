@@ -18,56 +18,56 @@
 					<div>
 						<div>Offer Name</div>
 						<div>
-							<label>${offer.offerName }</label>
+							<span>${offer.offerName }</span>
 						</div>
 					</div>
 					<div>
 						<div>Received Date</div>
 						<div>
-							<label>${offer.receivedDate }</label>
+							<span>${offer.receivedDate }</span>
 						</div>
 					</div>
 					<div>
 						<div>Work Date</div>
 						<div>
-							<label>${offer.workDate }</label>
+							<span>${offer.workDate }</span>
 						</div>
 					</div>
 					<div>
 						<div>Salary</div>
 						<div>
-							<label>${offer.salary }</label>
+							<span>${offer.salary }</span>
 						</div>
 					</div>
 					<div>
 						<div>Salary Description</div>
 						<div>
-							<label>${offer.salaryDescription }</label>
+							<span>${offer.salaryDescription }</span>
 						</div>
 					</div>
 					<div>
 						<div>Company</div>
 						<div>
-							<label>${offer.company }</label>
+							<span>${offer.company }</span>
 						</div>
 					</div>
 					<div>
 						<div>Working Place</div>
 						<div>
-							<label>${offer.workplace }</label>
+							<span>${offer.workplace }</span>
 						</div>
 					</div>
 					<div>
 						<div>Note</div>
 						<div>
-							<label>${offer.note }</label>
+							<span>${offer.note }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>
