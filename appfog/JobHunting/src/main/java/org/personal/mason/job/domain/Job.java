@@ -92,7 +92,7 @@ public void setRequiredTech(String requiredTech) {
 	this.requiredTech = requiredTech;
 }
 
-@Column(name = "content", length = 65535)
+@Column(name = "content", columnDefinition="TEXT")
 public String getContent() {
 	return this.content;
 }

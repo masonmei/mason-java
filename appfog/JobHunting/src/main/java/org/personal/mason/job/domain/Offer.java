@@ -99,7 +99,7 @@ public void setSalary(int salary) {
 	this.salary = salary;
 }
 
-@Column(name = "salary_description", length = 65535)
+@Column(name = "salary_description", columnDefinition="TEXT")
 public String getSalaryDescription() {
 	return this.salaryDescription;
 }

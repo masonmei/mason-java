@@ -34,7 +34,7 @@
 						<c:forEach var="offer" items="${offers }">
 							<tr>
 								<td hidden="true">${offer.id }</td>
-								<td>${offer.offerName }</td>
+								<td><a href='<c:url value="/offer/view?id=${offer.id }"/>'>${offer.offerName }</a></td>
 								<td>${offer.receivedDate }</td>
 								<td>${offer.workDate }</td>
 								<td>${offer.salary }</td>

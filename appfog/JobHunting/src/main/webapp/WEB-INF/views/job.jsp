@@ -18,32 +18,32 @@
 					<div>
 						<div>Job Title</div>
 						<div>
-							<label>${job.jobTitle }</label>
+							<span>${job.jobTitle }</span>
 						</div>
 					</div>
 					<div>
 						<div>Publish Date</div>
 						<div>
-							<label>${job.publishDate }</label>
+							<span>${job.publishDate }</span>
 						</div>
 					</div>
 					<div>
 						<div>Request Skill</div>
 						<div>
-							<label>${job.requiredTech }</label>
+							<span>${job.requiredTech }</span>
 						</div>
 					</div>
 					<div>
 						<div>Content</div>
 						<div>
-							<label>${job.content }</label>
+							<span>${job.content }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>

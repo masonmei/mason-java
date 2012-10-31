@@ -18,38 +18,38 @@
 					<div>
 						<div>Interview Name</div>
 						<div>
-							<label>${interview.interviewName }</label>
+							<span>${interview.interviewName }</span>
 						</div>
 					</div>
 					<div>
 						<div>Date</div>
 						<div>
-							<label>${interview.date }</label>
+							<span>${interview.date }</span>
 						</div>
 					</div>
 					<div>
 						<div>Location</div>
 						<div>
-							<label>${interview.location }</label>
+							<span>${interview.location }</span>
 						</div>
 					</div>
 					<div>
 						<div>Contact Info</div>
 						<div>
-							<label>${interview.contactInfo }</label>
+							<span>${interview.contactInfo }</span>
 						</div>
 					</div>
 					<div>
 						<div>Notes</div>
 						<div>
-							<label>${interview.notes }</label>
+							<span>${interview.notes }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>

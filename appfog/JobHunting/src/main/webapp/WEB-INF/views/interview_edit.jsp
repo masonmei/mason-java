@@ -66,7 +66,7 @@ $(function() {
 						<div>
 							<div>Notes</div>
 							<div>
-								<f:input path="notes" />
+								<f:textarea path="notes" />
 							</div>
 						</div>
 						<div>

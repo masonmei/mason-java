@@ -18,33 +18,33 @@
 					<div>
 						<div>News Title</div>
 						<div>
-							<label>${news.title }</label>
+							<span>${news.title }</span>
 						</div>
 					</div>
 					<div>
 						<div>Date</div>
 						<div>
-							<label>${news.date }</label>
+							<span>${news.date }</span>
 						</div>
 					</div>
 					<div>
 						<div>Description</div>
 						<div>
-							<label>${news.description }</label>
+							<span>${news.description }</span>
 						</div>
 					</div>
 					<div>
 
 						<div>Content</div>
 						<div>
-							<label>${news.content }</label>
+							<span>${news.content }</span>
 						</div>
 					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div>
-					<label>Should Never Come to This</label>
+					<span>Should Never Come to This</span>
 				</div>
 			</c:otherwise>
 		</c:choose>

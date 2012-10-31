@@ -118,7 +118,7 @@ public void setScale(Integer scale) {
 	this.scale = scale;
 }
 
-@Column(name = "description", length = 65535)
+@Column(name = "description", columnDefinition="TEXT")
 public String getDescription() {
 	return this.description;
 }

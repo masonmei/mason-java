@@ -92,7 +92,7 @@ public void setShortDesc(String shortDesc) {
 	this.shortDesc = shortDesc;
 }
 
-@Column(name = "description", length = 65535)
+@Column(name = "description", columnDefinition="TEXT")
 public String getDescription() {
 	return this.description;
 }
