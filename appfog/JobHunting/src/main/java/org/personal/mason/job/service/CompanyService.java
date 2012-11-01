@@ -68,4 +68,9 @@ public boolean addLabelToCompany(Long companyId, Label label) {
 	return false;
 }
 
+
+@Transactional
+public List<Company> search(String company, int startIndex, int maxResult){
+	return companyDao.searchByCompanyName(company, startIndex, maxResult);
+}
 }

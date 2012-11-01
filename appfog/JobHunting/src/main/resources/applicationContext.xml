@@ -112,12 +112,12 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="org.personal.mason.job.interceptor.LoginInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
+<!-- 	<mvc:interceptors> -->
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/**" /> -->
+<!-- 			<bean class="org.personal.mason.job.interceptor.LoginInterceptor" /> -->
+<!-- 		</mvc:interceptor> -->
+<!-- 	</mvc:interceptors> -->
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

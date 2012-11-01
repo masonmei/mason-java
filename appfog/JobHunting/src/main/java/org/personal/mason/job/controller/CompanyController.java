@@ -159,4 +159,10 @@ List<Province> getProvinces() {
 	return Collections.unmodifiableList(provinceService.findAll());
 }
 
+@RequestMapping(value="/search", method = RequestMethod.GET)
+public String search(@RequestParam("companyName") String companyName, Model model){
+	model.addAttribute("companies", companyService.search(companyName, -1 , -1));
+	return "companies";
+}
+
 }
