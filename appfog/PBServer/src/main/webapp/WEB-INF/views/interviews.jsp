@@ -37,7 +37,7 @@
 									href='<c:url value="/interview/view?id=${interview.id }"/>'>${interview.interviewName
 										}</a></td>
 								<td><fmt:formatDate value="${interview.date }"
-									pattern="yyyy-MM-dd HH:mm" type="both" /></td>
+										pattern="yyyy-MM-dd HH:mm" type="both" /></td>
 								<td>${interview.location }</td>
 								<td>${interview.notes }</td>
 								<td>${interview.contactInfo }</td>

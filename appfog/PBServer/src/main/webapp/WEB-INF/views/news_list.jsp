@@ -37,7 +37,8 @@
 								<td hidden="true">${news.id }</td>
 								<td><a href='<c:url value="/news/view?id=${news.id }"/>'>${news.title
 										}</a></td>
-								<td><fmt:formatDate value="${news.date }" pattern="yyyy-MM-dd" type="both"/></td>
+								<td><fmt:formatDate value="${news.date }"
+										pattern="yyyy-MM-dd" type="both" /></td>
 								<td>${news.description }</td>
 								<td><a
 									href='<c:url value="/news/delete?id=${news.id }&companyId=${company.id }"/>'>Delete</a></td>

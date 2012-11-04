@@ -25,7 +25,8 @@
 					<div>
 						<div>Date</div>
 						<div>
-							<span><fmt:formatDate value="${news.date }" pattern="yyyy-MM-dd" type="both"/></span>
+							<span><fmt:formatDate value="${news.date }"
+									pattern="yyyy-MM-dd" type="both" /></span>
 						</div>
 					</div>
 					<div>

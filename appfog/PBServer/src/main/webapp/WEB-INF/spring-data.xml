@@ -35,5 +35,6 @@
 		c:mongoDbFactory-ref="mongoDBFactory" />
 
 	<!-- Service for initializing MongoDB with sample data using MongoTemplate -->
-	<bean id="initialize" class="org.personal.mason.config.SystemInitialize" init-method="init" />
+	<bean id="initialize" class="org.personal.mason.config.SystemInitialize"
+		init-method="init" />
 </beans>

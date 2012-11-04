@@ -18,7 +18,7 @@ private boolean root;
 private String categoryName;
 private String description;
 @DBRef
-private List<ProductCategory> productCategories = new ArrayList<>();
+private List<ProductCategory> productCategories = new ArrayList<ProductCategory>();
 
 public boolean isRoot() {
 	return root;

@@ -6,10 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 
 <title>Job Hunting</title>
 
@@ -88,12 +92,14 @@ $(function() {
 			<c:when test="${!empty company}">
 				<form method="post" action="update">
 					<div>
-						<input type="hidden" name="id" id="companyId" value="${company.id }"/>
+						<input type="hidden" name="id" id="companyId"
+							value="${company.id }" />
 					</div>
 					<div>
 						<div>Company</div>
 						<div>
-							<input type="text" name="companyName" class="longInput" value="${company.companyName }"/>
+							<input type="text" name="companyName" class="longInput"
+								value="${company.companyName }" />
 						</div>
 					</div>
 					<div>
@@ -108,22 +114,25 @@ $(function() {
 							</div>
 						</c:if>
 						<div>
-							<input id="addLabelAC" class="shortInput" /><input type="button" value="Add Label" id="addLabelBtn" />
+							<input id="addLabelAC" class="shortInput" /><input type="button"
+								value="Add Label" id="addLabelBtn" />
 						</div>
 					</div>
 					<div>
 						<div>Province</div>
 						<div>
-							<input type="text" name="province" id="provinceName" class="shortDisableInput" disabled="disabled" value="${company.province }"/>
-							<select id="province" >
+							<input type="text" name="province" id="provinceName"
+								class="shortDisableInput" disabled="disabled"
+								value="${company.province }" /> <select id="province">
 							</select>
 						</div>
 					</div>
 					<div>
 						<div>City</div>
 						<div>
-							<input type="text" name="city" id="cityName" class="shortDisableInput" disabled="disabled" value="${company.city }"/>
-							<select id="city">
+							<input type="text" name="city" id="cityName"
+								class="shortDisableInput" disabled="disabled"
+								value="${company.city }" /> <select id="city">
 							</select>
 						</div>
 					</div>
@@ -131,13 +140,15 @@ $(function() {
 						<div>
 							<div>Business Type</div>
 							<div>
-								<input type="text" name="businessType" class="shortInput" value="${company.businessType }"/>
+								<input type="text" name="businessType" class="shortInput"
+									value="${company.businessType }" />
 							</div>
 						</div>
 						<div>
 							<div>Scale</div>
 							<div>
-								<input type="text" name="scale" class="shortInput" value="${company.scale }"/>
+								<input type="text" name="scale" class="shortInput"
+									value="${company.scale }" />
 							</div>
 						</div>
 					</div>

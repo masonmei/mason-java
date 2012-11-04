@@ -39,7 +39,7 @@
 								<td><a href='<c:url value="/job/view?id=${job.id }"/>'>${job.jobTitle
 										}</a></td>
 								<td><fmt:formatDate value="${job.publishDate }"
-									pattern="yyyy-MM-dd" type="both" /></td>
+										pattern="yyyy-MM-dd" type="both" /></td>
 								<td>${job.requiredTech }</td>
 								<td><a
 									href='<c:url value="/job/delete?id=${job.id }&companyId=${company.id }"/>'>Delete</a></td>

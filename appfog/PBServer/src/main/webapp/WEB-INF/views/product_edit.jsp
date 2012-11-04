@@ -7,14 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Job Hunting</title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/layout.css"/>">
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
-	
+
 <c:url var="createCategory" value="/category/create"></c:url>
 <c:url var="categoryList" value="/category/list"></c:url>
 <script type="text/javascript">
@@ -74,26 +75,30 @@ $(function() {
 </script>
 </head>
 <body>
-	<div id="createCategoryDialogForm" title="Create Category" class="content">
-	    <form>
-	    	<div>
-	        	<div>Parent Category</div>
-	        	<div>
-		        	<select name="category" id="parentCategory" class="shortInput">
-		        	</select>
-		        </div>
-	        </div>
-	        <div>
-	        	<div>Category Name</div>
-	        	<div>
-		        	<input type="text" name="newCategoryName" id="newCategoryName" class="shortInput" value=""/>
-		        </div>
-		    </div>
-	    </form>
+	<div id="createCategoryDialogForm" title="Create Category"
+		class="content">
+		<form>
+			<div>
+				<div>Parent Category</div>
+				<div>
+					<select name="category" id="parentCategory" class="shortInput">
+					</select>
+				</div>
+			</div>
+			<div>
+				<div>Category Name</div>
+				<div>
+					<input type="text" name="newCategoryName" id="newCategoryName"
+						class="shortInput" value="" />
+				</div>
+			</div>
+		</form>
 	</div>
 
 	<div class="content">
-		<div class="add"><button id="addCategory" class="button">Add Category</button></div>
+		<div class="add">
+			<button id="addCategory" class="button">Add Category</button>
+		</div>
 		<c:choose>
 			<c:when test="${!empty product}">
 				<f:form method="post" action="save?companyId=${companyId }"
@@ -102,31 +107,32 @@ $(function() {
 						<div>
 							<div>Product Name</div>
 							<div>
-								<f:input path="productName" cssClass="longInput"/>
+								<f:input path="productName" cssClass="longInput" />
 							</div>
 						</div>
 						<div>
 							<div>Category</div>
 							<div>
-								<f:select path="productCategoryId"  cssClass="shortInput" id="productCategory">
+								<f:select path="productCategoryId" cssClass="shortInput"
+									id="productCategory">
 								</f:select>
 							</div>
 						</div>
 						<div>
 							<div>Short Description</div>
 							<div>
-								<f:textarea path="shortDesc" cssClass="bigTextArea"/>
+								<f:textarea path="shortDesc" cssClass="bigTextArea" />
 							</div>
 						</div>
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description"  cssClass="bigTextArea"/>
+								<f:textarea path="description" cssClass="bigTextArea" />
 							</div>
 						</div>
 
 						<div>
-							<input type="submit" value="Save" class="button"/>
+							<input type="submit" value="Save" class="button" />
 						</div>
 					</div>
 				</f:form>

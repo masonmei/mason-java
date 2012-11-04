@@ -24,13 +24,13 @@ private Integer scale;
 private String description;
 
 @DBRef
-private List<Label> labels = new ArrayList<>();
+private List<Label> labels = new ArrayList<Label>();
 @DBRef
-private List<News> newses = new ArrayList<>();
+private List<News> newses = new ArrayList<News>();
 @DBRef
-private List<Product> products = new ArrayList<>();
+private List<Product> products = new ArrayList<Product>();
 @DBRef
-private List<Job> jobs = new ArrayList<>();
+private List<Job> jobs = new ArrayList<Job>();
 
 public String getCompanyName() {
 	return companyName;

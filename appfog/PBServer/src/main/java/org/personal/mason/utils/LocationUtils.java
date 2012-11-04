@@ -20,7 +20,7 @@ static {
 	try {
 		Properties properties = PropertiesLoaderUtils.loadAllProperties(LOCATION_PROPERTIES);
 		Set<String> propertyNames = properties.stringPropertyNames();
-		LOCATION_MAP = new Hashtable<>();
+		LOCATION_MAP = new Hashtable<String, List<String>>();
 		for (String string : propertyNames) {
 			String property = properties.getProperty(string, "");
 			String[] split = property.split(",");
@@ -32,7 +32,7 @@ static {
 }
 
 public static List<String> getAllProvince() {
-	return new ArrayList<>(LOCATION_MAP.keySet());
+	return new ArrayList<String>(LOCATION_MAP.keySet());
 }
 
 public static List<String> getCitiesOfProvince(String provinceName) {

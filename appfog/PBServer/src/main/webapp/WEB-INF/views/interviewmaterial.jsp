@@ -32,8 +32,10 @@
 					<div>
 						<div>Add Date</div>
 						<div>
-							
-							<span><fmt:formatDate value="${interviewMaterial.addDate }" pattern="yyyy-MM-dd hh:mm" type="both"/></span>
+
+							<span><fmt:formatDate
+									value="${interviewMaterial.addDate }"
+									pattern="yyyy-MM-dd hh:mm" type="both" /></span>
 						</div>
 					</div>
 					<div>
@@ -45,7 +47,8 @@
 					<div>
 						<div>Answer</div>
 						<div>
-							<span class="shortdescriptionspan">${interviewMaterial.answer }</span>
+							<span class="shortdescriptionspan">${interviewMaterial.answer
+								}</span>
 						</div>
 					</div>
 				</div>

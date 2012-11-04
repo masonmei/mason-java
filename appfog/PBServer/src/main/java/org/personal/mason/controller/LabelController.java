@@ -26,7 +26,7 @@ public void setLabelService(LabelService labelService) {
 public @ResponseBody
 List<String> listLabels() {
 	List<Label> labels = labelService.findAll();
-	List<String> names = new ArrayList<>();
+	List<String> names = new ArrayList<String>();
 	for (Label label : labels) {
 		names.add(label.getLabelName());
 	}

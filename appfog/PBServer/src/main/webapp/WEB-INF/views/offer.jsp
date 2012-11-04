@@ -26,13 +26,15 @@
 					<div>
 						<div>Received Date</div>
 						<div>
-							<span><fmt:formatDate value="${offer.receivedDate }" pattern="yyyy-MM-dd" type="both"/></span>
+							<span><fmt:formatDate value="${offer.receivedDate }"
+									pattern="yyyy-MM-dd" type="both" /></span>
 						</div>
 					</div>
 					<div>
 						<div>Work Date</div>
 						<div>
-							<span><fmt:formatDate value="${offer.workDate }" pattern="yyyy-MM-dd" type="both"/></span>
+							<span><fmt:formatDate value="${offer.workDate }"
+									pattern="yyyy-MM-dd" type="both" /></span>
 						</div>
 					</div>
 					<div>
@@ -44,7 +46,8 @@
 					<div>
 						<div>Salary Description</div>
 						<div>
-							<span class="shortdescriptionspan">${offer.salaryDescription }</span>
+							<span class="shortdescriptionspan">${offer.salaryDescription
+								}</span>
 						</div>
 					</div>
 					<div>

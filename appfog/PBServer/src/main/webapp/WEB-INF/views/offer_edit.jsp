@@ -48,7 +48,8 @@ $(function() {
 						<div>
 							<div>Received Date</div>
 							<div>
-								<f:input path="receivedDate" cssClass="shortDisableInput" disabled="disabled"/>
+								<f:input path="receivedDate" cssClass="shortDisableInput"
+									disabled="disabled" />
 							</div>
 						</div>
 						<div>

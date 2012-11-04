@@ -48,13 +48,14 @@ $(function() {
 						<div>
 							<div>Publish Date</div>
 							<div>
-								<f:input path="publishDate" id="datePicker" cssClass="shortInput" />
+								<f:input path="publishDate" id="datePicker"
+									cssClass="shortInput" />
 							</div>
 						</div>
 						<div>
 							<div>Require Skills</div>
 							<div>
-								<f:textarea path="requiredTech" cssClass="textArea"/>
+								<f:textarea path="requiredTech" cssClass="textArea" />
 							</div>
 						</div>
 						<div>
@@ -65,7 +66,7 @@ $(function() {
 						</div>
 
 						<div>
-							<input type="submit" value="Save" class="button"/>
+							<input type="submit" value="Save" class="button" />
 						</div>
 					</div>
 				</f:form>

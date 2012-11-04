@@ -49,24 +49,24 @@ $(function() {
 						<div>
 							<div>Date</div>
 							<div>
-								<f:input path="date" id="datePicker" cssClass="shortInput"/>
+								<f:input path="date" id="datePicker" cssClass="shortInput" />
 							</div>
 						</div>
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description" cssClass="bigTextArea"/>
+								<f:textarea path="description" cssClass="bigTextArea" />
 							</div>
 						</div>
 						<div>
 							<div>Content</div>
 							<div>
-								<f:textarea path="content" cssClass="bigTextArea"/>
+								<f:textarea path="content" cssClass="bigTextArea" />
 							</div>
 						</div>
 
 						<div>
-							<input type="submit" value="Save" class="button"/>
+							<input type="submit" value="Save" class="button" />
 						</div>
 					</div>
 				</f:form>

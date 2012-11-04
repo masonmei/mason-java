@@ -39,7 +39,7 @@ $(function() {
 			<c:when test="${!empty interview}">
 				<f:form method="post" action="save" modelAttribute="interview">
 					<div>
-						<div >
+						<div>
 							<div>Interview Name</div>
 							<div>
 								<f:input path="interviewName" cssClass="longInput" />
@@ -60,13 +60,13 @@ $(function() {
 						<div>
 							<div>Contact Info</div>
 							<div>
-								<f:input path="contactInfo"  cssClass="longInput" />
+								<f:input path="contactInfo" cssClass="longInput" />
 							</div>
 						</div>
 						<div>
 							<div>Notes</div>
 							<div>
-								<f:textarea path="notes" cssClass="bigTextArea"/>
+								<f:textarea path="notes" cssClass="bigTextArea" />
 							</div>
 						</div>
 						<div>

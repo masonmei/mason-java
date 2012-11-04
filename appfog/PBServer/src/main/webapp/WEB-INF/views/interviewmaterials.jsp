@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,8 @@
 									href='<c:url value="/interviewMaterial/view?id=${mat.id }"/>'>${mat.question
 										}</a></td>
 								<td>${mat.weight }</td>
-								<td><fmt:formatDate value="${mat.addDate }" pattern="yyyy-MM-dd hh:mm" type="both"/></td>
+								<td><fmt:formatDate value="${mat.addDate }"
+										pattern="yyyy-MM-dd hh:mm" type="both" /></td>
 								<td>${mat.type }</td>
 								<td><a
 									href='<c:url value="/interviewMaterial/answer?id=${mat.id }"/>'>Answer</a></td>

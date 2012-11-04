@@ -8,13 +8,17 @@
 <title>Job Hunting</title>
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
-<link rel="stylesheet" type="text/css"	href="<c:url value="/resources/css/frame.css"/>">
-<link rel="stylesheet" type="text/css"	href="<c:url value="/resources/css/menu/menu.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/frame.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/menu/menu.css"/>">
 
 </head>
 <body id="framebody">
 	<header>
-		<div id="banner"><img src='<c:url value="/resources/images/sunset.jpg"></c:url>'></div>
+		<div id="banner">
+			<img src='<c:url value="/resources/images/sunset.jpg"></c:url>'>
+		</div>
 	</header>
 
 	<nav>
@@ -36,7 +40,8 @@
 		</div>
 	</nav>
 	<section>
-		<iframe name="iframe" id="frame" width="100%" height="100%" src='<s:url value="/company/list"/>' frameborder="0" scrolling="no"></iframe>
+		<iframe name="iframe" id="frame" width="100%" height="100%"
+			src='<s:url value="/company/list"/>' frameborder="0" scrolling="no"></iframe>
 	</section>
 	<footer> This is the footer. </footer>
 </body>

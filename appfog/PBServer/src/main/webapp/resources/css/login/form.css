@@ -7,7 +7,7 @@
 	color: #eee;
 	width: 450px;
 	margin: auto;
-	margin-top:200px;
+	margin-top: 200px;
 	position: relative;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -19,7 +19,7 @@
 	color: #eee;
 	width: 270px;
 	margin: auto;
-	margin-top:200px;
+	margin-top: 200px;
 	position: relative;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -31,8 +31,7 @@
 	border: 5px;
 	margin: 3px;
 	padding: 5px;
-	background: #333333 url('logo-medium.png') no-repeat
-		scroll 240px 40px;
+	background: #333333 url('logo-medium.png') no-repeat scroll 240px 40px;
 }
 
 #registerForm fieldset {
@@ -48,7 +47,7 @@ h3 {
 }
 
 p {
-	margin:3px;
+	margin: 3px;
 	font-size: 11px;
 }
 
@@ -101,7 +100,7 @@ button {
 	-webkit-border-radius: 4px;
 }
 
-button:HOVER{
+button:HOVER {
 	background-color: activecaption;
 }
 
@@ -122,9 +121,9 @@ label {
 }
 
 #validationCode {
-	padding-top:5px;
+	padding-top: 5px;
 	padding-right: 5px;
-	border:3px;
+	border: 3px;
 	-moz-border-radius: 1px;
 	-webkit-border-radius: 1px;
 }
@@ -138,7 +137,7 @@ a {
 	cursor: pointer;
 }
 
-a:FOCUS{
+a:FOCUS {
 	color: olive;
 }
 

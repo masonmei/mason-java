@@ -37,7 +37,8 @@ $(function() {
 	<div class="content">
 		<c:choose>
 			<c:when test="${!empty interviewMaterial}">
-				<f:form method="post" action="save"	modelAttribute="interviewMaterial">
+				<f:form method="post" action="save"
+					modelAttribute="interviewMaterial">
 					<div>
 						<div>
 							<div>Question</div>
@@ -70,7 +71,7 @@ $(function() {
 							</div>
 						</div>
 						<div>
-							<input type="submit" value="Save" class="button"/>
+							<input type="submit" value="Save" class="button" />
 						</div>
 					</div>
 				</f:form>
