@@ -1,5 +1,6 @@
 package org.personal.mason.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -13,16 +14,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ProductCategory {
 @Id
 private String id;
+private boolean root;
 private String categoryName;
 private String description;
 @DBRef
-private List<ProductCategory> productCategories;
+private List<ProductCategory> productCategories = new ArrayList<>();
+
+public boolean isRoot() {
+	return root;
+}
+
+public void setRoot(boolean root) {
+	this.root = root;
+}
 
 public String getCategoryName() {
 	return categoryName;
 }
 
-public void ListCategoryName(String categoryName) {
+public void setCategoryName(String categoryName) {
 	this.categoryName = categoryName;
 }
 
@@ -30,7 +40,7 @@ public String getDescription() {
 	return description;
 }
 
-public void ListDescription(String description) {
+public void setDescription(String description) {
 	this.description = description;
 }
 
@@ -46,4 +56,11 @@ public String getId() {
 	return id;
 }
 
+public void setId(String id) {
+	if (id.isEmpty()) {
+		this.id = null;
+	} else {
+		this.id = id;
+	}
+}
 }

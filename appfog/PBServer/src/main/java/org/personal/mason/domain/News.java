@@ -53,4 +53,12 @@ public String getId() {
 	return id;
 }
 
+public void setId(String id) {
+	if (id.isEmpty()) {
+		this.id = null;
+	} else {
+		this.id = id;
+	}
+}
+
 }

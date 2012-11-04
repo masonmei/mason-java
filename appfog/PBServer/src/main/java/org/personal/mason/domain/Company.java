@@ -1,5 +1,6 @@
 package org.personal.mason.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -16,34 +17,20 @@ public class Company {
 @Id
 private String id;
 private String companyName;
-private String provice;
+private String province;
 private String city;
 private String businessType;
 private Integer scale;
 private String description;
 
 @DBRef
-private List<Label> labels;
+private List<Label> labels = new ArrayList<>();
 @DBRef
-private List<News> newses;
+private List<News> newses = new ArrayList<>();
 @DBRef
-private List<Product> products;
+private List<Product> products = new ArrayList<>();
 @DBRef
-private List<Job> jobs;
-
-// public Company() {
-// }
-//
-// @PersistenceConstructor
-// public Company(String companyName, String province, String city, String
-// businessType, Integer scale, String description) {
-// this.companyName = companyName;
-// this.provice = province;
-// this.city = city;
-// this.businessType = businessType;
-// this.scale = scale;
-// this.description = description;
-// }
+private List<Job> jobs = new ArrayList<>();
 
 public String getCompanyName() {
 	return companyName;
@@ -53,12 +40,12 @@ public void setCompanyName(String companyName) {
 	this.companyName = companyName;
 }
 
-public String getProvice() {
-	return provice;
+public String getProvince() {
+	return province;
 }
 
-public void setProvice(String provice) {
-	this.provice = provice;
+public void setProvince(String province) {
+	this.province = province;
 }
 
 public String getCity() {
@@ -127,6 +114,99 @@ public void setJobs(List<Job> jobs) {
 
 public String getId() {
 	return id;
+}
+
+public void setId(String id) {
+	if (id.isEmpty()) {
+		this.id = null;
+	} else {
+		this.id = id;
+	}
+}
+
+@Override
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((businessType == null) ? 0 : businessType.hashCode());
+	result = prime * result + ((city == null) ? 0 : city.hashCode());
+	result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+	result = prime * result + ((description == null) ? 0 : description.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((jobs == null) ? 0 : jobs.hashCode());
+	result = prime * result + ((labels == null) ? 0 : labels.hashCode());
+	result = prime * result + ((newses == null) ? 0 : newses.hashCode());
+	result = prime * result + ((products == null) ? 0 : products.hashCode());
+	result = prime * result + ((province == null) ? 0 : province.hashCode());
+	result = prime * result + ((scale == null) ? 0 : scale.hashCode());
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Company other = (Company) obj;
+	if (businessType == null) {
+		if (other.businessType != null)
+			return false;
+	} else if (!businessType.equals(other.businessType))
+		return false;
+	if (city == null) {
+		if (other.city != null)
+			return false;
+	} else if (!city.equals(other.city))
+		return false;
+	if (companyName == null) {
+		if (other.companyName != null)
+			return false;
+	} else if (!companyName.equals(other.companyName))
+		return false;
+	if (description == null) {
+		if (other.description != null)
+			return false;
+	} else if (!description.equals(other.description))
+		return false;
+	if (id == null) {
+		if (other.id != null)
+			return false;
+	} else if (!id.equals(other.id))
+		return false;
+	if (jobs == null) {
+		if (other.jobs != null)
+			return false;
+	} else if (!jobs.equals(other.jobs))
+		return false;
+	if (labels == null) {
+		if (other.labels != null)
+			return false;
+	} else if (!labels.equals(other.labels))
+		return false;
+	if (newses == null) {
+		if (other.newses != null)
+			return false;
+	} else if (!newses.equals(other.newses))
+		return false;
+	if (products == null) {
+		if (other.products != null)
+			return false;
+	} else if (!products.equals(other.products))
+		return false;
+	if (province == null) {
+		if (other.province != null)
+			return false;
+	} else if (!province.equals(other.province))
+		return false;
+	if (scale == null) {
+		if (other.scale != null)
+			return false;
+	} else if (!scale.equals(other.scale))
+		return false;
+	return true;
 }
 
 }

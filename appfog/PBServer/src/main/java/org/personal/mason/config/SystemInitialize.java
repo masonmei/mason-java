@@ -6,7 +6,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public class SystemInitialize {
 @Autowired
 private MongoTemplate mongoTemplate;
+
+
 public void init() {
-	
+
 }
 }

@@ -13,7 +13,16 @@
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean"
 		p:location="/WEB-INF/spring.properties" />
 
-	<context:property-placeholder properties-ref="deployProperties" />
+	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor" />
+
+	<context:property-placeholder
+		properties-ref="deployProperties" />
+	<import resource="trace-context.xml" />
+
+	<!-- Imports datasource configuration -->
+	<import resource="spring-data.xml" />
+
+
 
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />
@@ -23,18 +32,42 @@
 		correct base-package -->
 	<context:component-scan base-package="org.personal.mason" />
 
-	<!-- Configures the annotation-driven Spring MVC Controller programming 
-		model. Note that, with Spring 3.0, this tag works in Servlet MVC only! -->
 	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<bean class="org.springframework.http.MediaType">
+								<constructor-arg index="0" value="text" />
+								<constructor-arg index="1" value="plain" />
+								<constructor-arg index="2" value="UTF-8" />
+							</bean>
+						</list>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp" p:order="1"
+		p:contentType="text/html;charset=UTF-8" />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Imports logging configuration -->
-	<import resource="trace-context.xml" />
-
-	<!-- Imports datasource configuration -->
-	<import resource="spring-data.xml" />
-
-
+	<mvc:view-controller path="/" view-name="index" />
 
 </beans>

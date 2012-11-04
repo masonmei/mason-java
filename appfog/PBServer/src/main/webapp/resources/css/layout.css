@@ -1,0 +1,210 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+}
+
+.content {
+	color: silver;
+	width: 100%;
+	height: inherit;
+}
+
+/* Table section */
+.contenttable {
+	width: 100%;
+	text-align: center;
+	border: thin;
+	border-style: inset;
+	border-color: black;
+}
+
+th {
+	text-shadow: graytext;
+	background: black;
+	padding: 3px;
+}
+
+tr:nth-child(odd) {
+	background: black;
+}
+
+/* Link a section */
+a {
+	display: inline-block;
+	padding: 3px;
+	color: teal;
+}
+
+a:ACTIVE {
+	color: black;
+	background-color: aqua;
+}
+
+.content div {
+	padding: 2px;
+}
+
+.add {
+	float: right;
+	display: block;
+}
+
+.textArea {
+	background-color: gray;
+	width: 95%;
+	min-height: 80px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.bigTextArea {
+	background-color: gray;
+	width: 95%;
+	min-height: 150px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.shortInput {
+	width: 150px;
+	height: 25px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: gray;
+}
+
+.shortDisableInput {
+	background-color: gray;
+	width: 100px;
+	height: 25px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.longInput {
+	width: 80%;
+	height: 25px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: gray;
+}
+
+.button {
+	background-color: gray;
+	min-width: 100px;
+	min-height: 25px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+select {
+	background-color: gray;
+	min-width: 120px;
+	height: 25px;
+}
+
+#addLabelBtn {
+	width: 70px;
+	height: 25px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: gray;
+}
+
+/* View Page */
+.contentView {
+	margin: 0;
+	width: auto;
+	font-weight: bolder;
+	border: thin;
+	border-color: black;
+	border-style: inset;
+}
+
+.contentView div {
+	width: 100%;
+}
+
+.contentView span {
+	width: 98%;
+	display: inline-block;
+	padding: 2px;
+	border: 2px;
+	margin: 2px;
+	font-weight: normal;
+	background-color: black;
+	outline: 2px lime;
+	-moz-border-radius: 3px;
+	margin: 2px;
+	font-weight: normal;
+	background-color: black;
+	outline: 2px lime;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.shortdescriptionspan {
+	min-height: 80px;
+}
+
+.descriptionspan {
+	min-height: 150px;
+}
+
+.companyLabel {
+	padding: 2px;
+	border: 2px;
+	margin: 2px;
+	text-align: center;
+	font-weight: normal;
+	background-color: gray;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	float: none;
+}
+/*  
+select {
+	background-color: gray;
+	min-width: 120px;
+	min-height: 20px;
+}
+
+input {
+	background-color: gray;
+	min-width: 200px;
+	min-height: 20px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+textarea {
+	background-color: gray;
+	width: 90%;
+	min-height: 100px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.button {
+	background-color: gray;
+	min-width: 100px;
+	min-height: 20px;
+}
+
+
+
+.deleteImg {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+}
+
+.deleteImg:HOVER {
+	color: aqua;
+	cursor: pointer;
+}
+*/

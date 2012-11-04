@@ -13,7 +13,7 @@ public class User {
 
 @Id
 private String id;
-@Indexed(unique = true)
+@Indexed(unique = true, sparse = true)
 private String email;
 private String name;
 private String password;
@@ -44,6 +44,14 @@ public void setPassword(String password) {
 
 public String getId() {
 	return id;
+}
+
+public void setId(String id) {
+	if (id.isEmpty()) {
+		this.id = null;
+	} else {
+		this.id = id;
+	}
 }
 
 }
