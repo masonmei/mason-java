@@ -39,7 +39,7 @@ public UserForm createUserForm() {
 
 @RequestMapping(value = "/", method = RequestMethod.GET)
 public String root() {
-	return "redirect:/index";
+	return "redirect:index";
 }
 
 @RequestMapping(value = "index", method = RequestMethod.GET)

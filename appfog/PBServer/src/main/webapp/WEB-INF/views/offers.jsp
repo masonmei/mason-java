@@ -16,7 +16,7 @@
 	<div class="content">
 		<h3>All Interviews</h3>
 		<div class="add">
-			<a href='<c:url value="/offer/add"/>'>Add</a>
+			<a href='<c:url value="add"/>'>Add</a>
 		</div>
 		<div>
 			<c:choose>
@@ -34,7 +34,7 @@
 						<c:forEach var="offer" items="${offers }">
 							<tr>
 								<td hidden="true">${offer.id }</td>
-								<td><a href='<c:url value="/offer/view?id=${offer.id }"/>'>${offer.offerName
+								<td><a href='<c:url value="view?id=${offer.id }"/>'>${offer.offerName
 										}</a></td>
 								<td><fmt:formatDate value="${offer.receivedDate }"
 										pattern="yyyy-MM-dd" type="both" /></td>
@@ -44,7 +44,7 @@
 								<td>${offer.company }</td>
 								<td>${offer.workplace }</td>
 								<td><a
-									href='<c:url value="/offer/delete?id=${offer.id }"/>'>Delete</a></td>
+									href='<c:url value="delete?id=${offer.id }"/>'>Delete</a></td>
 							</tr>
 						</c:forEach>
 					</table>

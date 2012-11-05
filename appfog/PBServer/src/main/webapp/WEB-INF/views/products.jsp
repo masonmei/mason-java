@@ -19,7 +19,7 @@
 
 		<div>
 			<div class="add">
-				<a href='<c:url value="/product/add?companyId=${company.id }"/>'>Add</a>
+				<a href='<c:url value="add?companyId=${company.id }"/>'>Add</a>
 			</div>
 			<c:choose>
 				<c:when test="${!empty companyProducts}">
@@ -35,12 +35,12 @@
 						<c:forEach var="prod" items="${companyProducts }">
 							<tr>
 								<td hidden="true">${prod.id }</td>
-								<td><a href='<c:url value="/product/view?id=${prod.id }"/>'>${prod.productName
+								<td><a href='<c:url value="view?id=${prod.id }"/>'>${prod.productName
 										}</a></td>
 								<td>${prod.productCategory.categoryName }</td>
 								<td>${prod.shortDesc }</td>
 								<td><a
-									href='<c:url value="/product/delete?id=${prod.id }&companyId=${company.id }"/>'>Delete</a></td>
+									href='<c:url value="delete?id=${prod.id }&companyId=${company.id }"/>'>Delete</a></td>
 							</tr>
 						</c:forEach>
 

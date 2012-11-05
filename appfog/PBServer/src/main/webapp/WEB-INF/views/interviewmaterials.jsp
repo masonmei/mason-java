@@ -16,7 +16,7 @@
 	<div class="content">
 		<h3>All Materials</h3>
 		<div class="add">
-			<a href='<c:url value="/interviewMaterial/add"/>'>Add</a>
+			<a href='<c:url value="add"/>'>Add</a>
 		</div>
 		<div>
 			<c:choose>
@@ -35,14 +35,14 @@
 							<tr>
 								<td hidden="true">${mat.id }</td>
 								<td><a
-									href='<c:url value="/interviewMaterial/view?id=${mat.id }"/>'>${mat.question
+									href='<c:url value="view?id=${mat.id }"/>'>${mat.question
 										}</a></td>
 								<td>${mat.weight }</td>
 								<td><fmt:formatDate value="${mat.addDate }"
 										pattern="yyyy-MM-dd hh:mm" type="both" /></td>
 								<td>${mat.type }</td>
 								<td><a
-									href='<c:url value="/interviewMaterial/answer?id=${mat.id }"/>'>Answer</a></td>
+									href='<c:url value="answer?id=${mat.id }"/>'>Answer</a></td>
 							</tr>
 						</c:forEach>
 					</table>

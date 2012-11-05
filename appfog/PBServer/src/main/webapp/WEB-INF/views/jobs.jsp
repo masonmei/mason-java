@@ -21,7 +21,7 @@
 
 		<div>
 			<div class="add">
-				<a href='<c:url value="/job/add?companyId=${company.id }"/>'>Add</a>
+				<a href='<c:url value="add?companyId=${company.id }"/>'>Add</a>
 			</div>
 			<c:choose>
 				<c:when test="${!empty companyJobs}">
@@ -36,13 +36,13 @@
 						<c:forEach var="job" items="${companyJobs }">
 							<tr>
 								<td hidden="true">${job.id }</td>
-								<td><a href='<c:url value="/job/view?id=${job.id }"/>'>${job.jobTitle
+								<td><a href='<c:url value="view?id=${job.id }"/>'>${job.jobTitle
 										}</a></td>
 								<td><fmt:formatDate value="${job.publishDate }"
 										pattern="yyyy-MM-dd" type="both" /></td>
 								<td>${job.requiredTech }</td>
 								<td><a
-									href='<c:url value="/job/delete?id=${job.id }&companyId=${company.id }"/>'>Delete</a></td>
+									href='<c:url value="delete?id=${job.id }&companyId=${company.id }"/>'>Delete</a></td>
 							</tr>
 						</c:forEach>
 

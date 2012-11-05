@@ -8,9 +8,11 @@
 
 	<bean id="deployProperties"
 		class="org.springframework.beans.factory.config.PropertiesFactoryBean"
-		p:location="/WEB-INF/spring.properties" />
+		p:location="/WEB-INF/spring/spring.properties" />
 
 	<bean id="passwordEncryptor" class="org.jasypt.util.password.ConfigurablePasswordEncryptor" />
+
+	<bean id="accountActivityManager" class="org.personal.mason.interceptor.AccountActivityManager" />
 
 	<context:property-placeholder
 		properties-ref="deployProperties" />
@@ -30,7 +32,7 @@
 	<context:component-scan base-package="org.personal.mason" />
 
 	<mvc:annotation-driven />
-	
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<bean
@@ -58,14 +60,17 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<mvc:view-controller path="/" view-name="index" />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="org.personal.mason.interceptor.LoginInterceptor" />
+			<mvc:mapping path="/web/**" />
+			<bean class="org.personal.mason.interceptor.WebLoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/rest/**" /> 
+		<bean class="org.personal.mason.interceptor.RestLoginInterceptor" /> </mvc:interceptor> 
+		</mvc:interceptors> -->
 </beans>

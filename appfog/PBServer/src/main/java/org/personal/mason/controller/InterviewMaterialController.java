@@ -62,7 +62,7 @@ public String addInterviewMaterial(Map<String, Object> map) {
 @RequestMapping(value = "/save", method = RequestMethod.POST)
 public String saveInterviewMaterial(InterviewMaterial interviewMaterial) {
 	interviewMaterialService.save(interviewMaterial);
-	return "redirect:/interviewMaterial/list";
+	return "redirect:list";
 }
 
 @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public String viewInterviewMaterial(@RequestParam("id") String id, Map<String, O
 @RequestMapping(value = "/delete")
 public String deleteInterviewMaterial(@RequestParam("id") String id) {
 	interviewMaterialService.delete(id);
-	return "redirect:/interviewMaterial/list";
+	return "redirect:list";
 }
 
 @RequestMapping(value = "/answer")

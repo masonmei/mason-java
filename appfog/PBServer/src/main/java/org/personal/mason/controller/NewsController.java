@@ -80,7 +80,7 @@ public String addCompanyNews(@RequestParam("companyId") String companyId, Map<St
 public String saveCompanyNews(@RequestParam("companyId") String companyId, News news) {
 	newsService.save(news);
 	companyService.addNewsToCompany(companyId, news);
-	return "redirect:/news/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 
 @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -93,6 +93,6 @@ public String viewCompanyNews(@RequestParam("id") String id, Map<String, Object>
 @RequestMapping(value = "/delete")
 public String deleteCompanyNews(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
 	newsService.delete(id);
-	return "redirect:/news/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 }

@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					<div>
-						<a href='<c:url value="/company/edit?id=${company.id }"/>'>Edit</a>
+						<a href='<c:url value="edit?id=${company.id }"/>'>Edit</a>
 					</div>
 				</div>
 			</c:when>

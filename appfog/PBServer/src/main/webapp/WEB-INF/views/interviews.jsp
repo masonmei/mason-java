@@ -15,7 +15,7 @@
 	<div class="content">
 		<h3>All Interviews</h3>
 		<div class="add">
-			<a href='<c:url value="/interview/add"/>'>Add</a>
+			<a href='<c:url value="add"/>'>Add</a>
 		</div>
 		<div>
 			<c:choose>
@@ -34,7 +34,7 @@
 							<tr>
 								<td hidden="true">${interview.id }</td>
 								<td><a
-									href='<c:url value="/interview/view?id=${interview.id }"/>'>${interview.interviewName
+									href='<c:url value="view?id=${interview.id }"/>'>${interview.interviewName
 										}</a></td>
 								<td><fmt:formatDate value="${interview.date }"
 										pattern="yyyy-MM-dd HH:mm" type="both" /></td>
@@ -42,7 +42,7 @@
 								<td>${interview.notes }</td>
 								<td>${interview.contactInfo }</td>
 								<td><a
-									href='<c:url value="/interview/delete?id=${interview.id }"/>'>Delete</a></td>
+									href='<c:url value="delete?id=${interview.id }"/>'>Delete</a></td>
 							</tr>
 						</c:forEach>
 					</table>

@@ -62,7 +62,7 @@ public String addOffer(Map<String, Object> map) {
 @RequestMapping(value = "/save", method = RequestMethod.POST)
 public String saveOffer(Offer offer) {
 	offerService.save(offer);
-	return "redirect:/offer/list";
+	return "redirect:list";
 }
 
 @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -75,7 +75,7 @@ public String viewOffer(@RequestParam("id") String id, Map<String, Object> map) 
 @RequestMapping(value = "/delete")
 public String deleteOffer(@RequestParam("id") String id) {
 	offerService.delete(id);
-	return "redirect:/news/list";
+	return "redirect:list";
 }
 
 }

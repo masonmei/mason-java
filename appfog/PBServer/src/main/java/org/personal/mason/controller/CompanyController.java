@@ -75,7 +75,7 @@ public String newCompany(Model model) {
 @RequestMapping(value = "/update", method = RequestMethod.POST)
 public String updateCompany(Company company) {
 	companyService.save(company);
-	return "redirect:/company/list";
+	return "redirect:list";
 }
 
 @RequestMapping(value = "/label/add", method = RequestMethod.GET)

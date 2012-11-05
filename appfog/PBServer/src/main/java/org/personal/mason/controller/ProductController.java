@@ -78,7 +78,7 @@ public String saveCompanyProduct(@RequestParam("companyId") String companyId, Pr
 	product.setShortDesc(productForm.getShortDesc());
 	productService.save(product);
 	companyService.addProductToCompany(companyId, product);
-	return "redirect:/product/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 
 @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -91,6 +91,6 @@ public String viewCompanyProduct(@RequestParam("id") String id, Map<String, Obje
 @RequestMapping(value = "/delete")
 public String deleteCompanyProduct(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
 	productService.delete(id);
-	return "redirect:/product/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 }

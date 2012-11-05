@@ -12,7 +12,7 @@
 	<div class="content">
 		<h3>All Companies</h3>
 		<div class="add">
-			<a href='<c:url value="/company/new"/>'>New</a>
+			<a href='<c:url value="new"/>'>New</a>
 		</div>
 		<div>
 			<c:choose>
@@ -30,16 +30,16 @@
 						<c:forEach var="com" items="${companies }">
 							<tr>
 								<td hidden="true">${com.id }</td>
-								<td><a href='<c:url value="/company/view?id=${com.id }"/>'>${com.companyName
+								<td><a href='<c:url value="view?id=${com.id }"/>'>${com.companyName
 										}</a></td>
 								<td>${com.province }</td>
 								<td>${com.city }</td>
 								<td>${com.businessType }</td>
 								<td>${com.scale }</td>
 								<td><a
-									href='<c:url value="/news/list?companyId=${com.id }"/>'>News</a>&nbsp;<a
-									href='<c:url value="/product/list?companyId=${com.id }"/>'>Products</a>&nbsp;<a
-									href='<c:url value="/job/list?companyId=${com.id }"/>'>Jobs</a></td>
+									href='<c:url value="/web/news/list?companyId=${com.id }"/>'>News</a>&nbsp;<a
+									href='<c:url value="/web/product/list?companyId=${com.id }"/>'>Products</a>&nbsp;<a
+									href='<c:url value="/web/job/list?companyId=${com.id }"/>'>Jobs</a></td>
 							</tr>
 						</c:forEach>
 					</table>

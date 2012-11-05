@@ -46,7 +46,7 @@
 					alt="enter validation code" />
 			</p>
 			<p>
-				<img src='<c:url value="/validationCode"/>' id="validation"
+				<img src='<c:url value="validationCode"/>' id="validation"
 					onclick="javascript:refreshValidationCodeImage();" /><a
 					onclick="javascript:refreshValidationCodeImage();">Change
 					Image?</a>

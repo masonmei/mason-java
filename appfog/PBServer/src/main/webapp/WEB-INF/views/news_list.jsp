@@ -18,7 +18,7 @@
 			<c:if test="${not empty company }">${company.companyName }</c:if>
 		</h3>
 		<div class="add">
-			<a href='<c:url value="/news/add?companyId=${company.id }"/>'>Add</a>
+			<a href='<c:url value="add?companyId=${company.id }"/>'>Add</a>
 		</div>
 		<div>
 			<c:choose>
@@ -35,13 +35,13 @@
 						<c:forEach var="news" items="${companyNews }">
 							<tr>
 								<td hidden="true">${news.id }</td>
-								<td><a href='<c:url value="/news/view?id=${news.id }"/>'>${news.title
+								<td><a href='<c:url value="view?id=${news.id }"/>'>${news.title
 										}</a></td>
 								<td><fmt:formatDate value="${news.date }"
 										pattern="yyyy-MM-dd" type="both" /></td>
 								<td>${news.description }</td>
 								<td><a
-									href='<c:url value="/news/delete?id=${news.id }&companyId=${company.id }"/>'>Delete</a></td>
+									href='<c:url value="delete?id=${news.id }&companyId=${company.id }"/>'>Delete</a></td>
 							</tr>
 						</c:forEach>
 

@@ -78,7 +78,7 @@ public String addCompanyJob(@RequestParam("companyId") String companyId, Map<Str
 public String saveCompanyJob(@RequestParam("companyId") String companyId, Job job) {
 	jobService.save(job);
 	companyService.addJobToCompany(companyId, job);
-	return "redirect:/job/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 
 @RequestMapping(value = "/view", method = RequestMethod.GET)
@@ -91,6 +91,6 @@ public String viewCompanyJob(@RequestParam("id") String id, Map<String, Object> 
 @RequestMapping(value = "/delete")
 public String deleteCompanyJob(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
 	jobService.delete(id);
-	return "redirect:/job/list?companyId=" + companyId;
+	return "redirect:list?companyId=" + companyId;
 }
 }

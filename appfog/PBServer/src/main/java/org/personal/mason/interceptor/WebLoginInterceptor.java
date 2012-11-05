@@ -8,7 +8,7 @@ import org.personal.mason.utils.Constants;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-public class LoginInterceptor implements HandlerInterceptor {
+public class WebLoginInterceptor implements HandlerInterceptor {
 
 @Override
 public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -18,7 +18,7 @@ public boolean preHandle(HttpServletRequest request, HttpServletResponse respons
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute(Constants.SESSION_TOKEN);
 		if (email == null) {
-			response.sendRedirect("index");
+			response.sendRedirect(uri.substring(0, uri.indexOf("web/")) + "web/index");
 			return false;
 		}
 	}

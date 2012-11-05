@@ -16,8 +16,8 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
 
-<c:url var="createCategory" value="/category/create"></c:url>
-<c:url var="categoryList" value="/category/list"></c:url>
+<c:url var="createCategory" value="/web/category/create"></c:url>
+<c:url var="categoryList" value="/web/category/list"></c:url>
 <script type="text/javascript">
     $(document).ready(function() {
         $.getJSON('${categoryList}', {

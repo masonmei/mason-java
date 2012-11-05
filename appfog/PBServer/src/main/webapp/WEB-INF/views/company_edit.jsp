@@ -17,10 +17,10 @@
 
 <title>Job Hunting</title>
 
-<c:url var="findProvinces" value="/company/provinces" />
-<c:url var="findCities" value="/company/cities" />
-<c:url var="listLabels" value="/label/list" />
-<c:url var="addLabel" value="/company/label/add" />
+<c:url var="findProvinces" value="provinces" />
+<c:url var="findCities" value="cities" />
+<c:url var="listLabels" value="/web/label/list" />
+<c:url var="addLabel" value="label/add" />
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -122,7 +122,7 @@ $(function() {
 						<div>Province</div>
 						<div>
 							<input type="text" name="province" id="provinceName"
-								class="shortDisableInput" disabled="disabled"
+								class="shortDisableInput" readonly="readonly"
 								value="${company.province }" /> <select id="province">
 							</select>
 						</div>
@@ -131,7 +131,7 @@ $(function() {
 						<div>City</div>
 						<div>
 							<input type="text" name="city" id="cityName"
-								class="shortDisableInput" disabled="disabled"
+								class="shortDisableInput" readonly="readonly"
 								value="${company.city }" /> <select id="city">
 							</select>
 						</div>
