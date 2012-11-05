@@ -11,12 +11,12 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/app/common.js"/>"></script>
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/layout.css"/>">
+	href="<c:url value="/resources/css/frame.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/login/form.css"/>">
 
 </head>
-<body>
+<body id="framebody">
 	<f:form id="registerForm" action="register" method="post"
 		modelAttribute="userForm">
 		<fieldset>

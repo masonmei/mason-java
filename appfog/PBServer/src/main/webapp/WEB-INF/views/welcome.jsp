@@ -12,7 +12,6 @@
 	href="<c:url value="/resources/css/frame.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/menu/menu.css"/>">
-
 </head>
 <body id="framebody">
 	<header>
@@ -39,10 +38,9 @@
 			</ul>
 		</div>
 	</nav>
-	<section>
-		<iframe name="iframe" id="frame" width="100%" height="100%"
-			src='<s:url value="/company/list"/>' frameborder="0" scrolling="no"></iframe>
-	</section>
-	<footer> This is the footer. </footer>
+	<div id="main">
+		<iframe name="iframe" src='<c:url value="/company/list"/>' width="100%" height="100%" frameborder="0"></iframe>
+	</div>
+	<footer> Copyright © 2012-2015 All Rights Reserved Powered By Mason Mei </footer>
 </body>
 </html>
