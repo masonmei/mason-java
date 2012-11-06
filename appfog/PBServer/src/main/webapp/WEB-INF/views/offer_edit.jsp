@@ -14,6 +14,8 @@
 	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
 
 <script type="text/javascript">
 $(function() {  
@@ -29,7 +31,8 @@ $(function() {
         changeYear: true,
         changeMonth: true,
         currentText: "Now"
-     });  
+     });
+    $('#textEditor').htmlarea();
 });
 </script>
 </head>
@@ -85,7 +88,7 @@ $(function() {
 						<div>
 							<div>Note</div>
 							<div>
-								<f:textarea path="note" cssClass="bigTextArea" />
+								<f:textarea path="note" cssClass="bigTextArea" id='textEditor'/>
 							</div>
 						</div>
 						<div>

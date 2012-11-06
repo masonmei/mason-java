@@ -32,7 +32,7 @@ public void setInterviewService(InterviewService interviewService) {
 
 @InitBinder
 public void InitBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	dateFormat.setLenient(false);
 	binder.registerCustomEditor(Date.class, null, new CustomDateEditor(dateFormat, true));
 }

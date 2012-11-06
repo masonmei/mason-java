@@ -39,7 +39,7 @@
 										}</a></td>
 								<td>${mat.weight }</td>
 								<td><fmt:formatDate value="${mat.addDate }"
-										pattern="yyyy-MM-dd hh:mm" type="both" /></td>
+										pattern="yyyy-MM-dd HH:mm" type="both" /></td>
 								<td>${mat.type }</td>
 								<td><a
 									href='<c:url value="answer?id=${mat.id }"/>'>Answer</a></td>

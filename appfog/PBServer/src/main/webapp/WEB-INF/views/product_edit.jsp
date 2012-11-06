@@ -15,6 +15,9 @@
 	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
+	
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
 
 <c:url var="createCategory" value="/web/category/create"></c:url>
 <c:url var="categoryList" value="/web/category/list"></c:url>
@@ -35,6 +38,7 @@
 </script>
 <script>
 $(function() {
+    $('.textEditor').htmlarea();
     $("#createCategoryDialogForm").dialog({
         autoOpen: false,
         height: 280,
@@ -121,18 +125,18 @@ $(function() {
 						<div>
 							<div>Short Description</div>
 							<div>
-								<f:textarea path="shortDesc" cssClass="bigTextArea" />
+								<f:textarea path="shortDesc" cssClass="bigTextArea" class="textEditor"/>
 							</div>
 						</div>
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description" cssClass="bigTextArea" />
+								<f:textarea path="description" cssClass="bigTextArea" class="textEditor"/>
 							</div>
 						</div>
 
 						<div>
-							<input type="submit" value="Save" class="button" />
+							<input type="submit" value="Save" class="button"/>
 						</div>
 					</div>
 				</f:form>

@@ -15,21 +15,17 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">
 
+<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-timepicker.js" />"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/javascript/jquery-ui-timepicker.css"/>">
+
+		
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
+	
 <script type="text/javascript">
 $(function() {  
-    $('#datePicker').datepicker({  
-    	dateFormat: 'yy-mm-dd',
-        duration: '',  
-        showTime: true,  
-        constrainInput: false,  
-        stepMinutes: 1,  
-        stepHours: 1,  
-        altTimeField: '',  
-        time24h: false,
-        changeYear: true,
-        changeMonth: true,
-        currentText: "Now"
-     });  
+    $('.textEditor').htmlarea();
+    $('#datePicker').datetimepicker({dateFormat: 'yy-mm-dd', timeFormat: 'HH:mm'});
 });
 </script>
 </head>
@@ -67,7 +63,7 @@ $(function() {
 						<div>
 							<div>Answer</div>
 							<div>
-								<f:textarea path="answer" cssClass="bigTextArea" />
+								<f:textarea path="answer" cssClass="bigTextArea" class="textArea" />
 							</div>
 						</div>
 						<div>

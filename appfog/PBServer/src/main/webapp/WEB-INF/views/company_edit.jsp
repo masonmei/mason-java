@@ -15,6 +15,9 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">
 
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
+
 <title>Job Hunting</title>
 
 <c:url var="findProvinces" value="provinces" />
@@ -24,6 +27,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('.bigTextArea').htmlarea();
         $('#province').change(function() {
             $('input#provinceName').val($(this).val());
             $('input#cityName').val("");

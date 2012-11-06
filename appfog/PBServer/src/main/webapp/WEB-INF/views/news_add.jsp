@@ -14,9 +14,13 @@
 	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">
+	
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
 
 <script type="text/javascript">
 $(function() {  
+    $('.textEditor').htmlarea();
     $('#datePicker').datepicker({  
     	dateFormat: 'yy-mm-dd',
         duration: '',  
@@ -55,13 +59,13 @@ $(function() {
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description" cssClass="bigTextArea" />
+								<f:textarea path="description" cssClass="bigTextArea"  class="textEditor"/>
 							</div>
 						</div>
 						<div>
 							<div>Content</div>
 							<div>
-								<f:textarea path="content" cssClass="bigTextArea" />
+								<f:textarea path="content" cssClass="bigTextArea"  class="textEditor"/>
 							</div>
 						</div>
 

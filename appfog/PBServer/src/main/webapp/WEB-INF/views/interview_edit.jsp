@@ -8,28 +8,19 @@
 <title>Job Hunting</title>
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery-1.8.2.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/layout.css"/>">
+<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/javascript/jquery-ui-timepicker.js" />"></script>
+<link rel="stylesheet" type="text/css"	href="<c:url value="/resources/javascript/jquery-ui-1.9.1.custom.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/javascript/jquery-ui-timepicker.css"/>">
 
+<link rel="Stylesheet" type="text/css" href='<s:url value="/resources/jHtmlArea/style/jHtmlArea.css"></s:url>' />
+<script type="text/javascript" src='<s:url value="/resources/jHtmlArea/scripts/jHtmlArea-0.7.5.js"></s:url>'></script>
+	
 <script type="text/javascript">
 $(function() {  
-    $('#datePicker').datepicker({  
-    	dateFormat: 'yy-mm-dd',
-        duration: '',  
-        showTime: true,  
-        constrainInput: false,  
-        stepMinutes: 1,  
-        stepHours: 1,  
-        altTimeField: '',  
-        time24h: false,
-        changeYear: true,
-        changeMonth: true,
-        currentText: "Now"
-     });  
+    $('.textEditor').htmlarea();
+    $('#datePicker').datetimepicker({dateFormat: 'yy-mm-dd', timeFormat: 'HH:mm'});
 });
 </script>
 </head>
@@ -66,7 +57,7 @@ $(function() {
 						<div>
 							<div>Notes</div>
 							<div>
-								<f:textarea path="notes" cssClass="bigTextArea" />
+								<f:textarea path="notes" cssClass="bigTextArea" class="textArea" />
 							</div>
 						</div>
 						<div>

@@ -35,7 +35,7 @@
 
 							<span><fmt:formatDate
 									value="${interviewMaterial.addDate }"
-									pattern="yyyy-MM-dd hh:mm" type="both" /></span>
+									pattern="yyyy-MM-dd HH:mm" type="both" /></span>
 						</div>
 					</div>
 					<div>
