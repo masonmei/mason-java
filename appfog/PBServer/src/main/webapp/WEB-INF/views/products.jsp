@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Job Hunting</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">

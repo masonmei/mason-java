@@ -1,10 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Job Hunting</title>
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
@@ -41,6 +42,6 @@
 	<div id="main">
 		<iframe name="iframe" src='<c:url value="company/list"/>' width="100%" height="100%" frameborder="0"></iframe>
 	</div>
-	<footer> Copyright © 2012-2015 All Rights Reserved Powered By Mason Mei </footer>
+	<footer> Copyright Â© 2012-2015 All Rights Reserved Powered By Mason Mei </footer>
 </body>
 </html>

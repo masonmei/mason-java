@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>Register to be a User</title>
-
+<meta charset="UTF-8">
 <script type="text/javascript"
 	src="<c:url value="/resources/javascript/jquery.tools.min.js"/>"></script>
 <script type="text/javascript"

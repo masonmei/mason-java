@@ -1,9 +1,12 @@
 package org.personal.mason.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.personal.mason.domain.Company;
 import org.personal.mason.domain.Label;
 import org.personal.mason.service.CompanyService;
@@ -17,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriUtils;
 
 @Controller
 @RequestMapping("company")
 public class CompanyController {
 
+private final Log log = LogFactory.getLog(getClass());
 @Autowired
 private CompanyService companyService;
 @Autowired
@@ -95,8 +100,14 @@ boolean addLabelToCompany(@RequestParam("label") String labelName, @RequestParam
 @RequestMapping(value = "/cities", method = RequestMethod.GET)
 public @ResponseBody
 List<String> getCitiesOfProvince(@RequestParam("provinceName") String provinceName) {
-	List<String> citiesOfProvince = LocationUtils.getCitiesOfProvince(provinceName);
-	return Collections.unmodifiableList(citiesOfProvince);
+	try {
+		provinceName = UriUtils.decode(provinceName, "UTF-8");
+		List<String> citiesOfProvince = LocationUtils.getCitiesOfProvince(provinceName);
+		return Collections.unmodifiableList(citiesOfProvince);
+	} catch (UnsupportedEncodingException e) {
+		log.debug("could not decode the provinceName");
+	}
+	return null;
 }
 
 @RequestMapping(value = "/provinces", method = RequestMethod.GET)

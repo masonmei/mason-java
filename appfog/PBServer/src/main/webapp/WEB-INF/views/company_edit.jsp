@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
-<%@ page session="false"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
             $('input#provinceName').val($(this).val());
             $('input#cityName').val("");
             $.getJSON('${findCities}', {
-                provinceName : $(this).val(),
+                provinceName : encodeURIComponent($(this).val()),
                 ajax : 'true'
             }, function(data) {
                 var html = '<option value="">Select City</option>';
