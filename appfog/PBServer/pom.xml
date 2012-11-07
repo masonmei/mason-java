@@ -5,12 +5,17 @@
 	<artifactId>PBServer</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-
+	<repositories>
+		<repository>
+			<id>logentries-releases</id>
+			<url>https://github.com/logentries/logentries-mvn-repo/raw/master/releases</url>
+		</repository>
+	</repositories>
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
 		<javax.jstl-taglibs.version>1.1.2</javax.jstl-taglibs.version>
-		<jersey.version>1.14</jersey.version>
+		<jersey.version>1.15</jersey.version>
 		<encoding>UTF-8</encoding>
 	</properties>
 
@@ -79,7 +84,7 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		
+
 		<!-- Google Collection -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -206,6 +211,21 @@
 			<artifactId>spring-test</artifactId>
 			<version>3.1.2.RELEASE</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

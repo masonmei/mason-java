@@ -41,6 +41,9 @@ public long count() {
 
 public boolean verifyUser(User user) {
 	User persistUser = userRepository.findByEmail(user.getEmail());
+	if(persistUser == null){
+		return false;
+	}
 	return passwordEncryptor.checkPassword(user.getPassword(), persistUser.getPassword());
 }
 

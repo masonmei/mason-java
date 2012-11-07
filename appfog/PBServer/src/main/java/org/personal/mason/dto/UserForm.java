@@ -1,11 +1,16 @@
 package org.personal.mason.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserForm {
 private String name;
+@Email
 private String email;
+@NotEmpty
 private String password;
 private String passwordConfirm;
+@NotEmpty
 private String validationCode;
 
 private boolean keepLogin;

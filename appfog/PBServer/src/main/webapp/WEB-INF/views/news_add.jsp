@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
 $(function() {  
-    $('.textEditor').htmlarea();
+    $('.bigTextArea').htmlarea();
     $('#datePicker').datepicker({  
     	dateFormat: 'yy-mm-dd',
         duration: '',  
@@ -59,13 +59,13 @@ $(function() {
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description" cssClass="bigTextArea"  class="textEditor"/>
+								<f:textarea path="description" cssClass="bigTextArea"/>
 							</div>
 						</div>
 						<div>
 							<div>Content</div>
 							<div>
-								<f:textarea path="content" cssClass="bigTextArea"  class="textEditor"/>
+								<f:textarea path="content" cssClass="bigTextArea" />
 							</div>
 						</div>
 

@@ -38,7 +38,8 @@
 </script>
 <script>
 $(function() {
-    $('.textEditor').htmlarea();
+    $('.bigTextArea').htmlarea();
+    
     $("#createCategoryDialogForm").dialog({
         autoOpen: false,
         height: 280,
@@ -125,13 +126,13 @@ $(function() {
 						<div>
 							<div>Short Description</div>
 							<div>
-								<f:textarea path="shortDesc" cssClass="bigTextArea" class="textEditor"/>
+								<f:textarea path="shortDesc" cssClass="bigTextArea"/>
 							</div>
 						</div>
 						<div>
 							<div>Description</div>
 							<div>
-								<f:textarea path="description" cssClass="bigTextArea" class="textEditor"/>
+								<f:textarea path="description" cssClass="bigTextArea"/>
 							</div>
 						</div>
 

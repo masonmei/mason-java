@@ -92,6 +92,14 @@ public String viewCompanyNews(@RequestParam("id") String id, Map<String, Object>
 
 @RequestMapping(value = "/delete")
 public String deleteCompanyNews(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for(News n : company.getNewses()){
+		if(n.getId().equals(id)){
+			company.getNewses().remove(n);
+			break;
+		}
+	}
+	companyService.save(company);
 	newsService.delete(id);
 	return "redirect:list?companyId=" + companyId;
 }

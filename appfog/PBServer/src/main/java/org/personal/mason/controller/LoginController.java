@@ -12,16 +12,14 @@ import org.personal.mason.service.UserService;
 import org.personal.mason.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes(value = { "userForm" })
 public class LoginController {
 private static final Log log = LogFactory.getLog(LoginController.class);
 
@@ -32,22 +30,19 @@ public void setUserService(UserService userService) {
 	this.userService = userService;
 }
 
-@ModelAttribute("userForm")
-public UserForm createUserForm() {
-	return new UserForm();
-}
-
 @RequestMapping(value = "/", method = RequestMethod.GET)
 public String root() {
 	return "redirect:index";
 }
 
 @RequestMapping(value = "index", method = RequestMethod.GET)
-public void index() {
+public void index(Model model) {
+	model.addAttribute("userForm", new UserForm());
 }
 
 @RequestMapping(value = "login", method = RequestMethod.POST)
-public String login(@Validated UserForm userForm, BindingResult result, HttpSession session, HttpServletResponse response) {
+public String login(@Validated UserForm userForm, BindingResult result, HttpSession session,
+		HttpServletResponse response) {
 
 	try {
 		if (result.hasErrors()) {
@@ -56,7 +51,7 @@ public String login(@Validated UserForm userForm, BindingResult result, HttpSess
 
 		String validatecode = (String) session.getAttribute("validationcode");
 		if (validatecode == null || !validatecode.equalsIgnoreCase(userForm.getValidationCode())) {
-			result.addError(new ObjectError("validationCode", "validation code error"));
+			result.rejectValue("validationCode", "registration.checkingValidationCode", "Password not match!");
 			return "index";
 		}
 
@@ -73,9 +68,9 @@ public String login(@Validated UserForm userForm, BindingResult result, HttpSess
 				response.addCookie(cookie);
 			}
 
-			return "redirect:/welcome";
+			return "redirect:welcome";
 		} else {
-			result.addError(new ObjectError("*", "username or password incorrect"));
+			result.rejectValue("email", "login.checkpassword", "username or password incorrect");
 			return "index";
 		}
 	} catch (Exception e) {

@@ -72,7 +72,15 @@ public News viewCompanyNews(@QueryParam("id") String id) {
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/delete")
-public void deleteCompanyNews(@QueryParam("id") String id) {
+public void deleteCompanyNews(@QueryParam("id") String id, @QueryParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for (News n : company.getNewses()) {
+		if (n.getId().equals(id)) {
+			company.getNewses().remove(n);
+			break;
+		}
+	}
+	companyService.save(company);
 	newsService.delete(id);
 }
 }

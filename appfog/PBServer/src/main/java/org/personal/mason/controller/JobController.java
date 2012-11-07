@@ -90,6 +90,14 @@ public String viewCompanyJob(@RequestParam("id") String id, Map<String, Object> 
 
 @RequestMapping(value = "/delete")
 public String deleteCompanyJob(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for(Job j : company.getJobs()){
+		if(j.getId().equals(id)){
+			company.getJobs().remove(j);
+			break;
+		}
+	}
+	companyService.save(company);
 	jobService.delete(id);
 	return "redirect:list?companyId=" + companyId;
 }

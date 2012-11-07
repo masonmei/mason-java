@@ -81,7 +81,15 @@ public Product viewCompanyProduct(@QueryParam("id") String id) {
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/delete")
-public void deleteCompanyProduct(@QueryParam("id") String id) {
+public void deleteCompanyProduct(@QueryParam("id") String id, @QueryParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for (Product p : company.getProducts()) {
+		if (p.getId().equals(id)) {
+			company.getProducts().remove(p);
+			break;
+		}
+	}
+	companyService.save(company);
 	productService.delete(id);
 }
 }

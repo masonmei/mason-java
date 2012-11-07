@@ -74,7 +74,15 @@ public Job viewCompanyJob(@QueryParam("id") String id) {
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/delete")
-public void deleteCompanyJob(@QueryParam("id") String id) {
+public void deleteCompanyJob(@QueryParam("id") String id, @QueryParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for (Job j : company.getJobs()) {
+		if (j.getId().equals(id)) {
+			company.getJobs().remove(j);
+			break;
+		}
+	}
+	companyService.save(company);
 	jobService.delete(id);
 }
 }

@@ -71,7 +71,7 @@ public String addCompanyProduct(@RequestParam("companyId") String companyId, Map
 
 @RequestMapping(value = "/save", method = RequestMethod.POST)
 public String saveCompanyProduct(@RequestParam("companyId") String companyId, ProductForm productForm) {
-	Product product = new Product(); 
+	Product product = new Product();
 	product.setProductCategory(productCategoryService.findById(productForm.getProductCategoryId()));
 	product.setDescription(productForm.getDescription());
 	product.setProductName(productForm.getProductName());
@@ -90,6 +90,14 @@ public String viewCompanyProduct(@RequestParam("id") String id, Map<String, Obje
 
 @RequestMapping(value = "/delete")
 public String deleteCompanyProduct(@RequestParam("id") String id, @RequestParam("companyId") String companyId) {
+	Company company = companyService.findById(companyId);
+	for (Product p : company.getProducts()) {
+		if (p.getId().equals(id)) {
+			company.getProducts().remove(p);
+			break;
+		}
+	}
+	companyService.save(company);
 	productService.delete(id);
 	return "redirect:list?companyId=" + companyId;
 }

@@ -10,7 +10,6 @@
 <title>Job Hunting</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/layout.css"/>">
-
 </head>
 <body>
 	<div class="content">
@@ -28,21 +27,17 @@
 							<th>Weight</th>
 							<th>Add Date</th>
 							<th>Type</th>
-							<th>Operation</th>
 						</tr>
 
 						<c:forEach var="mat" items="${interviewMaterials }">
 							<tr>
 								<td hidden="true">${mat.id }</td>
-								<td><a
-									href='<c:url value="view?id=${mat.id }"/>'>${mat.question
+								<td><a href='<c:url value="view?id=${mat.id }"/>'>${mat.question
 										}</a></td>
 								<td>${mat.weight }</td>
 								<td><fmt:formatDate value="${mat.addDate }"
 										pattern="yyyy-MM-dd HH:mm" type="both" /></td>
 								<td>${mat.type }</td>
-								<td><a
-									href='<c:url value="answer?id=${mat.id }"/>'>Answer</a></td>
 							</tr>
 						</c:forEach>
 					</table>
