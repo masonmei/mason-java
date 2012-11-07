@@ -5,12 +5,6 @@
 	<artifactId>PBServer</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	<repositories>
-		<repository>
-			<id>logentries-releases</id>
-			<url>https://github.com/logentries/logentries-mvn-repo/raw/master/releases</url>
-		</repository>
-	</repositories>
 	<properties>
 		<spring.version>3.1.2.RELEASE</spring.version>
 		<javax.servlet-api.version>2.5</javax.servlet-api.version>
