@@ -11,7 +11,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.personal.mason.domain.pb.Account;
+import org.personal.mason.domain.pb.Basicinfo;
+import org.personal.mason.domain.pb.Record;
 import org.personal.mason.domain.pb.Relation;
+import org.personal.mason.domain.pb.Resource;
 import org.personal.mason.utils.RestClient;
 
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -58,42 +61,139 @@ public void testListRelations() {
 	builder.header("Token", token);
 	List<Relation> result = builder.get(new GenericType<List<Relation>>() {
 	});
-	assertTrue(result.size() == 0);
+	assertTrue(result.size() == 2);
+	for (Relation relation : result) {
+		System.out.println(relation.getId());
+	}
 }
 
 @Test
 public void testAddRelation() {
-	fail("Not yet implemented");
+	String path = "/relation/create";
+	Relation relation = new Relation();
+	Basicinfo info = new Basicinfo();
+	info.setAddresses("GD");
+	info.setBirth(Calendar.getInstance().getTime());
+	info.setName("Mason Mei");
+	relation.setBasicinfo(info);
+	relation.setExtendinfo("extendinfo");
+	relation.setRelationtype("relationtyps");
+
+	Builder builder = RestClient.getResource().path(path).type(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Relation result = null;
+	try {
+		result = builder.post(Relation.class, relation);
+	} catch (UniformInterfaceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClientHandlerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	assertNotNull(result);
 }
 
 @Test
 public void testModifyRelation() {
-	fail("Not yet implemented");
+	String path = "/relation/modify";
+	Relation relation = new Relation();
+	relation.setId("50acec690364e521c4b10c2d");
+	Basicinfo info = new Basicinfo();
+	info.setAddresses("GD1");
+	info.setBirth(Calendar.getInstance().getTime());
+	relation.setBasicinfo(info);
+	relation.setExtendinfo("extendinfo1");
+	relation.setRelationtype("relationtyps1");
+	Builder builder = RestClient.getResource().path(path).type(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Relation result = null;
+	try {
+		result = builder.put(Relation.class, relation);
+	} catch (UniformInterfaceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClientHandlerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	assertNotNull(result);
 }
 
 @Test
 public void testDeleteRelation() {
-	fail("Not yet implemented");
+	String path = "/relation/delete";
+	Builder builder = RestClient.getResource().path(path).queryParam("id", "50acf06903644d550d4ebb3b")
+			.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Boolean delete = builder.delete(Boolean.class);
+	System.out.println(delete);
 }
 
 @Test
 public void testDeleteRecord() {
-	fail("Not yet implemented");
+	String path = "/relation/record/delete";
+
+	Builder builder = RestClient.getResource().path(path).queryParam("id", "50acf18103644d550d4ebb3d")
+			.queryParam("relation", "50acec690364e521c4b10c2d").type(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Boolean delete = builder.delete(Boolean.class);
+	System.out.println(delete);
 }
 
 @Test
 public void testAddRecord() {
-	fail("Not yet implemented");
+	String path = "/relation/record/create";
+	Record record = new Record();
+	Builder builder = RestClient.getResource().path(path).queryParam("relation", "50acec690364e521c4b10c2d")
+			.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Record result = null;
+	try {
+		result = builder.post(Record.class, record);
+	} catch (UniformInterfaceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClientHandlerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	assertNotNull(result);
 }
 
 @Test
 public void testDeleteResource() {
-	fail("Not yet implemented");
+	String path = "/relation/resource/delete";
+
+	Builder builder = RestClient.getResource().path(path).queryParam("id", "50acf26e03644d550d4ebb3e")
+			.queryParam("relation", "50acec690364e521c4b10c2d").type(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Boolean delete = builder.delete(Boolean.class);
+	System.out.println(delete);
 }
 
 @Test
 public void testAddResource() {
-	fail("Not yet implemented");
+	String path = "/relation/resource/create";
+	Resource resource = new Resource();
+	Builder builder = RestClient.getResource().path(path).queryParam("relation", "50acec690364e521c4b10c2d")
+			.type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON);
+	builder.header("Token", token);
+	Resource result = null;
+	try {
+		result = builder.post(Resource.class, resource);
+	} catch (UniformInterfaceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClientHandlerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	assertNotNull(result);
 }
 
 }
