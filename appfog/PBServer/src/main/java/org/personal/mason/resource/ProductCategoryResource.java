@@ -12,7 +12,9 @@ import javax.ws.rs.core.MediaType;
 import org.personal.mason.domain.ProductCategory;
 import org.personal.mason.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/category")
 public class ProductCategoryResource {
 @Autowired

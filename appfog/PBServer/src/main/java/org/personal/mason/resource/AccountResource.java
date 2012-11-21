@@ -2,7 +2,6 @@ package org.personal.mason.resource;
 
 import java.util.List;
 
-import javax.management.relation.RelationService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -17,9 +16,13 @@ import javax.ws.rs.core.Response;
 import org.personal.mason.domain.pb.Account;
 import org.personal.mason.interceptor.AccountActivityManager;
 import org.personal.mason.service.pb.AccountService;
+import org.personal.mason.service.pb.RelationService;
 import org.personal.mason.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+
+@Component
 @Path("/account")
 public class AccountResource {
 
@@ -38,8 +41,10 @@ private AccountActivityManager accountActivityManager;
 @Path("/create")
 public Response createAccount(Account account) {
 	Account savedAccount = accountService.createAccount(account);
-	String token = accountActivityManager.putAccount(savedAccount);
-	return Response.ok(account).header(Constants.REST_TOKEN_KEY, token).build();
+	String token = accountActivityManager.putAccount(savedAccount);if (token == null) {
+		return Response.ok(null).build();
+	}
+	return Response.ok(savedAccount).header(Constants.REST_TOKEN_KEY, token).build();
 }
 
 @POST
@@ -50,7 +55,7 @@ public Response validateAccount(Account account) {
 	Account validateAccount = accountService.validateAccount(account);
 	String token = accountActivityManager.putAccount(validateAccount);
 	if (token == null) {
-		return null;
+		return Response.ok(null).build();
 	}
 	return Response.ok(validateAccount).header(Constants.REST_TOKEN_KEY, token).build();
 }
@@ -59,10 +64,34 @@ public Response validateAccount(Account account) {
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/modify")
-public Response modifyAccount(Account account) {
+public Account modifyAccount(@HeaderParam(Constants.REST_TOKEN_KEY) String token, Account account) {
+	Account sessionAccount = accountActivityManager.getAccount(token);
+	if(sessionAccount == null){
+		return null;
+	}
 	Account modifiedAccount = accountService.modifyAccount(account);
-	String token = accountActivityManager.putAccount(modifiedAccount);
-	return Response.ok(modifiedAccount).header(Constants.REST_TOKEN_KEY, token).build();
+	if(modifiedAccount == null){
+		return null;
+	}
+	accountActivityManager.updateSessionAccount(token, modifiedAccount);
+	return modifiedAccount;
+}
+
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@Path("/changePassword")
+public Account changePassword(@HeaderParam(Constants.REST_TOKEN_KEY) String token, @QueryParam("oldpassword") String oldPassword, @QueryParam("newpassword") String newPassword){
+	Account account = accountActivityManager.getAccount(token);
+	if(account != null && accountService.validatePassword(oldPassword, account.getSecret())){
+		account.setSecret(newPassword);
+		Account modifiedAccount = accountService.changePassword(account);
+		if(modifiedAccount != null){
+			accountActivityManager.updateSessionAccount(token, modifiedAccount);
+		}
+		return modifiedAccount;
+	}
+	return null;
 }
 
 @GET

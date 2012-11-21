@@ -16,7 +16,9 @@ import org.personal.mason.service.InterviewService;
 import org.personal.mason.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/interview")
 public class InterviewResource {
 @Autowired

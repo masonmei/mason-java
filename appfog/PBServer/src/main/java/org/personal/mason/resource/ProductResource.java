@@ -17,9 +17,11 @@ import org.personal.mason.service.CompanyService;
 import org.personal.mason.service.ProductCategoryService;
 import org.personal.mason.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@Component
 @Path("/product")
 public class ProductResource {
 @Autowired

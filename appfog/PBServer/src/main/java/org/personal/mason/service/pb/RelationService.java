@@ -1,6 +1,5 @@
 package org.personal.mason.service.pb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.personal.mason.domain.pb.Account;
@@ -43,25 +42,37 @@ public Relation addRelation(Relation relation, Account account) {
 }
 
 public Relation modifyRelation(Relation relation) {
-	List<Record> records = relation.getRecords();
-	List<Record> udpatedRecords = new ArrayList<Record>();
-	for (Record record : records) {
-		udpatedRecords.add(recordRepository.save(record));
-	}
-	List<Resource> resources = relation.getResources();
-	List<Resource> udpatedResources = new ArrayList<Resource>();
-	for (Resource resource : resources) {
-		udpatedResources.add(resourceRepository.save(resource));
-	}
-	relation.setRecords(udpatedRecords);
-	relation.setResources(udpatedResources);
 	return relationRepository.save(relation);
 }
 
-public boolean deleteRelation(Long id) {
+public Record addRecord(Record record, Relation relation) {
+	Relation persist = relationRepository.findOne(relation.getId());
+	Record saved = recordRepository.save(record);
+	if (saved != null) {
+		persist.getRecords().add(saved);
+		relationRepository.save(persist);
+		return saved;
+	}
+	return null;
+}
+
+public Resource addResource(Resource resource, Relation relation) {
+	Relation persist = relationRepository.findOne(relation.getId());
+	Resource saved = resourceRepository.save(resource);
+	if (saved != null) {
+		persist.getResources().add(saved);
+		relationRepository.save(persist);
+		return saved;
+	}
+	return null;
+}
+
+public boolean deleteRelation(String id) {
 	try {
 		Relation relation = relationRepository.findOne(id);
 		if (null != relation) {
+			resourceRepository.delete(relation.getResources());
+			recordRepository.delete(relation.getRecords());
 			relationRepository.delete(id);
 		}
 		return true;
@@ -70,22 +81,43 @@ public boolean deleteRelation(Long id) {
 	}
 }
 
-public boolean deleteRecord(Long id) {
+public boolean deleteRecord(String id, Relation relation) {
 	try {
-		recordRepository.delete(id);
-		return true;
+		Relation persist = relationRepository.findOne(relation.getId());
+		for (Record record : persist.getRecords()) {
+			if (record.getId().equals(id)) {
+				persist.getRecords().remove(record);
+				relationRepository.save(persist);
+				recordRepository.delete(id);
+				return true;
+
+			}
+		}
+		return false;
 	} catch (Exception e) {
 		return false;
 	}
 }
 
-public boolean deleteResource(Long id) {
+public boolean deleteResource(String id, Relation relation) {
 	try {
-		resourceRepository.delete(id);
-		return true;
+		Relation persist = relationRepository.findOne(relation.getId());
+		for (Resource resource : persist.getResources()) {
+			if (resource.getId().equals(id)) {
+				persist.getResources().remove(resource);
+				relationRepository.save(persist);
+				resourceRepository.delete(id);
+				return true;
+			}
+		}
+		return false;
 	} catch (Exception e) {
 		return false;
 	}
+}
+
+public Relation findRelationById(String relationId) {
+	return relationRepository.findOne(relationId);
 }
 
 }

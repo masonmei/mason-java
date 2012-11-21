@@ -12,7 +12,9 @@ import javax.ws.rs.core.MediaType;
 import org.personal.mason.domain.Label;
 import org.personal.mason.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/label")
 public class LabelResource {
 

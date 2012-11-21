@@ -18,7 +18,9 @@ import org.personal.mason.service.LabelService;
 import org.personal.mason.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/company")
 public class CompanyResource {
 

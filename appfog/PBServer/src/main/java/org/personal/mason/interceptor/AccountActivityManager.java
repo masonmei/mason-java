@@ -44,6 +44,10 @@ public Account getAccount(String token) {
 	return sessionCache.apply(token);
 }
 
+public void updateSessionAccount(String token, Account account){
+	sessionCache.put(token, account);
+}
+
 public void removeAccount(String token) {
 	sessionCache.refresh(token);
 }

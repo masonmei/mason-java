@@ -16,9 +16,11 @@ import org.personal.mason.domain.Job;
 import org.personal.mason.service.CompanyService;
 import org.personal.mason.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+@Component
 @Path("/job")
 public class JobResource {
 @Autowired

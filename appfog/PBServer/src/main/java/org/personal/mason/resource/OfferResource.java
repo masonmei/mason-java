@@ -16,7 +16,9 @@ import org.personal.mason.service.OfferService;
 import org.personal.mason.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/offer")
 public class OfferResource {
 @Autowired

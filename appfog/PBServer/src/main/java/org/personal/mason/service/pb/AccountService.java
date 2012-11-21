@@ -31,33 +31,63 @@ public Account createAccount(Account account) {
 			Relation savedRelation = relationRepository.save(account.getRelation());
 			account.setRelation(savedRelation);
 		}
+        account.setSecret(passwordEncryptor.encryptPassword(account.getSecret()));
 		return accountRepository.save(account);
 	}
 	return null;
 }
 
 public Account validateAccount(Account account) {
-	account.setSecret(passwordEncryptor.encryptPassword(account.getSecret()));
+    boolean result = false;
 	Account findAccount;
-	findAccount = accountRepository.findByEmailAndSecret(account.getEmail(), account.getSecret());
-
-	if (findAccount == null) {
-		findAccount = accountRepository.findByAccountAndSecret(account.getAccount(), account.getSecret());
+	findAccount = accountRepository.findByEmail(account.getEmail());
+    if(findAccount != null){
+        result = validatePassword(account.getSecret(), findAccount.getSecret());
+    }
+	if (!result) {
+		findAccount = accountRepository.findByAccount(account.getAccount());
+        if(findAccount != null){
+            result =validatePassword(account.getSecret(), findAccount.getSecret());
+        }
 	}
-
-	return findAccount;
+    if(result){
+	    return findAccount;
+    }
+    return null;
 }
 
 @Transactional
 public Account modifyAccount(Account account) {
-	Relation relation = account.getRelation();
+	Account persistEntity = accountRepository.findOne(account.getId());
+	copyContent(account, persistEntity);
+	Relation relation = persistEntity.getRelation();
 	if (relation != null) {
-		relationRepository.save(account.getRelation());
+		relationRepository.save(persistEntity.getRelation());
 	}
-	return accountRepository.save(account);
+	return accountRepository.save(persistEntity);
+}
+
+@Transactional
+public Account changePassword(Account account) {
+	Account persistEntity = accountRepository.findOne(account.getId());
+	persistEntity.setSecret(passwordEncryptor.encryptPassword(account.getSecret()));
+	return accountRepository.save(persistEntity);
 }
 
 public List<Account> findAllAccounts() {
 	return accountRepository.findAll();
+}
+
+public boolean validatePassword(String plainPassword, String encryptedPassword){
+	return passwordEncryptor.checkPassword(plainPassword, encryptedPassword);
+}
+
+private static void copyContent(Account source, Account target){
+	target.setAccount(source.getAccount());
+	target.setCreatedate(source.getCreatedate());
+	target.setEmail(source.getEmail());
+	target.setRelation(source.getRelation());
+	target.setRelations(source.getRelations());
+	target.setUsername(source.getUsername());
 }
 }

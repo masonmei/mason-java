@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Relation {
 
 @Id
-private Long id;
+private String id;
 
 private Basicinfo basicinfo;
 private String relationtype;
@@ -28,11 +28,11 @@ private List<Record> records = new ArrayList<Record>();
 @DBRef
 private List<Resource> resources = new ArrayList<Resource>();
 
-public Long getId() {
+public String getId() {
 	return id;
 }
 
-public void setId(Long id) {
+public void setId(String id) {
 	this.id = id;
 }
 

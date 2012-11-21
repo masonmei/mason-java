@@ -26,17 +26,23 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 	HttpServletRequest servletRequest = (HttpServletRequest)request;
 	HttpServletResponse servletResponse = (HttpServletResponse)response;
 	String uri = servletRequest.getRequestURI();
-	if (uri.contains("/account/create") || uri.endsWith("/account/create") || uri.contains("/account/index") ) {
-		chain.doFilter(servletRequest, response);
+
+    String header = servletRequest.getHeader(Constants.REST_TOKEN_KEY);
+    if (header != null) {
+        chain.doFilter(servletRequest, servletResponse);
+        return;
+    }
+
+    if(uri.contains("/account/index")){
+       chain.doFilter(servletRequest, servletResponse);
+        return;
+    }
+
+	if (servletRequest.getMethod().equalsIgnoreCase("post") && (uri.contains("/account/create") || uri.contains("/account/validate"))) {
+		chain.doFilter(servletRequest, servletResponse);
 		return;
 	}
-	
-	String header = servletRequest.getHeader(Constants.REST_TOKEN_KEY);
-	if (header != null) {
-		chain.doFilter(servletRequest, response);
-		return;
-	}
-	
+
 	servletResponse.sendRedirect(uri.substring(0, uri.indexOf("rest/")) + "rest/account/index");
 	return;
 }

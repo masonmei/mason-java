@@ -11,7 +11,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.personal.mason.utils.LocationUtils;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/common")
 public class CommonResource {
 

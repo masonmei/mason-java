@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Account {
 
 @Id
-private Long id;
+private String id;
 @DBRef
 private Relation relation;
 @Indexed(unique = true)
@@ -33,11 +33,11 @@ private Date createdate;
 @DBRef
 private List<Relation> relations = new ArrayList<Relation>(0);
 
-public Long getId() {
+public String getId() {
 	return id;
 }
 
-public void setId(Long id) {
+public void setId(String id) {
 	this.id = id;
 }
 

@@ -16,7 +16,9 @@ import org.personal.mason.domain.News;
 import org.personal.mason.service.CompanyService;
 import org.personal.mason.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/news")
 public class NewsResource {
 @Autowired
