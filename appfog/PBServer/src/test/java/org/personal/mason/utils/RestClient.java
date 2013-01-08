@@ -11,7 +11,7 @@ import com.sun.jersey.api.json.JSONConfiguration;
 public enum RestClient {
 RestClient;
 
-private static final String RESOURCE_URI = "http://localhost:8080/PBServer/rest";
+private static final String RESOURCE_URI = "http://pbserver.aws.af.cm/rest";
 private Client client;
 private ObjectMapper mapper;
 private WebResource resource;

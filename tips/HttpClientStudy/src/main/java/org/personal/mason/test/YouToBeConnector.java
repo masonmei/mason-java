@@ -23,21 +23,21 @@ public static void main(String[] args) throws IOException {
 //	Arrays.copy
 	
 	
-	String urlString = "http://innovate.prod.quest.corp";
-//
-//
-//
-//	String proxyHost = "10.30.178.59";
-//	int proxyPort = 80;
-//
-//	InetSocketAddress inetsa = new InetSocketAddress(proxyHost, proxyPort);
-//	Proxy proxy = new Proxy(Type.HTTP, inetsa);
-//
+	String urlString = "http://www.baidu.com/";
+
+
+
+	String proxyHost = "10.30.178.116";
+	int proxyPort = 80;
+
+	InetSocketAddress inetsa = new InetSocketAddress(proxyHost, proxyPort);
+	Proxy proxy = new Proxy(Type.HTTP, inetsa);
+
 	URL url = new URL(urlString);
-//
+
 	Authenticator.setDefault(new MyAuthenticator());
-//
-	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+	HttpURLConnection conn = (HttpURLConnection) url.openConnection(proxy);
 	
 	conn.connect();
 	int responseCode = conn.getResponseCode();
@@ -50,26 +50,26 @@ public static void main(String[] args) throws IOException {
 }
 
 class MyAuthenticator extends Authenticator {
-private int count = 1;
-private int count2 = 1;
+private int count = 9;
+private int count2 = 9;
 @Override
 protected PasswordAuthentication getPasswordAuthentication() {
 	if (getRequestorType() == RequestorType.PROXY) {
 		String proxyUser = "";
 		if(count2 < 9){
-			proxyUser = "paul" + count2++;
+			proxyUser = "mmei" + count2++;
 		}else{
-			proxyUser = "paul";
+			proxyUser = "mmei";
 		}
 		
-		return new PasswordAuthentication(proxyUser, "123456".toCharArray());
+		return new PasswordAuthentication(proxyUser, "rdisfun".toCharArray());
 //		return null;
 	} else {
-//		if(count < 9){
-//			
-//			return new PasswordAuthentication("paul" + count++, "123456".toCharArray());
-//		}
-		return new PasswordAuthentication("prod\\mmei", "2year@quest".toCharArray());
+		if(count < 9){
+			
+			return new PasswordAuthentication("paul" + count++, "123456".toCharArray());
+		}
+		return new PasswordAuthentication("paul", "123456".toCharArray());
 	}
 }
 }

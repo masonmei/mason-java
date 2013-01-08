@@ -1,24 +1,32 @@
-package org.personal.mason.domain;
+package org.personal.mason.competition.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Account entity. @author MyEclipse Persistence Tools
  */
-
+@Document
 public class Account {
 
+@Id
 private String id;
-private Relation relation;
+@Indexed(unique = true)
 private String account;
+@Indexed(unique = true)
 private String email;
 private String username;
 private String secret;
 private Date createdate;
 
-private List<Relation> relations = new ArrayList<Relation>(0);
+@DBRef
+private List<Category> categories = new ArrayList<Category>();
 
 public String getId() {
 	return id;
@@ -26,14 +34,6 @@ public String getId() {
 
 public void setId(String id) {
 	this.id = id;
-}
-
-public Relation getRelation() {
-	return relation;
-}
-
-public void setRelation(Relation relation) {
-	this.relation = relation;
 }
 
 public String getAccount() {
@@ -76,12 +76,11 @@ public void setCreatedate(Date createdate) {
 	this.createdate = createdate;
 }
 
-public List<Relation> getRelations() {
-	return relations;
+public List<Category> getCategories() {
+	return categories;
 }
 
-public void setRelations(List<Relation> relations) {
-	this.relations = relations;
+public void setCategories(List<Category> categories) {
+	this.categories = categories;
 }
-
 }
