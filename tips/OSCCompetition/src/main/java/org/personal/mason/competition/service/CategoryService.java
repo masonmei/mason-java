@@ -46,4 +46,12 @@ public boolean deleteCategory(Category category) {
 public List<Category> getPublicPrivilegeCategories(){
 	return categoryRepository.findByPublicPrivilege(true);
 }
+
+public Category findById(String id) {
+	return categoryRepository.findOne(id);
+}
+
+public Category createCategory(Category category) {
+	return categoryRepository.save(category);
+}
 }

@@ -1,107 +1,95 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8" />
-<title>Favorite Photo Gallge</title>
-<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet"
-	type="text/css" />
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<link rel="stylesheet" href='<c:url value="/resources/css/style.css"/>' />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
+<script src='<c:url value="/resources/js/login.js"/>'></script>
 
 </head>
 <body>
-	<header tabindex="0">
-		<div>
-			<div id="content">
-				<div class="post">
-					<c:choose>
-						<c:when test="${!empty currentUser}">
-							<div class="btn-sign">
-								<a href="<c:url value="/account/logout"/>">Logout</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="btn-sign">
-								<a href="#login-box" class="login-window">Sign In</a>
-							</div>
-							<div class="btn-sign">
-								<a href="<c:url value="/account/register"></c:url>">Register</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</div>
-
-				<div id="login-box" class="">
-					<a href="#" class="close"><img
-						src="<c:url value="/resources/images/close_pop.png"/>"
-						class="btn_close" title="Close Window" alt="Close" /></a>
-					<f:form id="loginForm" method="post" action="account/login"
-						class="signin" modelAttribute="account">
-						<fieldset class="textbox">
-							<label class="username"> <span>Account or Email</span> <f:input
-									path="email" class="inputField" alt="enter your email" />
-							</label> <label class="password"> <span>Password</span> <f:password
-									path="secret" class="inputField" alt="enter password" />
-							</label>
-
-							<button type="submit">Login</button>
-						</fieldset>
-					</f:form>
-				</div>
-
-
+	<!-- Top line start -->
+	<div id="bar">
+		<div id="container">
+			<div id="siteHead">
+				<h2>Header</h2>
 			</div>
+			<c:choose>
+				<c:when test="${!empty currentUser}">
+					<div class="btn-sign">
+						<a href="<c:url value="/account/logout"/>" target="_top">Logout</a>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<!-- Login Starts Here -->
+					<div id="loginContainer">
+						<a href="#" id="loginButton"><span>Login</span><em></em></a>
+						<div style="clear: both"></div>
+						<div id="loginBox">
+							<form id="loginForm" method="post" action="account/login"
+								target="_top">
+								<fieldset id="body">
+									<fieldset>
+										<label for="email">Account or Email</label><input type="text"
+											name="email" id="email" />
+									</fieldset>
+									<fieldset>
+										<label for="password">Password</label> <input type="password"
+											name="secret" id="password" />
+									</fieldset>
+									<input type="submit" id="login" value="Sign in" />
+									<div id="registerButton">
+										<a href="<c:url value="/account/register"></c:url>"
+											target="_top">Register</a>
+									</div>
+								</fieldset>
+								<span><a href="#">Forgot your password?</a></span>
+							</form>
+						</div>
+					</div>
+					<!-- Login Ends Here -->
+				</c:otherwise>
+			</c:choose>
+
 		</div>
-		<h2>To Be Add</h2>
-	</header>
-
-	<div class="category">
-		<c:if test="${!empty categories}">
-			<c:forEach var="cat" items="${categories }">
-				<a href="#"><span>${cat.categoryName }</span></a>
-			</c:forEach>
-		</c:if>
-		<c:if test="${!empty currentUser}">
-			<div>
-				<a>+</a>
-			</div>
-		</c:if>
 	</div>
+	<!-- Top line end -->
 
 	<div>
 		<div class="category">
-			<div>
-				<a><img src='<c:url value="/resources/images/add.png"></c:url>' /></a>
-			</div>
-			<div>
-				<a href="#">Previous</a><a href="#">Next</a>
-			</div>
-		</div>
-		<div class="gallery">
-			<c:if test="${!empty images}">
-				<c:forEach var="img" items="${images }">
-					<a draggable="true"><img
-						src="<c:url value="/image/thumbnail?id=${img.id }"/>"></a>
+			<c:if test="${!empty categories}">
+				<c:forEach var="cat" items="${categories }">
+					<a href='<c:url value="/category/images?id=${cat.id }&page=0"/>'
+						target="imagesView"> <span>${cat.categoryName }</span>
+					</a>
 				</c:forEach>
 			</c:if>
+			<c:if test="${!empty currentUser}">
+				<div>
+					<a>++++++</a>
+				</div>
+			</c:if>
 		</div>
-		<script src="<c:url value="/resources/js/main.js"/>"></script>
-		<div class="category">
-			<a href="#">Previous</a><a href="#">Next</a>
+		<div>
+			<form action="category/add" method="post">
+				<fieldset id="body">
+					<fieldset>
+						<label for="categoryName">Category Name</label><input type="text"
+							name="categoryName" id="email" />
+					</fieldset>
+					<fieldset>
+						<label for="publicPrivilege">Public</label> <input type="checkbox"
+							name="publicPrivilege" id="publicPrivilege" />
+					</fieldset>
+					<input type="submit" value="Create" id="registerButton" />
+				</fieldset>
+			</form>
 		</div>
 	</div>
 
-
-	<div class="login-popup">
-		<form action='<c:url value="/image/upload"></c:url>' method="post"
-			enctype="multipart/form-data">
-			<fieldset>
-				<input type="file" name="uploadFile" /> <input type="submit"
-					value="Upload" />
-			</fieldset>
-		</form>
+	<div>
+		<iframe src="<c:url value="/images"/>" name="imagesView"
+			id="imageView" frameborder="0" width="100%" height="100%"></iframe>
 	</div>
 </body>
 </html>

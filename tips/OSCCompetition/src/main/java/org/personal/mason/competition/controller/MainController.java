@@ -34,26 +34,39 @@ public String root() {
 
 @RequestMapping(value = "index", method = RequestMethod.GET)
 public String index(HttpSession session, Model model) {
-	if(session!= null && session.getAttribute(Constants.SESSION_TOKEN) != null){
+	if (session != null && session.getAttribute(Constants.SESSION_TOKEN) != null) {
+		String accountId = (String) session.getAttribute(Constants.SESSION_TOKEN);
+		Account account = accountService.findById(accountId);
+		List<Category> allCategory = categoryService.findAllByAccount(account);
+		model.addAttribute("currentUser", account);
+		model.addAttribute("categories", allCategory);
+		model.addAttribute("category", new Category());
+	} else {
+		model.addAttribute("account", new Account());
+	}
+
+	return "index";
+}
+
+@RequestMapping(value = "images", method = RequestMethod.GET)
+public String getImages(HttpSession session, Model model) {
+	if (session != null && session.getAttribute(Constants.SESSION_TOKEN) != null) {
 		String id = (String) session.getAttribute(Constants.SESSION_TOKEN);
 		Account account = accountService.findById(id);
-		List<Category> allCategory = categoryService.findAllByAccount(account);
-		model.addAttribute("categories", allCategory);
-		if(allCategory.size() > 0){
-			model.addAttribute("images", allCategory.get(0).getImages());
+		List<Category> publicPrivilegeCategories = categoryService.getPublicPrivilegeCategories(account);
+		if (publicPrivilegeCategories.size() > 0) {
+			model.addAttribute("images", publicPrivilegeCategories.get(0).getImages());
 		}
-	}else{
-		model.addAttribute("account", new Account());
+	} else {
 		model.addAttribute("images", getPublicImages());
 	}
-	
-	return "index";
+	return "images";
 }
 
 private List<Image> getPublicImages() {
 	Random random = new Random();
 	List<Category> publicPrivilegeCategories = categoryService.getPublicPrivilegeCategories();
-	if(publicPrivilegeCategories.size() > 0){
+	if (publicPrivilegeCategories.size() > 0) {
 		return publicPrivilegeCategories.get(random.nextInt(publicPrivilegeCategories.size())).getImages();
 	}
 	return Collections.emptyList();

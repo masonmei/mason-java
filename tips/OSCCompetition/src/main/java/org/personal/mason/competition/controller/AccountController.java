@@ -36,14 +36,13 @@ public String login(Account account, HttpSession session, Model model) {
 	try {
 		Account validateAccount = accountService.validateAccount(account);
 		if (validateAccount != null) {
-			session.setAttribute(Constants.SESSION_TOKEN, validateAccount.getEmail());
-			model.addAttribute("currentUser", validateAccount);
+			session.setAttribute(Constants.SESSION_TOKEN, validateAccount.getId());
 		}
 	} catch (Exception e) {
 		log.debug("login failed", e);
 	}
 
-	return "index";
+	return "redirect:/index";
 }
 
 @RequestMapping(value = "logout", method = RequestMethod.GET)
