@@ -15,4 +15,6 @@ List<Category> findByAccountAndPublicPrivilege(Account account, boolean publicPr
 List<Category> findByAccount(Account account);
 
 Page<Category> findByAccount(Account account, Pageable pageable);
+
+List<Category> findByPublicPrivilege(boolean publicPrivilege);
 }

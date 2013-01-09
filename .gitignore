@@ -9,3 +9,5 @@ tips/CountryInfo/target/classes/META-INF/maven/org.personal.mason.ws.client/Coun
 tips/CountryInfo/target/classes/META-INF/maven/org.personal.mason.ws.client/CountryInfo/pom.xml
 
 tips/CountryInfo/.project
+
+tips/OSCCompetition/target/tomcat/logs/access_log.2013-01-09

@@ -42,4 +42,8 @@ public boolean deleteCategory(Category category) {
 		return false;
 	}
 }
+
+public List<Category> getPublicPrivilegeCategories(){
+	return categoryRepository.findByPublicPrivilege(true);
+}
 }

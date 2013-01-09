@@ -74,4 +74,12 @@ private static void copyContent(Account source, Account target){
 	target.setEmail(source.getEmail());
 	target.setUsername(source.getUsername());
 }
+
+public Account findByEmail(String email) {
+	return accountRepository.findByEmail(email);
+}
+
+public Account findById(String id) {
+	return accountRepository.findOne(id);
+}
 }

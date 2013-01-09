@@ -23,6 +23,10 @@ public Image save(Image image) {
 	return imageRepository.save(image);
 }
 
+public List<Image> save(List<Image> images){
+	return imageRepository.save(images);
+}
+
 public void deleteImageById(String id) {
 	imageRepository.delete(id);
 }
