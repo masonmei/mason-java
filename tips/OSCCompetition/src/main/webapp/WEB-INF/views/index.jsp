@@ -3,16 +3,34 @@
 <head>
 <link rel="stylesheet" href='<c:url value="/resources/css/style.css"/>' />
 <script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script src='<c:url value="/resources/js/login.js"/>'></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
+
+<script type="text/javascript">
+	function openNewCategoryDialog() {
+		$('#createCategory').dialog({
+			width : 200,
+			closeOnEscape: false,
+			show : "slide"
+		});
+	}
+
+	function closeNewCategoryDialog() {
+		$('#createCategory').dialog("close");
+		;
+	}
+
+</script>
 </head>
 <body>
 	<!-- Top line start -->
 	<div id="bar">
 		<div id="container">
 			<div id="siteHead">
-				<h2>Header</h2>
+				<h2>Welcome come to Picture Sharing Gallery</h2>
 			</div>
 			<c:choose>
 				<c:when test="${!empty currentUser}">
@@ -56,28 +74,30 @@
 	<!-- Top line end -->
 
 	<div>
-		<div class="category">
+		<div class="categories">
 			<c:if test="${!empty categories}">
 				<c:forEach var="cat" items="${categories }">
 					<a href='<c:url value="/category/images?id=${cat.id }&page=0"/>'
-						target="imagesView"> <span>${cat.categoryName }</span>
+						target="imagesView" class="categoryItem"> <span>${cat.categoryName
+							}</span>
 					</a>
 				</c:forEach>
 			</c:if>
 			<c:if test="${!empty currentUser}">
-				<div>
-					<a>++++++</a>
-				</div>
+				<a onclick="openNewCategoryDialog();" class="categoryItemAdd">+</a>
 			</c:if>
 		</div>
-		<div>
+		<div id="createCategory">
+			<a onclick="closeNewCategoryDialog();" class="boxclose"><img
+				src='<c:url value="/resources/images/close_pop.png"/>' /></a>
+
 			<form action="category/add" method="post">
-				<fieldset id="body">
-					<fieldset>
+				<fieldset>
+					<fieldset class="noborder">
 						<label for="categoryName">Category Name</label><input type="text"
-							name="categoryName" id="email" />
+							name="categoryName" id="categoryName" />
 					</fieldset>
-					<fieldset>
+					<fieldset class="noborder">
 						<label for="publicPrivilege">Public</label> <input type="checkbox"
 							name="publicPrivilege" id="publicPrivilege" />
 					</fieldset>

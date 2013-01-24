@@ -54,4 +54,8 @@ public Category findById(String id) {
 public Category createCategory(Category category) {
 	return categoryRepository.save(category);
 }
+
+public Category saveCategory(Category cat) {
+	return categoryRepository.save(cat);
+}
 }

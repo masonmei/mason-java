@@ -5,10 +5,11 @@
 <html>
 <head>
 <title>Register to be a User</title>
+<link rel="stylesheet" href='<c:url value="/resources/css/style.css"/>' />
 <meta charset="UTF-8">
 </head>
-<body id="framebody">
-	<div id="register-box" class="">
+<body>
+	<div id="register-box">
 		<f:form method="post" class="signin" action="register"
 			modelAttribute="account">
 			<fieldset class="textbox">

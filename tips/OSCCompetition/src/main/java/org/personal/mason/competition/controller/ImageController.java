@@ -16,7 +16,9 @@ import net.sourceforge.fastupload.MultiPart;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.personal.mason.competition.domain.Category;
 import org.personal.mason.competition.domain.Image;
+import org.personal.mason.competition.service.CategoryService;
 import org.personal.mason.competition.service.ImageService;
 import org.personal.mason.competition.utils.ImageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class ImageController {
 private final Log log = LogFactory.getLog(getClass());
 @Autowired
 private ImageService imageService;
+
+@Autowired
+private CategoryService categoryService;
 
 @RequestMapping(value = "/list", method = RequestMethod.GET)
 public String listImages(Model model) {
@@ -89,12 +94,35 @@ public String getThumbnail(@QueryParam("id") String id, HttpServletResponse resp
 
 @RequestMapping(value = "/upload", method = RequestMethod.POST)
 public String uploadImage(HttpServletRequest request) {
-	List<Image> images = splitOutImages(request);
+	List<Image> images = new LinkedList<Image>();
+	String cid = null;
+	try {
+		FastUploadParser parser = new FastUploadParser(request);
+		List<MultiPart> parseList = parser.parseList();
+		for (MultiPart part : parseList) {
+			if (part.isFile()) {
+				Image image = new Image();
+				image.setFileName(part.getFileName());
+				image.setImageData(part.getContentBuffer());
+				image.setContentType(part.getContentType());
+				images.add(image);
+			}else if(part.getName().equals("cid")){
+				cid = part.getString();
+			}
+		}
+	} catch (Exception e) {
+	}
+	
 	if (images.size() > 0) {
-		imageService.save(images);
+		List<Image> savedImages = imageService.save(images);
+		Category cat = categoryService.findById(cid);
+		if (cat != null) {
+			cat.getImages().addAll(savedImages);
+			categoryService.saveCategory(cat);
+		}
 	}
 
-	return "redirect:list";
+	return "redirect:/category/images?id=" + cid + "&page=0";
 }
 
 public static List<Image> splitOutImages(HttpServletRequest request) {

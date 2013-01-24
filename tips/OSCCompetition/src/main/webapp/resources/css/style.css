@@ -1,9 +1,9 @@
 html,body {
-	width: 100%;
+	width: 960px;
 	height: 100%;
 	padding: 0;
 	background: #fff;
-	margin: 0;
+	margin: 0 auto;
 	font-family: arial
 }
 
@@ -19,8 +19,8 @@ a {
 
 #bar {
 	width: 100%;
-	height: 35px;
-	padding: 15px 0;
+	height: 50px;
+	padding: 5px 0;
 	background: url(../images/bar.png) repeat-x;
 }
 
@@ -31,16 +31,26 @@ a {
 
 #siteHead {
 	float: left;
-	color:silver;
+	color: silver;
 	position: relative;
-	padding-bottom: 20px;
-	text-align: center;
 	text-shadow: black;
-	border: 10px;
-	display: inline-block;
+	display: block;
+	margin-left: 10px;
 }
 
 /*-------LOGIN STARTS HERE -------*/
+.btn-sign {
+	display: block;
+	float: right;
+	background: #d2e0ea url(../images/buttonbg.png) repeat-x;
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	position: relative;
+	z-index: 30;
+	cursor: pointer;
+	margin-right: 10px;
+}
 
 /* Login Container (default to float:right) */
 #loginContainer {
@@ -51,7 +61,7 @@ a {
 
 /* Login Button */
 #loginButton {
-	display: inline-block;
+	display: block;
 	float: right;
 	background: #d2e0ea url(../images/buttonbg.png) repeat-x;
 	border: 1px solid #899caa;
@@ -210,4 +220,241 @@ fieldset#body {
 
 input:focus {
 	outline: none;
+}
+
+#createCategory {
+	margin: inherit;
+	display: none;
+	width: 250px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	position: relative;
+	background-color: gray;
+}
+
+#createCategory input {
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	min-width: 100px;
+	color: #3a454d;
+	font-weight: bold;
+	padding: 8px 8px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	font-size: 12px;
+}
+
+#createCategory checkbox {
+	width: auto;
+	margin: 1px 9px 0 0;
+	float: left;
+	padding: 0;
+	border: 0;
+	*margin: -3px 9px 0 0; /* IE7 Fix */
+}
+
+.noborder {
+	margin: 0 0 12px 0;
+	display: block;
+	border: 0;
+	padding: 0;
+}
+
+.boxclose {
+	cursor: pointer;
+	float: right;
+	height: 26px;
+	width: 26px;
+	position: relative;
+	top: -18px;
+	right: 18px;
+}
+
+.categories {
+	float:left;
+	border: windowframe;
+	width:100%;
+	margin: 5px;
+	background-color: silver;
+	min-height: 100px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+}
+
+.categoryItem {
+	display: inline-block;
+	background: #d2e0ea url(../images/buttonbgHover.png) repeat-x;
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	position: relative;
+	cursor: pointer;
+	margin: 5px;
+	padding: 5px 20px;
+}
+
+.categoryItemAdd {
+	display: inline-block;
+	background: #afafaf url(../images/buttonbgHover.png) repeat-x;
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	position: relative;
+	cursor: pointer;
+	margin: 5px;
+	padding: 5px 20px;
+}
+
+.ui-dialog-titlebar-close {
+	visibility: hidden;
+}
+
+.uploadButton {
+	cursor: pointer;
+	float: left;
+}
+
+#upload-popup {
+	margin: 0 auto;
+	display: none;
+	width: 250px;
+	height: 150px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	position: relative;
+}
+
+#upload-popup input {
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	color: #3a454d;
+	font-weight: bold;
+	padding: 8px 8px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	font-size: 12px;
+}
+
+.closeupload {
+	cursor: pointer;
+	float: right;
+	height: 26px;
+	width: 26px;
+	position: relative;
+	right: -30px;
+	top: 13px;
+}
+
+.category-controllbar {
+	margin: 5px;
+	background-color: silver;
+	min-height: 45px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	display: block;
+}
+
+.category-controllbar .add-btn {
+	margin-left: 5px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	display: inline;
+}
+
+.category-controllbar .add-btn {
+	margin-left: 5px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	display: inline;
+}
+
+.category-controllbar .page-controller {
+	margin-right: 5px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	display: inline;
+	float: right;
+	margin-top: 20px;
+}
+
+.category-controllbar .page-controller a {
+	display: inline-block;
+	color: white;
+	font-size: medium;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	background-color: gray;
+}
+
+.gallay {
+	margin: 5px;
+	background-image: url("gallery_bg.jpg");
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	min-height:500px;
+}
+
+.gallay a {
+	display: inline-block;
+	background-color: white;
+	border: 3px;
+	border-color: white;
+	border-bottom-style: solid;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	margin-left: 25px;
+	margin-top: 10px;
+	margin-bottom: 10px; 
+	text-align : center;
+	width: 200px;
+	height: 150px;
+	text-align: center;
+}
+
+#register-box {
+	margin: 0 auto;
+	margin-top:100px;
+	width: 350px;
+	background: url(../images/bar.png) repeat-x repeat-y;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+#register-box input {
+	width: 92%;
+	border: 1px solid #899caa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	color: #3a454d;
+	font-weight: bold;
+	padding: 8px 8px;
+	box-shadow: inset 0px 1px 3px #bbb;
+	-webkit-box-shadow: inset 0px 1px 3px #bbb;
+	-moz-box-shadow: inset 0px 1px 3px #bbb;
+	font-size: 12px;
+}
+
+#register-box button{
+	width: auto;
+	float: left;
+	min-width: 80px;
+	background: #339cdf url(../images/loginbuttonbg.png) repeat-x;
+	color: #fff;
+	padding: 7px 10px 8px 10px;
+	text-shadow: 0px -1px #278db8;
+	border: 1px solid #339cdf;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	margin: 0 12px 0 0;
+	cursor: pointer;
+	*padding: 7px 2px 8px 2px; /* IE7 Fix */
+}
 }
