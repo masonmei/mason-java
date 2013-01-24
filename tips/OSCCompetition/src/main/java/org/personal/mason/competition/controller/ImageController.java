@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("image")
@@ -53,7 +54,7 @@ public String listPublicImages(Model model) {
 }
 
 @RequestMapping(value = "/original", method = RequestMethod.GET)
-public String getImage(@QueryParam("id") String id, HttpServletResponse response) {
+public ModelAndView getImage(@QueryParam("id") String id, HttpServletResponse response) {
 	Image image = imageService.findImageById(id);
 	if (image != null) {
 		response.setContentType(image.getContentType());
@@ -61,19 +62,20 @@ public String getImage(@QueryParam("id") String id, HttpServletResponse response
 			BufferedImage generateImage = ImageUtils.readImage(image.getImageData());
 			ServletOutputStream outputStream = response.getOutputStream();
 			ImageIO.write(generateImage, "JPEG", outputStream);
-			outputStream.flush();
-			outputStream.close();
-			outputStream = null;
-			response.flushBuffer();
+			try {  
+				outputStream.flush();  
+	        } finally {  
+	        	outputStream.close();  
+	        }  
 		} catch (IOException e) {
 			log.debug("could not write image", e);
 		}
 	}
-	return "index";
+	return null;
 }
 
 @RequestMapping(value = "/thumbnail", method = RequestMethod.GET)
-public String getThumbnail(@QueryParam("id") String id, HttpServletResponse response) {
+public ModelAndView getThumbnail(@QueryParam("id") String id, HttpServletResponse response) {
 	Image image = imageService.findImageById(id);
 	if (image != null) {
 		response.setContentType(image.getContentType());
@@ -81,15 +83,16 @@ public String getThumbnail(@QueryParam("id") String id, HttpServletResponse resp
 			BufferedImage generateImage = ImageUtils.getThumbnailImage(image.getImageData());
 			ServletOutputStream outputStream = response.getOutputStream();
 			ImageIO.write(generateImage, "JPEG", outputStream);
-			outputStream.flush();
-			outputStream.close();
-			outputStream = null;
-			response.flushBuffer();
+			try {  
+				outputStream.flush();  
+	        } finally {  
+	        	outputStream.close();  
+	        }  
 		} catch (IOException e) {
 			log.debug("could not write image", e);
 		}
 	}
-	return "index";
+	return null;
 }
 
 @RequestMapping(value = "/upload", method = RequestMethod.POST)

@@ -61,7 +61,6 @@
 											target="_top">Register</a>
 									</div>
 								</fieldset>
-								<span><a href="#">Forgot your password?</a></span>
 							</form>
 						</div>
 					</div>
@@ -109,7 +108,7 @@
 
 	<div>
 		<iframe src="<c:url value="/images"/>" name="imagesView"
-			id="imageView" frameborder="0" width="100%" height="100%"></iframe>
+			id="imageView" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
 	</div>
 </body>
 </html>
