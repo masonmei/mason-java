@@ -19,12 +19,15 @@
 	<!--配置持久模型层 -->
 	<bean id="oauthClientDetailDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthClientDetailDaoImpl" />
 	<bean id="usersDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthUserDaoImpl" />
+	<bean id="roleDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthRoleDaoImpl" />
 	<bean id="oauthCodeDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthCodeDaoImpl" />
 
+
 	<bean id="userService" class="org.personal.mason.feop.oauth.service.spi.impl.OUserServiceImpl" p:userDao-ref="usersDao"
-		p:passwordEncoder-ref="passwordEncoder" />
+		p:passwordEncoder-ref="passwordEncoder" p:roleDao-ref="roleDao" />
 	<bean id="clientDetailService" class="org.personal.mason.feop.oauth.service.spi.impl.OClientDetailServiceImpl" p:oauthClientDetailDao-ref="oauthClientDetailDao" />
 	<bean id="authCodeService" class="org.personal.mason.feop.oauth.service.spi.impl.OAuthCodeServiceImpl" p:codeDao-ref="oauthCodeDao" />
+	<bean id="roleService" class="org.personal.mason.feop.oauth.service.spi.impl.ORoleServiceImpl" p:roleDao-ref="roleDao" />
 	<bean id="userContext" class="org.personal.mason.feop.oauth.service.spi.impl.OUserContextStub">
 		<constructor-arg ref="userService" name="userService" />
 	</bean>
@@ -35,13 +38,13 @@
 				<bean class="org.personal.mason.feop.oauth.service.spi.PhotoInfo">
 					<property name="id" value="1" />
 					<property name="name" value="photo1.jpg" />
-					<property name="userId" value="mason_mei" />
+					<property name="userId" value="mason.mei@gmail.com" />
 					<property name="resourceURL" value="/org/personal/mason/feop/oauth/service/spi/impl/photo1.jpg" />
 				</bean>
 				<bean class="org.personal.mason.feop.oauth.service.spi.PhotoInfo">
 					<property name="id" value="2" />
 					<property name="name" value="photo2.jpg" />
-					<property name="userId" value="mason_mei" />
+					<property name="userId" value="mason.mei@gmail.com" />
 					<property name="resourceURL" value="/org/personal/mason/feop/oauth/service/spi/impl/photo2.jpg" />
 				</bean>
 				<bean class="org.personal.mason.feop.oauth.service.spi.PhotoInfo">
@@ -53,7 +56,7 @@
 				<bean class="org.personal.mason.feop.oauth.service.spi.PhotoInfo">
 					<property name="id" value="4" />
 					<property name="name" value="photo4.jpg" />
-					<property name="userId" value="mason_mei" />
+					<property name="userId" value="mason.mei@gmail.com" />
 					<property name="resourceURL" value="/org/personal/mason/feop/oauth/service/spi/impl/photo4.jpg" />
 				</bean>
 				<bean class="org.personal.mason.feop.oauth.service.spi.PhotoInfo">

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import org.personal.mason.feop.oauth.service.dao.OauthRoleDao;
 import org.personal.mason.feop.oauth.service.dao.OauthUserDao;
 import org.personal.mason.feop.oauth.service.domain.OauthUser;
 import org.personal.mason.feop.oauth.service.mvc.model.SignupForm;
@@ -16,6 +17,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class OUserServiceImpl implements OUserService {
 	private OauthUserDao userDao;
+	private OauthRoleDao roleDao;
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
@@ -29,10 +31,17 @@ public class OUserServiceImpl implements OUserService {
 	@Autowired
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		if (passwordEncoder == null) {
-			throw new IllegalArgumentException(
-					"password encoder cannot be null");
+			throw new IllegalArgumentException("password encoder cannot be null");
 		}
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Autowired
+	public void setRoleDao(OauthRoleDao roleDao) {
+		if (roleDao == null) {
+			throw new IllegalArgumentException("role Dao cannot be null");
+		}
+		this.roleDao = roleDao;
 	}
 
 	@Override
@@ -46,6 +55,7 @@ public class OUserServiceImpl implements OUserService {
 	public void regist(OauthUser user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
+		user.setRoles(roleDao.getDefaultUserRoles());
 		userDao.saveObject(user);
 	}
 
@@ -71,8 +81,7 @@ public class OUserServiceImpl implements OUserService {
 		user.setEmail(signupForm.getEmail());
 		user.setPassword(signupForm.getPassword());
 		user.setUserId(UUID.randomUUID().toString());
-		user.setUserName(String.format("%s %s", signupForm.getFirstName(),
-				signupForm.getLastName()).trim());
+		user.setUserName(String.format("%s %s", signupForm.getFirstName(), signupForm.getLastName()).trim());
 		return user;
 	}
 

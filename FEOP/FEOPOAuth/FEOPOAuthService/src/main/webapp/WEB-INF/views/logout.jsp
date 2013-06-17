@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<c:set var="pageTitle" value="Logout" scope="request" />
 <html>
 <head>
-<title>Logout</title>
+<title><c:out value="${pageTitle }" /></title>
 </head>
 <body>
 

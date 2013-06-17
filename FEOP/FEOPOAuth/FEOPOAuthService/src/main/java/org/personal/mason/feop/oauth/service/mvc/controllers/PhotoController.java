@@ -9,6 +9,7 @@ import java.util.Iterator;
 
 import org.personal.mason.feop.oauth.service.spi.PhotoInfo;
 import org.personal.mason.feop.oauth.service.spi.PhotoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,11 @@ public class PhotoController {
 
 	private PhotoService photoService;
 
+	@Autowired
 	public void setPhotoService(PhotoService photoService) {
+		if (photoService == null) {
+			throw new IllegalArgumentException("photo Service cannot be null");
+		}
 		this.photoService = photoService;
 	}
 

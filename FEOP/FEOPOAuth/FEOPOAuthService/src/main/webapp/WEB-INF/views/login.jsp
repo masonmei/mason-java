@@ -1,31 +1,37 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!DOCTYPE html>
+<html>
+<head>
 <c:set var="pageTitle" value="Please Login" scope="request" />
-<jsp:include page="./includes/header.jsp" />
-
 <c:url value="/login" var="loginUrl" />
-<form action="${loginUrl}" method="post">
-	<c:if test="${param.error != null}">
-		<div class="alert alert-error">
-			Failed to login.
-			<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+<title><c:out value="${pageTitle }" /></title>
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/css/style.css"/>" />
+</head>
+<body>
+	<div id="content">
+		<form action="${loginUrl}" method="post">
+			<c:if test="${param.error != null}">
+				<div class="alert alert-error">
+					Failed to login.
+					<c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
               Reason: <c:out
-					value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+							value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+					</c:if>
+				</div>
 			</c:if>
-		</div>
-	</c:if>
-	<c:if test="${param.logout != null}">
-		<div class="alert alert-success">You have been logged out.</div>
-	</c:if>
-	<label for="username">Username</label> <input type="text" id="username"
-		name="username" /> <label for="password">Password</label> <input
-		type="password" id="password" name="password" />
-	<div class="form-actions">
-		<input id="submit" class="btn" name="submit" type="submit"
-			value="Login" />
+			<c:if test="${param.logout != null}">
+				<div class="alert alert-success">You have been logged out.</div>
+			</c:if>
+			<label for="username">Username</label> <input type="text"
+				id="username" name="username" /> <label for="password">Password</label>
+			<input type="password" id="password" name="password" />
+			<div class="form-actions">
+				<input id="submit" class="btn" name="submit" type="submit"
+					value="Login" />
+			</div>
+		</form>
 	</div>
-</form>
-<jsp:include page="./includes/footer.jsp" />
+</body>
+</html>

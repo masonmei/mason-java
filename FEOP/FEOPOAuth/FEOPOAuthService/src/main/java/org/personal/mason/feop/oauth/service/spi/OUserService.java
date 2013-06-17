@@ -33,4 +33,5 @@ public interface OUserService {
 	public List<String> findUserRoles(OauthUser user);
 
 	public OauthUser createUser(SignupForm signupForm);
+	
 }
