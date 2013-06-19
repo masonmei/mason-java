@@ -4,7 +4,7 @@
 <html>
 <head>
 <c:set var="pageTitle" value="Please Login" scope="request" />
-<c:url value="/login" var="loginUrl" />
+<c:url value="/oauth/login.do" var="loginUrl" />
 <title><c:out value="${pageTitle }" /></title>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/resources/css/style.css"/>" />
@@ -25,8 +25,8 @@
 				<div class="alert alert-success">You have been logged out.</div>
 			</c:if>
 			<label for="username">Username</label> <input type="text"
-				id="username" name="username" /> <label for="password">Password</label>
-			<input type="password" id="password" name="password" />
+				id="username" name="j_username" /> <label for="password">Password</label>
+			<input type="password" id="password" name="j_password" />
 			<div class="form-actions">
 				<input id="submit" class="btn" name="submit" type="submit"
 					value="Login" />

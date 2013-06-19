@@ -68,12 +68,16 @@
 
 
 	<!-- OAuth2 Server端 用户登录验证 -->
-	<security:http access-denied-page="/login?authorization_error=true" disable-url-rewriting="true">
+	<security:http>
 		<security:intercept-url pattern="/oauth/**" access="ROLE_USER" />
 		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
-		<security:form-login authentication-failure-url="/login?authentication_error=true" default-target-url="/home" login-page="/login"
+		<security:form-login authentication-failure-url="/login?error=true" default-target-url="/home" login-page="/login"
 			login-processing-url="/oauth/login.do" />
+		<security:session-management invalid-session-url="/">
+			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</security:session-management>
+		
 		<security:logout logout-success-url="/logout" logout-url="/oauth/logout.do" />
 		<security:anonymous />
 	</security:http>
@@ -123,7 +127,7 @@
 	<oauth2:resource-server id="resourceServerFilter" resource-id="sparklr" token-services-ref="tokenServices" />
 
 	<!-- 预先注册的客户端（consumer）相关配置信息 -->
-	<bean id="clientDetails" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2ClientDetailsServiceImpl" p:clientDetailService-ref="clientDetailService"/>
+	<bean id="clientDetails" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2ClientDetailsServiceImpl" p:clientDetailService-ref="clientDetailService" />
 
 	<!-- 客户端有效性验证 -->
 	<bean id="userApprovalHandler" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2UserApprovalHandler">
