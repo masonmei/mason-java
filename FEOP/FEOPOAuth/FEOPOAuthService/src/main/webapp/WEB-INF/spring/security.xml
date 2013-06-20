@@ -1,13 +1,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:oauth2="http://www.springframework.org/schema/security/oauth2" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	<import resource="databases.xml" />
 	<import resource="services.xml" />
 
@@ -66,6 +66,18 @@
 		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
 	</security:http>
 
+	<!-- The OAuth2 protected resources are separated out into their own block so we can deal with authorization and error handling separately. This 
+		isn't mandatory, but it makes it easier to control the behaviour. -->
+	<security:http pattern="/client/**" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"
+		access-decision-manager-ref="accessDecisionManager">
+		<security:anonymous enabled="false" />
+		<security:intercept-url pattern="/client/" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		<security:intercept-url pattern="/client/form" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		<security:intercept-url pattern="/client/info" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		<security:intercept-url pattern="/client/create" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		
+		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
+	</security:http>
 
 	<!-- OAuth2 Server端 用户登录验证 -->
 	<security:http>
@@ -77,7 +89,7 @@
 		<security:session-management invalid-session-url="/">
 			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</security:session-management>
-		
+
 		<security:logout logout-success-url="/logout" logout-url="/oauth/logout.do" />
 		<security:anonymous />
 	</security:http>

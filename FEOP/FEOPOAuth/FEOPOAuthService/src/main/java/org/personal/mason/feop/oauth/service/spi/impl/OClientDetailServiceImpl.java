@@ -22,4 +22,19 @@ public class OClientDetailServiceImpl implements OClientDetailService {
 		return oauthClientDetailDao.findByClientId(clientId);
 	}
 
+	@Override
+	public void decorateClientBy(OauthClientDetail client, String clientTypeName) {
+		ClientTypes clientType = ClientTypes.getClientTypeWithName(clientTypeName);
+		client.setScope(clientType.getScope());
+		client.setAuthorizedGrantTypes(clientType.getGrantTypes());
+		client.setAuthorities(clientType.getAuthorities());
+		client.setAccessTokenValidity(clientType.getAccessTokenValidity());
+		client.setRefreshTokenValidity(clientType.getRefreshTokenValidity());
+	}
+
+	@Override
+	public void createApplication(OauthClientDetail client) {
+		oauthClientDetailDao.saveClient(client);
+	}
+
 }

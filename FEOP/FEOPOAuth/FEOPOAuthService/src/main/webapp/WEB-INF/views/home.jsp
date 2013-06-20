@@ -6,5 +6,7 @@
 </head>
 <body>
 	<h1>You have been login!</h1>
+	
+	<a href="client/">Client</a>
 </body>
 </html>

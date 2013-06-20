@@ -13,7 +13,7 @@ public class OauthClientDetailDaoImpl extends GenericDaoImpl<OauthClientDetail> 
 
 	@Override
 	public boolean saveClient(OauthClientDetail client) {
-		getEntityManager().persist(client);
+		saveObject(client);
 		return client.getId() != null;
 	}
 

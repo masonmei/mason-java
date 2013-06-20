@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:28 +0800] "GET /oauth2/ HTTP/1.1" 302 - http-bio-8888-exec-1 79
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:29 +0800] "GET /oauth2/ HTTP/1.1" 200 794 http-bio-8888-exec-2 1651
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:32 +0800] "POST /oauth2/oauth/login.do HTTP/1.1" 302 - http-bio-8888-exec-3 548
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:32 +0800] "GET /oauth2/home HTTP/1.1" 200 145 http-bio-8888-exec-4 123
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:34 +0800] "GET /oauth2/oauth/authorize?response_type=code&client_id=mason-baidu-client&redirect_uri=http://www.baidu.com/ HTTP/1.1" 200 958 http-bio-8888-exec-5 428
+0:0:0:0:0:0:0:1 - - [21/Jun/2013:00:44:41 +0800] "POST /oauth2/oauth/authorize HTTP/1.1" 302 - http-bio-8888-exec-6 5257

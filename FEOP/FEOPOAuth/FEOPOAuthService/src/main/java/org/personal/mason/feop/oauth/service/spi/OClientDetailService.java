@@ -6,4 +6,8 @@ public interface OClientDetailService {
 
 	OauthClientDetail findByClientId(String clientId);
 
+	void decorateClientBy(OauthClientDetail client, String clientType);
+
+	void createApplication(OauthClientDetail client);
+
 }

@@ -32,22 +32,20 @@ public class SignupController {
 		this.userService = userService;
 	}
 
-	@RequestMapping("/signup/form")
+	@RequestMapping(value = { "/signup/", "/signup/form" })
 	public String signup(@ModelAttribute SignupForm signupForm) {
 		return "signup/form";
 	}
 
 	@RequestMapping(value = "/signup/new", method = RequestMethod.POST)
-	public String signup(@Valid SignupForm signupForm, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+	public String signup(@Valid SignupForm signupForm, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "signup/form";
 		}
 
 		String email = signupForm.getEmail();
 		if (userService.findByEmailOrUsername(email) != null) {
-			result.rejectValue("email", "errors.signup.email",
-					"Email address already in use.");
+			result.rejectValue("email", "errors.signup.email", "Email address already in use.");
 			return "signup/form";
 		}
 

@@ -1,3 +1,4 @@
+org/personal/mason/feop/oauth/service/mvc/model/ClientForm.class
 org/personal/mason/feop/oauth/service/dao/OauthCodeDao.class
 org/personal/mason/feop/oauth/service/dao/impl/OauthUserDaoImpl.class
 org/personal/mason/feop/oauth/service/mvc/controllers/DefaultController.class
@@ -20,6 +21,7 @@ org/personal/mason/feop/oauth/service/dao/impl/GenericDaoImpl.class
 org/personal/mason/feop/oauth/service/mvc/model/SignupForm.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2TokenStore.class
 org/personal/mason/feop/oauth/service/spi/impl/OAuthCodeServiceImpl.class
+org/personal/mason/feop/oauth/service/oauth2/OAuth2UsernamePasswordAuthenticationFilter.class
 org/personal/mason/feop/oauth/service/domain/BaseObject.class
 org/personal/mason/feop/oauth/service/spi/OClientDetailService.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2UserApprovalHandler.class
@@ -34,14 +36,17 @@ org/personal/mason/feop/oauth/service/oauth2/OAuth2ClientDetailsServiceImpl.clas
 org/personal/mason/feop/oauth/service/mvc/controllers/HomeController.class
 org/personal/mason/feop/oauth/service/spi/OUserContext.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2AuthorizationCodeServices.class
+org/personal/mason/feop/oauth/service/spi/impl/ClientTypes.class
 org/personal/mason/feop/oauth/service/dao/GenericDao.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2UserDetailsServiceImpl.class
 org/personal/mason/feop/oauth/service/spi/impl/PhotoServiceImpl.class
 org/personal/mason/feop/oauth/service/dao/impl/OauthClientDetailDaoImpl.class
 org/personal/mason/feop/oauth/service/dao/OauthRoleDao.class
+org/personal/mason/feop/oauth/service/utils/SecuriteGenerator.class
 org/personal/mason/feop/oauth/service/mvc/controllers/PhotoController.class
 org/personal/mason/feop/oauth/service/spi/impl/OClientDetailServiceImpl.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2AccessDecisionManager.class
 org/personal/mason/feop/oauth/service/domain/OauthAccessToken.class
+org/personal/mason/feop/oauth/service/mvc/controllers/ApplicationRegistrationController.class
 org/personal/mason/feop/oauth/service/mvc/controllers/OAuth2Controller.class
 org/personal/mason/feop/oauth/service/dao/OauthUserDao.class
