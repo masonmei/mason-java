@@ -7,10 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/spring/services.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/databases.xml</config>
-		<config>src/main/webapp/WEB-INF/oauth2-servlet.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/cloudfoundry.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

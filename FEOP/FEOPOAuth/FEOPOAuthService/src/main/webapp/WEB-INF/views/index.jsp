@@ -36,12 +36,10 @@
 			<form id="loginForm" name="loginForm"
 				action="<c:url value="/oauth/login.do"/>" method="post">
 				<p>
-					<label>Email: <input type='text' name='j_username'
-						value="mason.mei@gmail.com"></label>
+					<label>Email: <input type='text' name='j_username'></label>
 				</p>
 				<p>
-					<label>Secret: <input type="password" name='j_password'
-						value="Stxaivj1986"></label>
+					<label>Secret: <input type="password" name='j_password'></label>
 				</p>
 
 				<p>

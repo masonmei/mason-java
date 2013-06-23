@@ -20,15 +20,11 @@ public class OauthUserDaoImpl extends GenericDaoImpl<OauthUser> implements Oauth
 		try {
 			EntityManager entityManager = getEntityManager();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			CriteriaQuery<OauthUser> criteria = criteriaBuilder
-					.createQuery(OauthUser.class);
+			CriteriaQuery<OauthUser> criteria = criteriaBuilder.createQuery(OauthUser.class);
 			Root<OauthUser> root = criteria.from(OauthUser.class);
-			Predicate emailPredicate = criteriaBuilder.equal(root.get("email"),
-					emailOrUsername);
-			Predicate usernamePredicate = criteriaBuilder.equal(
-					root.get("userName"), emailOrUsername);
-			Predicate wherePredicate = criteriaBuilder.or(usernamePredicate,
-					emailPredicate);
+			Predicate emailPredicate = criteriaBuilder.equal(root.get("email"), emailOrUsername);
+			Predicate usernamePredicate = criteriaBuilder.equal(root.get("userName"), emailOrUsername);
+			Predicate wherePredicate = criteriaBuilder.or(usernamePredicate, emailPredicate);
 			criteria.distinct(true).select(root).where(wherePredicate);
 			return entityManager.createQuery(criteria).getSingleResult();
 		} catch (Exception e) {

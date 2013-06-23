@@ -18,6 +18,10 @@
 	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource" p:driverClassName="${jdbc.driver.classname}" p:url="${jdbc.url}"
 		p:username="${jdbc.username}" p:password="${jdbc.password}" p:initialSize="${pool.size}" p:testWhileIdle="${test.idle}" p:validationQuery="${validation.query}"
 		p:validationQueryTimeout="${validation.timeout}" destroy-method="close" />
+	
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:db/initialDB.sql"/>
+	</jdbc:initialize-database>
 
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:security="http://www.springframework.org/schema/security" xmlns:tx="http://www.springframework.org/schema/tx"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:security="http://www.springframework.org/schema/security" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
@@ -22,6 +21,8 @@
 	<bean id="usersDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthUserDaoImpl" />
 	<bean id="roleDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthRoleDaoImpl" />
 	<bean id="oauthCodeDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthCodeDaoImpl" />
+	<bean id="accessTokenDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthAccessTokenDaoImpl" />
+	<bean id="refreshTokenDao" class="org.personal.mason.feop.oauth.service.dao.impl.OauthRefreshTokenDaoImpl" />
 
 
 	<bean id="userService" class="org.personal.mason.feop.oauth.service.spi.impl.OUserServiceImpl" p:userDao-ref="usersDao"
@@ -29,6 +30,10 @@
 	<bean id="clientDetailService" class="org.personal.mason.feop.oauth.service.spi.impl.OClientDetailServiceImpl" p:oauthClientDetailDao-ref="oauthClientDetailDao" />
 	<bean id="authCodeService" class="org.personal.mason.feop.oauth.service.spi.impl.OAuthCodeServiceImpl" p:codeDao-ref="oauthCodeDao" />
 	<bean id="roleService" class="org.personal.mason.feop.oauth.service.spi.impl.ORoleServiceImpl" p:roleDao-ref="roleDao" />
+	<bean id="accessTokenService" class="org.personal.mason.feop.oauth.service.spi.impl.OAccessTokenServiceImpl" p:accessTokenDao-ref="accessTokenDao" />
+	<bean id="refreshTokenService" class="org.personal.mason.feop.oauth.service.spi.impl.ORefreshTokenServiceImpl" p:refreshTokenDao-ref="refreshTokenDao" />
+
+
 	<bean id="userContext" class="org.personal.mason.feop.oauth.service.spi.impl.OUserContextStub">
 		<constructor-arg ref="userService" name="userService" />
 	</bean>

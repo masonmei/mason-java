@@ -3,39 +3,38 @@ package org.personal.mason.feop.oauth.service.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the oauth_access_token database table.
  * 
  */
 @Entity
-@Table(name="oauth_access_token")
+@Table(name = "oauth_access_token")
 public class OauthAccessToken implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Lob
 	private byte[] authentication;
 
-	@Column(name="authentication_id")
+	@Column(name = "authentication_id", unique = true)
 	private String authenticationId;
 
-	@Column(name="client_id")
+	@Column(name = "client_id")
 	private String clientId;
 
-	@Column(name="refresh_token")
+	@Column(name = "refresh_token")
 	private String refreshToken;
 
 	@Lob
 	private byte[] token;
 
-	@Column(name="token_id")
+	@Column(name = "token_id", unique = true)
 	private String tokenId;
 
-	@Column(name="user_name")
+	@Column(name = "user_name")
 	private String userName;
 
 	public OauthAccessToken() {

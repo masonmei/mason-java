@@ -22,12 +22,10 @@ public class OauthClientDetailDaoImpl extends GenericDaoImpl<OauthClientDetail> 
 		try {
 			EntityManager entityManager = getEntityManager();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			CriteriaQuery<OauthClientDetail> criteria = criteriaBuilder
-					.createQuery(OauthClientDetail.class);
+			CriteriaQuery<OauthClientDetail> criteria = criteriaBuilder.createQuery(OauthClientDetail.class);
 			Root<OauthClientDetail> root = criteria.from(OauthClientDetail.class);
-			
-			Predicate wherePredicate = criteriaBuilder.equal(
-					root.get("clientId"), clientId);
+
+			Predicate wherePredicate = criteriaBuilder.equal(root.get("clientId"), clientId);
 			criteria.distinct(true).select(root).where(wherePredicate);
 			return entityManager.createQuery(criteria).getSingleResult();
 		} catch (Exception e) {

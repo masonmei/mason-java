@@ -71,11 +71,11 @@
 	<security:http pattern="/client/**" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager">
 		<security:anonymous enabled="false" />
-		<security:intercept-url pattern="/client/" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		<security:intercept-url pattern="/client/form" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		<security:intercept-url pattern="/client/info" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		<security:intercept-url pattern="/client/create" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		
+		<security:intercept-url pattern="/client/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client/form" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client/info" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client/create" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
 		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
 	</security:http>
 
@@ -102,21 +102,21 @@
 
 	<!-- 服务点的验证与授权方式 -->
 	<oauth2:authorization-server client-details-service-ref="clientDetails" token-services-ref="tokenServices"
-		user-approval-handler-ref="userApprovalHandler">
+		user-approval-handler-ref="userApprovalHandler" authorization-endpoint-url="/oauth/authorize" token-endpoint-url="/oauth/token">
 		<!-- 适用于所有有Server端配合的应用和无Server端应用 -->
-		<oauth2:authorization-code authorization-code-services-ref="oauth2AuthorizationCodeService" />
+		<oauth2:authorization-code authorization-code-services-ref="oauth2AuthorizationCodeService" disabled="false"/>
 
 		<!-- 适用于所有无Server端配合的应用（桌面客户端需要内嵌浏览器） -->
-		<oauth2:implicit />
+		<oauth2:implicit disabled="false" />
 
 		<!-- 令牌刷新方式，适用于所有有Server端配合的应用 -->
-		<oauth2:refresh-token />
+		<oauth2:refresh-token disabled="false" />
 
 		<!-- 采用应用公钥、密钥获取Access Token，适用于任何类型应用 -->
-		<oauth2:client-credentials disabled="true" />
+		<oauth2:client-credentials disabled="false" />
 
 		<!-- 适用于无法使用浏览器发起服务端和客户端验流程的应用 -->
-		<oauth2:password disabled="true" />
+		<oauth2:password disabled="false" authentication-manager-ref="authenticationManager"/>
 	</oauth2:authorization-server>
 
 	<bean id="oauth2AuthorizationCodeService" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2AuthorizationCodeServices"
@@ -127,6 +127,8 @@
 	<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.JdbcTokenStore">
 		<constructor-arg ref="dataSource" />
 	</bean>
+	<!-- <bean id="tokenStore" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2TokenStore" p:accessTokenService-ref="accessTokenService"
+		p:refreshTokenService-ref="refreshTokenService" /> -->
 	<!-- Tokens管理 -->
 	<bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
 		<property name="tokenStore" ref="tokenStore" />
