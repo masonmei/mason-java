@@ -10,9 +10,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.personal.mason.feop.oauth.service.dao.GenericDao;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class GenericDaoImpl<T> implements GenericDao<T> {
+	protected final Log log = LogFactory.getLog(GenericDaoImpl.class);
+
 	private EntityManager entityManager;
 
 	@PersistenceContext
@@ -27,57 +33,87 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		return entityManager.getEntityManagerFactory().createEntityManager();
 	}
 
-	/**
-	 * @see org.appfuse.dao.DAO#saveObject(java.lang.Object)
-	 */
-	public void saveObject(T entity) {
-		EntityManager entityManager = getEntityManager();
-		entityManager.getTransaction().begin();
-		entityManager.persist(entity);
-		entityManager.getTransaction().commit();
+	public Class<T> getEntityType() {
+		throw new NotImplementedException();
 	}
 
-	/**
-	 * @see org.appfuse.dao.DAO#getObject(java.lang.Class, java.io.Serializable)
-	 */
-	public T getObject(Class<T> clazz, Serializable id) {
+	@Override
+	public T findById(Serializable id) {
 		try {
-			return getEntityManager().find(clazz, id);
+			return getEntityManager().find(getEntityType(), id);
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	/**
-	 * @see org.appfuse.dao.DAO#getObjects(java.lang.Class)
-	 */
-	public List<T> getObjects(Class<T> clazz) {
+	@Override
+	public void saveObject(T entity) {
+		log.debug("start save entity [" + entity + "]");
 		try {
 			EntityManager entityManager = getEntityManager();
-			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(clazz);
-			Root<T> root = criteria.from(clazz);
-			criteria.select(root);
-			return entityManager.createQuery(criteria).getResultList();
+			 entityManager.getTransaction().begin();
+			 entityManager.persist(entity);
+			 entityManager.getTransaction().commit();
+			log.debug("end save entity [" + entity + "]");
 		} catch (Exception e) {
-			return Collections.emptyList();
+			log.debug("exception save entity [" + entity + "]");
 		}
+
+		// EntityManager entityManager = getEntityManager();
+		// entityManager.getTransaction().begin();
+		// entityManager.persist(entity);
+		// entityManager.getTransaction().commit();
 	}
 
-	/**
-	 * @see org.appfuse.dao.DAO#removeObject(java.lang.Class,
-	 *      java.io.Serializable)
-	 */
+	@Override
+	public void udpate(T entity) {
+		log.debug("start update entity [" + entity + "]");
+		try {
+			getEntityManager().merge(entity);
+			log.debug("end update entity [" + entity + "]");
+		} catch (Exception e) {
+			log.debug("exception delete entity [" + entity + "]");
+		}
+
+	}
+
+	@Override
 	public void removeObject(Class<T> clazz, Serializable id) {
-		T entity = getObject(clazz, id);
-		removeObject(entity);
+		log.debug("start delete entity  with id [" + id + "]");
+		try {
+			getEntityManager().remove(findById(id));
+			log.debug("end delete entity with id [" + id + "]");
+		} catch (Exception e) {
+			log.debug("exception delete entity with by id [" + id + "]", e);
+		}
 	}
 
 	@Override
 	public void removeObject(T entity) {
-		if (entity != null) {
+		log.debug("exception delete entity [" + entity + "]");
+		try {
 			getEntityManager().remove(entity);
+			log.debug("exception delete entity");
+		} catch (Exception e) {
+			log.debug("exception delete entity", e);
 		}
+	}
+
+	@Override
+	public List<T> findAll() {
+		log.debug("find entities of class [" + getEntityType() + "]");
+		try {
+			EntityManager entityManager = getEntityManager();
+			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+			CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getEntityType());
+			Root<T> root = criteria.from(getEntityType());
+			criteria.select(root);
+			return entityManager.createQuery(criteria).getResultList();
+		} catch (Exception e) {
+			log.debug("exception find entities of class [" + getEntityType() + "]", e);
+			return Collections.emptyList();
+		}
+
 	}
 
 	/**

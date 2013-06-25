@@ -2,6 +2,7 @@ package org.personal.mason.feop.oauth.service.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class OauthUser extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4887499676134613261L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

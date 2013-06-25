@@ -16,12 +16,17 @@ import org.personal.mason.feop.oauth.service.domain.OauthUser;
 public class OauthUserDaoImpl extends GenericDaoImpl<OauthUser> implements OauthUserDao {
 
 	@Override
+	public Class<OauthUser> getEntityType() {
+		return OauthUser.class;
+	}
+
+	@Override
 	public OauthUser findByEmailOrUsername(String emailOrUsername) {
 		try {
 			EntityManager entityManager = getEntityManager();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			CriteriaQuery<OauthUser> criteria = criteriaBuilder.createQuery(OauthUser.class);
-			Root<OauthUser> root = criteria.from(OauthUser.class);
+			CriteriaQuery<OauthUser> criteria = criteriaBuilder.createQuery(getEntityType());
+			Root<OauthUser> root = criteria.from(getEntityType());
 			Predicate emailPredicate = criteriaBuilder.equal(root.get("email"), emailOrUsername);
 			Predicate usernamePredicate = criteriaBuilder.equal(root.get("userName"), emailOrUsername);
 			Predicate wherePredicate = criteriaBuilder.or(usernamePredicate, emailPredicate);

@@ -11,10 +11,12 @@ import org.personal.mason.feop.oauth.service.mvc.model.SignupForm;
 import org.personal.mason.feop.oauth.service.spi.OUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+@Service
 public class OUserServiceImpl implements OUserService {
 	private OauthUserDao userDao;
 	private OauthRoleDao roleDao;
@@ -60,11 +62,13 @@ public class OUserServiceImpl implements OUserService {
 	}
 
 	@Override
+	@Transactional
 	public OauthUser findUserById(Serializable id) {
-		return userDao.getObject(OauthUser.class, id);
+		return userDao.findById(id);
 	}
 
 	@Override
+	@Transactional
 	public OauthUser findByEmailOrUsername(String emailOrUsername) {
 		return userDao.findByEmailOrUsername(emailOrUsername);
 	}

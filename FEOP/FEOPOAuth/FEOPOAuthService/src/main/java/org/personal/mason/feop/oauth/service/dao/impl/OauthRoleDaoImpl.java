@@ -18,6 +18,11 @@ public class OauthRoleDaoImpl extends GenericDaoImpl<OauthRole> implements Oauth
 	private List<OauthRole> defaultUserRoles = null;
 
 	@Override
+	public Class<OauthRole> getEntityType() {
+		return OauthRole.class;
+	}
+
+	@Override
 	public List<OauthRole> getDefaultUserRoles() {
 
 		if (defaultUserRoles != null) {
@@ -27,8 +32,8 @@ public class OauthRoleDaoImpl extends GenericDaoImpl<OauthRole> implements Oauth
 		try {
 			EntityManager entityManager = getEntityManager();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-			CriteriaQuery<OauthRole> criteria = criteriaBuilder.createQuery(OauthRole.class);
-			Root<OauthRole> root = criteria.from(OauthRole.class);
+			CriteriaQuery<OauthRole> criteria = criteriaBuilder.createQuery(getEntityType());
+			Root<OauthRole> root = criteria.from(getEntityType());
 			Predicate roleNamePredicate = criteriaBuilder.equal(root.get("name"), DEFAULT_USER_ROLE);
 			Predicate enablePredicate = criteriaBuilder.equal(root.get("enabled"), true);
 			Predicate wherePredicate = criteriaBuilder.and(roleNamePredicate, enablePredicate);

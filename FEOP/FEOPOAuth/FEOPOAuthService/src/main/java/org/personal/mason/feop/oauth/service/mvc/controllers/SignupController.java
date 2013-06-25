@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.personal.mason.feop.oauth.service.domain.OauthUser;
 import org.personal.mason.feop.oauth.service.mvc.model.SignupForm;
-import org.personal.mason.feop.oauth.service.spi.OUserContext;
 import org.personal.mason.feop.oauth.service.spi.OUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,18 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class SignupController {
 
-	private final OUserContext userContext;
 	private final OUserService userService;
 
 	@Autowired
-	public SignupController(OUserContext userContext, OUserService userService) {
-		if (userContext == null) {
-			throw new IllegalArgumentException("User Context cannot be null");
-		}
+	public SignupController(OUserService userService) {
 		if (userService == null) {
 			throw new IllegalArgumentException("User Service cannot be null");
 		}
-		this.userContext = userContext;
 		this.userService = userService;
 	}
 
@@ -51,7 +45,6 @@ public class SignupController {
 
 		OauthUser user = userService.createUser(signupForm);
 		userService.regist(user);
-		userContext.setCurrentUser(user);
 
 		redirectAttributes.addFlashAttribute("message", "You have successfully signed up and logged in.");
 		return "redirect:/";

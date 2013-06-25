@@ -14,6 +14,11 @@ import org.personal.mason.feop.oauth.service.domain.OauthRefreshToken;
 public class OauthRefreshTokenDaoImpl extends GenericDaoImpl<OauthRefreshToken> implements OauthRefreshTokenDao {
 
 	@Override
+	public Class<OauthRefreshToken> getEntityType() {
+		return OauthRefreshToken.class;
+	}
+
+	@Override
 	public OauthRefreshToken findRefreshTokenWithTokenId(String tokenId) {
 		try {
 			EntityManager entityManager = getEntityManager();

@@ -6,8 +6,10 @@ import org.personal.mason.feop.oauth.service.dao.OauthAccessTokenDao;
 import org.personal.mason.feop.oauth.service.domain.OauthAccessToken;
 import org.personal.mason.feop.oauth.service.spi.OAccessTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class OAccessTokenServiceImpl implements OAccessTokenService {
 
 	private OauthAccessTokenDao accessTokenDao;
@@ -44,16 +46,19 @@ public class OAccessTokenServiceImpl implements OAccessTokenService {
 	}
 
 	@Override
+	@Transactional
 	public OauthAccessToken findAccessTokenWithAuthenticationId(String key) {
 		return accessTokenDao.findAccessTokenWithAuthenticationId(key);
 	}
 
 	@Override
+	@Transactional
 	public List<OauthAccessToken> findAccessTokenWithUsername(String userName) {
 		return accessTokenDao.findAccessTokenWithUsername(userName);
 	}
 
 	@Override
+	@Transactional
 	public List<OauthAccessToken> findAccessTokenWithClientId(String clientId) {
 		return accessTokenDao.findAccessTokenWithClientId(clientId);
 	}

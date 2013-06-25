@@ -30,18 +30,14 @@ public class OAuth2UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		// 查找奇艺用户
 		OauthUser user = userService.findByEmailOrUsername(username);
-
 		System.out.println("UserDetails:" + user);
 
 		if (null == user) {
 			throw new UsernameNotFoundException("Invalid User");
 		}
 
-		// 获取用户角色
 		Collection<GrantedAuthority> grantedAuths = this.obtionGrantedAuthorities(user);
-
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -52,12 +48,6 @@ public class OAuth2UserDetailsServiceImpl implements UserDetailsService {
 		return userDetail;
 	}
 
-	/**
-	 * 取得用户的权限
-	 * 
-	 * @param users
-	 * @return
-	 */
 	private Set<GrantedAuthority> obtionGrantedAuthorities(OauthUser user) {
 
 		if (null == user) {

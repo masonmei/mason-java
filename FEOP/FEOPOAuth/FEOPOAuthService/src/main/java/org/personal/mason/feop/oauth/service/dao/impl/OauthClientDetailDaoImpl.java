@@ -12,6 +12,11 @@ import org.personal.mason.feop.oauth.service.domain.OauthClientDetail;
 public class OauthClientDetailDaoImpl extends GenericDaoImpl<OauthClientDetail> implements OauthClientDetailDao {
 
 	@Override
+	public Class<OauthClientDetail> getEntityType() {
+		return OauthClientDetail.class;
+	}
+
+	@Override
 	public boolean saveClient(OauthClientDetail client) {
 		saveObject(client);
 		return client.getId() != null;
@@ -31,6 +36,12 @@ public class OauthClientDetailDaoImpl extends GenericDaoImpl<OauthClientDetail> 
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public void updateApplication(OauthClientDetail oauthClientDetail) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

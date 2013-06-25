@@ -12,7 +12,9 @@ import org.personal.mason.feop.oauth.service.spi.PhotoService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PhotoServiceImpl implements PhotoService {
 	private List<PhotoInfo> photos;
 

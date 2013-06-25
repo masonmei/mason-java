@@ -10,6 +10,11 @@ import org.personal.mason.feop.oauth.service.dao.OauthCodeDao;
 import org.personal.mason.feop.oauth.service.domain.OauthCode;
 
 public class OauthCodeDaoImpl extends GenericDaoImpl<OauthCode> implements OauthCodeDao {
+	
+	@Override
+	public Class<OauthCode> getEntityType() {
+		return OauthCode.class;
+	}
 
 	@Override
 	public OauthCode findOauthCodeByCode(String code) {

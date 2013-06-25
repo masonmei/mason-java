@@ -9,6 +9,7 @@
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/ORoleService.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/model/ClientForm.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/DefaultController.java
+/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/oauth2/OAuth2ClientDetailsService.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/domain/OauthRefreshToken.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/autologin/AutoLoginAuthenticationRequest.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/AccessConfirmationController.java
@@ -27,16 +28,13 @@
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/dao/impl/OauthRefreshTokenDaoImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/autologin/DefaultAutoLoginCodeStore.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/dao/OauthUserDao.java
-/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/OUserContextStub.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/model/SignupForm.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/PhotoServiceImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/autologin/AutologinController.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/OClientDetailServiceImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/autologin/SocialClientUserDetails.java
-/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/OUserContext.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/dao/impl/GenericDaoImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/OUserService.java
-/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/oauth2/OAuth2ClientDetailsServiceImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/dao/OauthClientTokenDao.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/oauth2/OAuth2UsernamePasswordAuthenticationFilter.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/SignupController.java
@@ -45,6 +43,7 @@
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/OUserServiceImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/OAccessTokenService.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/ClientTypes.java
+/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/Oauth2TokenController.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/oauth2/OAuth2UserApprovalHandler.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/PhotoService.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/impl/OAccessTokenServiceImpl.java
@@ -58,6 +57,7 @@
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/dao/impl/OauthRoleDaoImpl.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/domain/OauthClientToken.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/spi/OAuthCodeService.java
+/Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/oauth/ClientType.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/ApplicationRegistrationController.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/PhotoController.java
 /Users/mason/SCM/github/mason-java/FEOP/FEOPOAuth/FEOPOAuthService/src/main/java/org/personal/mason/feop/oauth/service/mvc/controllers/OAuth2Controller.java

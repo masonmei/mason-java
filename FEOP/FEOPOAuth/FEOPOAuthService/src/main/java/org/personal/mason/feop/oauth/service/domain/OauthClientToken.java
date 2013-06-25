@@ -18,6 +18,11 @@ import javax.persistence.Table;
 @Table(name = "oauth_client_token")
 public class OauthClientToken extends BaseObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5124879682905975648L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

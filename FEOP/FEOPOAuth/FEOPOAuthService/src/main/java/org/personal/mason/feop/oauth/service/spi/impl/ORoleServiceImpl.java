@@ -6,7 +6,9 @@ import org.personal.mason.feop.oauth.service.dao.OauthRoleDao;
 import org.personal.mason.feop.oauth.service.domain.OauthRole;
 import org.personal.mason.feop.oauth.service.spi.ORoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ORoleServiceImpl implements ORoleService {
 
 	private OauthRoleDao roleDao;

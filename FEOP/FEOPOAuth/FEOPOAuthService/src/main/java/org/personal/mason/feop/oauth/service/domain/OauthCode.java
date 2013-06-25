@@ -17,6 +17,11 @@ import javax.persistence.Table;
 @Table(name = "oauth_code")
 public class OauthCode extends BaseObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 880869016537752129L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

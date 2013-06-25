@@ -16,6 +16,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class OauthRole extends BaseObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1019367973729294374L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

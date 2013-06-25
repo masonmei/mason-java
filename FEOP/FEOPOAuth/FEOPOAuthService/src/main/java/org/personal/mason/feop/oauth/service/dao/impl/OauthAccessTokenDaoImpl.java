@@ -17,6 +17,11 @@ import org.personal.mason.feop.oauth.service.domain.OauthAccessToken;
 public class OauthAccessTokenDaoImpl extends GenericDaoImpl<OauthAccessToken> implements OauthAccessTokenDao {
 
 	@Override
+	public Class<OauthAccessToken> getEntityType() {
+		return OauthAccessToken.class;
+	}
+
+	@Override
 	public OauthAccessToken findAccessTokenWithTokenId(String tokenId) {
 		try {
 			EntityManager entityManager = getEntityManager();

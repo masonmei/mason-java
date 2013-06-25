@@ -4,8 +4,10 @@ import org.personal.mason.feop.oauth.service.dao.OauthRefreshTokenDao;
 import org.personal.mason.feop.oauth.service.domain.OauthRefreshToken;
 import org.personal.mason.feop.oauth.service.spi.ORefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ORefreshTokenServiceImpl implements ORefreshTokenService {
 
 	private OauthRefreshTokenDao refreshTokenDao;
@@ -25,6 +27,7 @@ public class ORefreshTokenServiceImpl implements ORefreshTokenService {
 	}
 
 	@Override
+	@Transactional
 	public OauthRefreshToken findRefreshTokenWithTokenId(String tokenId) {
 		return refreshTokenDao.findRefreshTokenWithTokenId(tokenId);
 	}

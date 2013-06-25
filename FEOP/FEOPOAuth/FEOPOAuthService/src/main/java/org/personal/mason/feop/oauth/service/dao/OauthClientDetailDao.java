@@ -8,4 +8,6 @@ public interface OauthClientDetailDao extends GenericDao<OauthClientDetail> {
 
 	public OauthClientDetail findByClientId(String clientId);
 
+	public void updateApplication(OauthClientDetail oauthClientDetail);
+
 }
