@@ -22,6 +22,7 @@ org/personal/mason/feop/oauth/service/oauth2/OAuth2ClientDetailsService.class
 org/personal/mason/feop/oauth/service/spi/ORoleService.class
 org/personal/mason/feop/oauth/service/domain/OauthCode.class
 org/personal/mason/feop/oauth/service/dao/impl/GenericDaoImpl.class
+org/personal/mason/feop/oauth/service/spi/impl/AuthorizationType.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2TokenStore.class
 org/personal/mason/feop/oauth/service/mvc/model/SignupForm.class
 org/personal/mason/feop/oauth/service/spi/impl/OAccessTokenServiceImpl.class
@@ -55,7 +56,6 @@ org/personal/mason/feop/oauth/service/spi/impl/ORefreshTokenServiceImpl.class
 org/personal/mason/feop/oauth/service/mvc/autologin/OAuthAuthority.class
 org/personal/mason/feop/oauth/service/spi/ORefreshTokenService.class
 org/personal/mason/feop/oauth/service/mvc/controllers/Oauth2TokenController.class
-org/personal/mason/feop/oauth/service/spi/impl/ClientTypes.class
 org/personal/mason/feop/oauth/service/mvc/autologin/SocialClientUserDetails$Source.class
 org/personal/mason/feop/oauth/service/dao/GenericDao.class
 org/personal/mason/feop/oauth/service/oauth2/OAuth2UserDetailsServiceImpl.class

@@ -30,9 +30,9 @@ public class OClientDetailServiceImpl implements OClientDetailService {
 
 	@Override
 	public void decorateClientBy(OauthClientDetail client, String clientTypeName) {
-		ClientTypes clientType = ClientTypes.getClientTypeWithName(clientTypeName);
+		AuthorizationType clientType = AuthorizationType.getClientTypeWithName(clientTypeName);
 		client.setScope(clientType.getScope());
-		client.setAuthorizedGrantTypes(clientType.getGrantTypes());
+		client.setAuthorizedGrantTypes(clientType.getGrantType());
 		client.setAuthorities(clientType.getAuthorities());
 		client.setAccessTokenValidity(clientType.getAccessTokenValidity());
 		client.setRefreshTokenValidity(clientType.getRefreshTokenValidity());

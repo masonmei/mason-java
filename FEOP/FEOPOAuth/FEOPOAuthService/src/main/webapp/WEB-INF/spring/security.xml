@@ -100,21 +100,12 @@
 
 	<!-- 服务点的验证与授权方式 -->
 	<oauth2:authorization-server client-details-service-ref="clientDetails" token-services-ref="tokenServices"
-		user-approval-handler-ref="userApprovalHandler" authorization-endpoint-url="/oauth/authorize" token-endpoint-url="/oauth/token">
-		<!-- 适用于所有有Server端配合的应用和无Server端应用 -->
-		<oauth2:authorization-code authorization-code-services-ref="oauth2AuthorizationCodeService" disabled="false"/>
-
-		<!-- 适用于所有无Server端配合的应用（桌面客户端需要内嵌浏览器） -->
-		<oauth2:implicit disabled="false" />
-
-		<!-- 令牌刷新方式，适用于所有有Server端配合的应用 -->
-		<oauth2:refresh-token disabled="false" />
-
-		<!-- 采用应用公钥、密钥获取Access Token，适用于任何类型应用 -->
-		<oauth2:client-credentials disabled="false" />
-
-		<!-- 适用于无法使用浏览器发起服务端和客户端验流程的应用 -->
-		<oauth2:password disabled="false" authentication-manager-ref="authenticationManager"/>
+		authorization-endpoint-url="/oauth/authorize" token-endpoint-url="/oauth/token">
+		<oauth2:authorization-code />
+		<oauth2:implicit />
+		<oauth2:refresh-token />
+		<oauth2:client-credentials />
+		<oauth2:password />
 	</oauth2:authorization-server>
 
 	<bean id="oauth2AuthorizationCodeService" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2AuthorizationCodeServices"
@@ -125,13 +116,14 @@
 	<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.JdbcTokenStore">
 		<constructor-arg ref="dataSource" />
 	</bean>
-	<!-- <bean id="tokenStore" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2TokenStore" p:accessTokenService-ref="accessTokenService"
-		p:refreshTokenService-ref="refreshTokenService" /> -->
+	<!-- <bean id="tokenStore" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2TokenStore" p:accessTokenService-ref="accessTokenService" p:refreshTokenService-ref="refreshTokenService" 
+		/> -->
 	<!-- Tokens管理 -->
 	<bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
 		<property name="tokenStore" ref="tokenStore" />
 		<property name="supportRefreshToken" value="true" />
-		<property name="clientDetailsService" ref="clientDetails" />
+		<property name="accessTokenValiditySeconds" value="3600" />
+		<property name="refreshTokenValiditySeconds" value="36000" />
 	</bean>
 	<!-- 配置服务端受保护的资源 -->
 	<!-- Resource Server Configuration 过滤受保护的资源 初始化时候（@link CompositeFilter）组成一个过滤链来处理access_token的有效性 （@link CompositeFilter）过滤器包含Oauth一组过滤链（@link 
@@ -139,7 +131,12 @@
 	<oauth2:resource-server id="resourceServerFilter" resource-id="sparklr" token-services-ref="tokenServices" />
 
 	<!-- 预先注册的客户端（consumer）相关配置信息 -->
-	<bean id="clientDetails" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2ClientDetailsService" p:clientDetailService-ref="clientDetailService" />
+	<bean id="clientDetails" class="org.springframework.security.oauth2.provider.JdbcClientDetailsService">
+		<constructor-arg name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- <bean id="clientDetails" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2ClientDetailsService" p:clientDetailService-ref="clientDetailService" 
+		/> -->
 
 	<!-- 客户端有效性验证 -->
 	<bean id="userApprovalHandler" class="org.personal.mason.feop.oauth.service.oauth2.OAuth2UserApprovalHandler">

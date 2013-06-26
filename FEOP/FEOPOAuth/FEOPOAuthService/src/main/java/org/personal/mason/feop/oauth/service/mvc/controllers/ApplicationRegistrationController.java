@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import org.personal.mason.feop.oauth.service.domain.OauthClientDetail;
 import org.personal.mason.feop.oauth.service.mvc.model.ClientForm;
 import org.personal.mason.feop.oauth.service.spi.OClientDetailService;
-import org.personal.mason.feop.oauth.service.spi.impl.ClientTypes;
+import org.personal.mason.feop.oauth.service.spi.impl.AuthorizationType;
 import org.personal.mason.feop.oauth.service.utils.SecuriteGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class ApplicationRegistrationController {
 
 	@RequestMapping(value = { "/client/", "/client/form" })
 	public String signup(@ModelAttribute ClientForm clientForm, ModelMap map) {
-		map.addAttribute("client_types", ClientTypes.getAllTypes());
+		map.addAttribute("client_types", AuthorizationType.getAllTypes());
 		return "client/form";
 	}
 
