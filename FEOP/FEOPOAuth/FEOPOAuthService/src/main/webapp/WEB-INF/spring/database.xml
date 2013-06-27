@@ -10,12 +10,12 @@
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" p:locations="classpath:jdbc.properties" />
 
 
-	<bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" p:initialSize="10" p:maxActive="100"
+	<!-- <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" p:initialSize="10" p:maxActive="100"
 		p:maxIdle="30" p:minIdle="10" p:logAbandoned="true" p:removeAbandoned="true" p:removeAbandonedTimeout="100" p:maxWait="5000" p:testOnBorrow="false"
 		p:testOnReturn="false" p:testWhileIdle="true" p:minEvictableIdleTimeMillis="0" p:timeBetweenEvictionRunsMillis="60" p:validationQuery="select 1"
-		p:numTestsPerEvictionRun="100" />
+		p:numTestsPerEvictionRun="100" /> -->
 
-	<bean id="dataSource" parent="parentDataSource" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
 		p:password="${jdbc.password}" />
 
 	<jdbc:initialize-database data-source="dataSource">

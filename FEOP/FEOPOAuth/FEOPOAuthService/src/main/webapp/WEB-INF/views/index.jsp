@@ -8,60 +8,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="pageTitle" value="OAuth Platform" scope="request" />
+<c:set var="pageTitle" value="Open Auth Platform" scope="request" />
 <title><c:out value="${pageTitle }" /></title>
-<title>OAuth Platform</title>
 <link type="text/css" rel="stylesheet"
-	href="<c:url value="/resources/css/style.css"/>" />
+	href="<c:url value="/resources/css/default.css"/>" />
 
-<authz:authorize ifAllGranted="ROLE_USER">
-	<script type='text/javascript'>
-		function pictureDisplay(json) {
-			for ( var i = 0; i < json.photos.length; i++) {
-				var photo = json.photos[i];
-				document
-						.write('<img src="photos/' + photo.id + '" alt="' + photo.name + '">');
-			}
-		}
-	</script>
-</authz:authorize>
 </head>
 <body>
-	<h1>Open Auth Platform</h1>
-	<div id="content">
-		<h2>Welcome to OAuth Platform</h2>
+	<div id="container">
+		<div id="header">
+			<div id="header-left">Open Auth Platform</div>
+			<div id="header-right">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<div style="text-align: center">
 
-		<authz:authorize ifNotGranted="ROLE_USER">
-			<h2>Login</h2>
-			<form id="loginForm" name="loginForm"
-				action="<c:url value="/oauth/login.do"/>" method="post">
-				<p>
-					<label>Email: <input type='text' name='j_username'></label>
-				</p>
-				<p>
-					<label>Secret: <input type="password" name='j_password'></label>
-				</p>
-
-				<p>
-					<input name="login" value="Login" type="submit">
-				</p>
-			</form>
-		</authz:authorize>
-		<authz:authorize ifAllGranted="ROLE_USER">
-			<div style="text-align: center">
-				<form action="<c:url value="/oauth/logout.do"/>">
-					<input type="submit" value="Logout">
-				</form>
+						<a href="<c:url value="/oauth/logout.do"/>">Logout</a>
+					</div>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/signup/"/>">Signup</a>
+				</authz:authorize>
 			</div>
+		</div>
 
-			<h2>Your personal information</h2>
-			<p>
-				<script type='text/javascript'
-					src='photos.do?callback=pictureDisplay&format=json'></script>
-			</p>
-		</authz:authorize>
+		<div id="content">
+			<div id="content-header">
+				<h2>Welcome to OAuth Platform</h2>
+			</div>
+			<authz:authorize ifNotGranted="ROLE_USER">
+				<div id="login-form">
+					<div id="login-form-header">Welcome to login Open Auth
+						Platform</div>
+					<div id="login-form-content">
+						<form id="loginForm" name="loginForm"
+							action="<c:url value="/oauth/login.do"/>" method="post">
+							<p>
+								<label>Email: <input class="input" type='text'
+									name='j_username'></label>
+							</p>
+							<p>
+								<label>Secret: <input class="input" type="password"
+									name='j_password'></label>
+							</p>
+							<p>
+								<input class="button" name="login" value="Login" type="submit">
+								<input class="button" name="reset" value="Reset" type="reset">
+							</p>
+						</form>
+					</div>
+				</div>
+			</authz:authorize>
+		</div>
 	</div>
-
-	<div id="footer">OAuth2.0</div>
+	<div id="footer">Copyright &copy 2013 oauth.com. All rights
+		reserved.</div>
 </body>
 </html>

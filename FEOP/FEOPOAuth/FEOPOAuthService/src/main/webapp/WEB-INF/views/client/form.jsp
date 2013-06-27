@@ -8,22 +8,47 @@
 <html>
 <head>
 <title><c:out value="${pageTitle }" /></title>
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/css/default.css"/>" />
 </head>
 <body>
-	<form:form action="./create" method="post" modelAttribute="clientForm">
-		<form:errors path="*" element="div" cssClass="alert alert-error" />
-		<fieldset>
-			<legend>User Information</legend>
-			<label for="clientName">Client Name</label>
-			<form:input path="clientName" id="clientName" />
-			<label for="clientType">Client Type</label>
-			<form:radiobuttons path="clientType" items="${client_types }" />
-			<label for="redirectUrl">Redirect Url</label>
-			<form:input path="redirectUrl" id="redirectUrl"/>
-			<div>
-				<input id="submit" type="submit" value="Create Account" />
+	<div id="container">
+		<div id="header">
+			<div id="header-left">Open Auth Platform</div>
+		</div>
+		<div id="content">
+			<div id="content-header">
+				<h2>Create Application</h2>
 			</div>
-		</fieldset>
-	</form:form>
+			<div id="login-form">
+				<div id="login-form-header">Application Information</div>
+				<div id="login-form-content">
+					<c:url value="/client/create" var="newAction" />
+					<form:form action="${newAction }" method="post"
+						modelAttribute="clientForm">
+						<form:errors path="*" element="div" cssClass="alert alert-error" />
+						<p>
+							<label for="clientName">Client Name</label>
+							<form:input path="clientName" id="clientName" cssClass="input" />
+						</p>
+						<p>
+							<label for="clientType">Client Type</label>
+							<form:radiobuttons path="clientType" items="${client_types }"
+								cssClass="input" />
+						</p>
+						<p>
+							<label for="redirectUrl">Redirect Url</label>
+							<form:input path="redirectUrl" id="redirectUrl" cssClass="input" />
+						</p>
+						<p>
+							<input id="submit" type="submit" value="Create Account"
+								class="button" />
+						</p>
+					</form:form>
+				</div>
+			</div>
+		</div>
+		<div id="footer">Copyright &copy 2013 oauth.com. All rights
+			reserved.</div>
 </body>
 </html>
