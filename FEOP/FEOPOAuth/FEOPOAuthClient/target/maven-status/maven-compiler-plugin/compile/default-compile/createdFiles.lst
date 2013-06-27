@@ -1,6 +1,0 @@
-org/personal/mason/feop/oauth/client/mvc/SparklrController.class
-org/personal/mason/feop/oauth/client/converter/AccessTokenRequestConverter.class
-org/personal/mason/feop/oauth/client/impl/SparklrServiceImpl.class
-org/personal/mason/feop/oauth/client/SparklrService.class
-org/personal/mason/feop/oauth/client/impl/SparklrServiceImpl$1.class
-org/personal/mason/feop/oauth/client/SparklrException.class
