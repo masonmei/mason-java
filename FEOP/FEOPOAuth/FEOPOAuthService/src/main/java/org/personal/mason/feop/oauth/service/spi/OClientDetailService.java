@@ -18,4 +18,6 @@ public interface OClientDetailService {
 
 	List<OauthClientDetail> findAllOauthClientDetails();
 
+	List<OauthClientDetail> findAllOauthClientDetailsByUser(String currentUser);
+
 }

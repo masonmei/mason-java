@@ -15,6 +15,17 @@
 	<div id="container">
 		<div id="header">
 			<div id="header-left">Open Auth Platform</div>
+			<div id="header-right">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<div style="text-align: center">
+
+						<a href="<c:url value="/oauth/logout.do"/>">Logout</a>
+					</div>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/signup/"/>">Signup</a>
+				</authz:authorize>
+			</div>
 		</div>
 		<div id="content">
 			<div id="content-header">

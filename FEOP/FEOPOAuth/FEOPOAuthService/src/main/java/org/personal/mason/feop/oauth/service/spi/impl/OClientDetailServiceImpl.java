@@ -47,7 +47,7 @@ public class OClientDetailServiceImpl implements OClientDetailService {
 	@Override
 	@Transactional
 	public void updateApplication(OauthClientDetail oauthClientDetail) {
-		oauthClientDetailDao.updateApplication(oauthClientDetail);
+		oauthClientDetailDao.udpate(oauthClientDetail);
 	}
 
 	@Override
@@ -60,6 +60,11 @@ public class OClientDetailServiceImpl implements OClientDetailService {
 	@Transactional
 	public List<OauthClientDetail> findAllOauthClientDetails() {
 		return oauthClientDetailDao.findAll();
+	}
+
+	@Override
+	public List<OauthClientDetail> findAllOauthClientDetailsByUser(String currentUser) {
+		return oauthClientDetailDao.findByOwner(currentUser);
 	}
 
 }

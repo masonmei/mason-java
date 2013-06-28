@@ -52,6 +52,9 @@ public class OauthClientDetail extends BaseObject {
 	@Column(name = "web_server_redirect_uri")
 	private String webServerRedirectUri;
 
+	@Column(name = "owner")
+	private String owner;
+
 	public OauthClientDetail() {
 	}
 
@@ -143,21 +146,49 @@ public class OauthClientDetail extends BaseObject {
 		this.webServerRedirectUri = webServerRedirectUri;
 	}
 
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((accessTokenValidity == null) ? 0 : accessTokenValidity.hashCode());
-		result = prime * result + ((additionalInformation == null) ? 0 : additionalInformation.hashCode());
-		result = prime * result + ((authorities == null) ? 0 : authorities.hashCode());
-		result = prime * result + ((authorizedGrantTypes == null) ? 0 : authorizedGrantTypes.hashCode());
-		result = prime * result + ((clientId == null) ? 0 : clientId.hashCode());
-		result = prime * result + ((clientSecret == null) ? 0 : clientSecret.hashCode());
+		result = prime
+				* result
+				+ ((accessTokenValidity == null) ? 0 : accessTokenValidity
+						.hashCode());
+		result = prime
+				* result
+				+ ((additionalInformation == null) ? 0 : additionalInformation
+						.hashCode());
+		result = prime * result
+				+ ((authorities == null) ? 0 : authorities.hashCode());
+		result = prime
+				* result
+				+ ((authorizedGrantTypes == null) ? 0 : authorizedGrantTypes
+						.hashCode());
+		result = prime * result
+				+ ((clientId == null) ? 0 : clientId.hashCode());
+		result = prime * result
+				+ ((clientSecret == null) ? 0 : clientSecret.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((refreshTokenValidity == null) ? 0 : refreshTokenValidity.hashCode());
-		result = prime * result + ((resourceIds == null) ? 0 : resourceIds.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		result = prime
+				* result
+				+ ((refreshTokenValidity == null) ? 0 : refreshTokenValidity
+						.hashCode());
+		result = prime * result
+				+ ((resourceIds == null) ? 0 : resourceIds.hashCode());
 		result = prime * result + ((scope == null) ? 0 : scope.hashCode());
-		result = prime * result + ((webServerRedirectUri == null) ? 0 : webServerRedirectUri.hashCode());
+		result = prime
+				* result
+				+ ((webServerRedirectUri == null) ? 0 : webServerRedirectUri
+						.hashCode());
 		return result;
 	}
 
@@ -204,6 +235,11 @@ public class OauthClientDetail extends BaseObject {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (owner == null) {
+			if (other.owner != null)
+				return false;
+		} else if (!owner.equals(other.owner))
 			return false;
 		if (refreshTokenValidity == null) {
 			if (other.refreshTokenValidity != null)

@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=utf8"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="authz"
@@ -35,29 +34,31 @@
 			<div id="content-header">
 				<h2>Welcome to OAuth Platform</h2>
 			</div>
-			<authz:authorize ifNotGranted="ROLE_USER">
-				<div id="login-form">
-					<div id="login-form-header">Welcome to login Open Auth
-						Platform</div>
-					<div id="login-form-content">
-						<form id="loginForm" name="loginForm"
-							action="<c:url value="/oauth/login.do"/>" method="post">
-							<p>
-								<label>Email: <input class="input" type='text'
-									name='j_username'></label>
-							</p>
-							<p>
-								<label>Secret: <input class="input" type="password"
-									name='j_password'></label>
-							</p>
-							<p>
-								<input class="button" name="login" value="Login" type="submit">
-								<input class="button" name="reset" value="Reset" type="reset">
-							</p>
-						</form>
+			<div id="content-body">
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<div id="login-form">
+						<div id="login-form-header">Welcome to login Open Auth
+							Platform</div>
+						<div id="login-form-content">
+							<form id="loginForm" name="loginForm"
+								action="<c:url value="/oauth/login.do"/>" method="post">
+								<p>
+									<label>Email: <input class="input" type='text'
+										name='j_username'></label>
+								</p>
+								<p>
+									<label>Secret: <input class="input" type="password"
+										name='j_password'></label>
+								</p>
+								<p>
+									<input class="button" name="login" value="Login" type="submit">
+									<input class="button" name="reset" value="Reset" type="reset">
+								</p>
+							</form>
+						</div>
 					</div>
-				</div>
-			</authz:authorize>
+				</authz:authorize>
+			</div>
 		</div>
 	</div>
 	<div id="footer">Copyright &copy 2013 oauth.com. All rights

@@ -32,9 +32,10 @@
 			<div id="content-header">
 				<h2>Welcome to OAuth Platform</h2>
 			</div>
-			<h1>You have been login!</h1>
-
-			<a href="<c:url value="/client/"/>">Client</a>
+			<div id="content-body">
+				<h1>You have been login!</h1>
+				<a href="<c:url value="/client/"/>">Client</a>
+			</div>
 		</div>
 	</div>
 	<div id="footer">Copyright &copy 2013 oauth.com. All rights

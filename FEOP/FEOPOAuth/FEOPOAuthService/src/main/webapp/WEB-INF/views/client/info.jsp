@@ -15,15 +15,33 @@
 	<div id="container">
 		<div id="header">
 			<div id="header-left">Open Auth Platform</div>
+			<div id="header-right">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<div style="text-align: center">
+
+						<a href="<c:url value="/oauth/logout.do"/>">Logout</a>
+					</div>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/signup/"/>">Signup</a>
+				</authz:authorize>
+			</div>
 		</div>
 		<div id="content">
 			<div id="content-header">
 				<h2>Create Application</h2>
 			</div>
-			<div id="login-form">
-				<label>Client Id: <c:out value="${client.clientId }" /></label> <label>Secret:
-					<c:out value="${client.clientSecret }" />
-				</label>
+			<div id="content-body">
+				<div style="width: 300px; left:35%; position: relative;">
+					<div class="widget">
+						<div class="widget-header">Your Application Information</div>
+						<div class="widget-body">
+							<div>Please remember the following information for using.</div>
+							<div><label>Client Id: <c:out value="${client.clientId }" /></label></div>
+							<div><label>Secret: <c:out value="${client.clientSecret }" /></label></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -70,10 +70,12 @@
 	<security:http pattern="/client/**" create-session="never" entry-point-ref="oauthAuthenticationEntryPoint"
 		access-decision-manager-ref="accessDecisionManager">
 		<security:anonymous enabled="false" />
-		<security:intercept-url pattern="/client/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/client/form" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/client/info" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/client/create" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/client/" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/client/form" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/client/info" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/client/create" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/client/list" access="IS_AUTHENTICATED_FULLY" />
+		<security:intercept-url pattern="/client/delete/**" access="IS_AUTHENTICATED_FULLY" />
 
 		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
 	</security:http>

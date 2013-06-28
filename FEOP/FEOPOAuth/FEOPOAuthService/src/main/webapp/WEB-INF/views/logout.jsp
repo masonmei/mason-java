@@ -14,7 +14,10 @@
 			<div id="header-left">Open Auth Platform</div>
 		</div>
 		<div id="content">
-			<div id="login-form">
+			<div id="content-header">
+				<h2>Logout Open Auth Platform</h2>
+			</div>
+			<div id="content-body">
 				<h1>You have been logout!</h1>
 			</div>
 		</div>
