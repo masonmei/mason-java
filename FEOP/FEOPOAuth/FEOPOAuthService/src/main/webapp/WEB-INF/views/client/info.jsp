@@ -14,7 +14,14 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<div id="header-left">Open Auth Platform</div>
+			<div id="header-left">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<a href="<c:url value="/home"/>">Open Auth Platform</a>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/"/>">Open Auth Platform</a>
+				</authz:authorize>
+			</div>
 			<div id="header-right">
 				<authz:authorize ifAllGranted="ROLE_USER">
 					<div style="text-align: center">
@@ -29,16 +36,46 @@
 		</div>
 		<div id="content">
 			<div id="content-header">
-				<h2>Create Application</h2>
+				<div id="content-header-left">
+					<h2>View Application</h2>
+				</div>
+				<div id="content-header-right">
+					<div id="menu-bar">
+						<ul id="main-menu">
+							<li><a href="<c:url value="/home"/>">Home</a></li>
+							<li><a href="<c:url value="/profile/"/>">Profile</a>
+								<ul class="sub-menu">
+									<li><a href="<c:url value="/profile/changepwd"/>">Change
+											Password</a></li>
+									<li><a href="<c:url value="/profile/"/>">Profile</a></li>
+									<li><a href="<c:url value="/profile/update"/>">Update
+											Profile</a></li>
+								</ul></li>
+							<li><a href="<c:url value="/client/list"/>">Applications</a>
+								<ul class="sub-menu">
+									<li><a href="<c:url value="/client/list"/>">My
+											Application</a></li>
+									<li><a href="<c:url value="/client/"/>">New
+											Application</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<div id="content-body">
-				<div style="width: 300px; left:35%; position: relative;">
+				<div style="width: 300px; left: 35%; position: relative;">
 					<div class="widget">
 						<div class="widget-header">Your Application Information</div>
 						<div class="widget-body">
 							<div>Please remember the following information for using.</div>
-							<div><label>Client Id: <c:out value="${client.clientId }" /></label></div>
-							<div><label>Secret: <c:out value="${client.clientSecret }" /></label></div>
+							<div class="line">
+								<label class="left">Client Id: </label> <label class="right"><c:out
+										value="${client.clientId }" /></label>
+							</div>
+							<div class="line">
+								<label class="left">Secret: </label> <label class="right"><c:out
+										value="${client.clientSecret }" /></label>
+							</div>
 						</div>
 					</div>
 				</div>

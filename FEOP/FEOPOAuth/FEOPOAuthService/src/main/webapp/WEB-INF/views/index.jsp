@@ -16,7 +16,14 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<div id="header-left">Open Auth Platform</div>
+			<div id="header-left">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<a href="<c:url value="/home"/>">Open Auth Platform</a>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/"/>">Open Auth Platform</a>
+				</authz:authorize>
+			</div>
 			<div id="header-right">
 				<authz:authorize ifAllGranted="ROLE_USER">
 					<div style="text-align: center">
@@ -32,7 +39,10 @@
 
 		<div id="content">
 			<div id="content-header">
-				<h2>Welcome to OAuth Platform</h2>
+				<div id="content-header-left">
+					<h2>Welcome to OAuth Platform</h2>
+				</div>
+
 			</div>
 			<div id="content-body">
 				<authz:authorize ifNotGranted="ROLE_USER">
@@ -42,18 +52,18 @@
 						<div id="login-form-content">
 							<form id="loginForm" name="loginForm"
 								action="<c:url value="/oauth/login.do"/>" method="post">
-								<p>
-									<label>Email: <input class="input" type='text'
-										name='j_username'></label>
-								</p>
-								<p>
-									<label>Secret: <input class="input" type="password"
-										name='j_password'></label>
-								</p>
-								<p>
-									<input class="button" name="login" value="Login" type="submit">
-									<input class="button" name="reset" value="Reset" type="reset">
-								</p>
+								<div class="line">
+									<label class="left">Email: </label><input class="right"
+										type='text' name='j_username'>
+								</div>
+								<div class="line">
+									<label class="left">Secret: </label><input class="right"
+										type="password" name='j_password'>
+								</div>
+								<div class="line">
+									<input class="left" name="login" value="Login" type="submit">
+									<input class="left" name="reset" value="Reset" type="reset">
+								</div>
 							</form>
 						</div>
 					</div>

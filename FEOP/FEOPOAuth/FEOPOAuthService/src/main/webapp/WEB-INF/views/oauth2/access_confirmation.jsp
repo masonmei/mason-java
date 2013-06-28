@@ -24,7 +24,14 @@ form input {
 <body>
 	<div id="container">
 		<div id="header">
-			<div id="header-left">Open Auth Platform</div>
+			<div id="header-left">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<a href="<c:url value="/home"/>">Open Auth Platform</a>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/"/>">Open Auth Platform</a>
+				</authz:authorize>
+			</div>
 		</div>
 		<div id="content">
 			<%

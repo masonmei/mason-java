@@ -15,7 +15,14 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<div id="header-left">Open Auth Platform</div>
+			<div id="header-left">
+				<authz:authorize ifAllGranted="ROLE_USER">
+					<a href="<c:url value="/home"/>">Open Auth Platform</a>
+				</authz:authorize>
+				<authz:authorize ifNotGranted="ROLE_USER">
+					<a href="<c:url value="/"/>">Open Auth Platform</a>
+				</authz:authorize>
+			</div>
 			<div id="header-right">
 				<authz:authorize ifAllGranted="ROLE_USER">
 					<div style="text-align: center">
@@ -31,7 +38,31 @@
 
 		<div id="content">
 			<div id="content-header">
-				<h2>My Applications</h2>
+				<div id="content-header-left">
+					<h2>My Applications</h2>
+				</div>
+				<div id="content-header-right">
+					<div id="menu-bar">
+						<ul id="main-menu">
+							<li><a href="<c:url value="/home"/>">Home</a></li>
+							<li><a href="<c:url value="/profile/"/>">Profile</a>
+								<ul class="sub-menu">
+									<li><a href="<c:url value="/profile/changepwd"/>">Change
+											Password</a></li>
+									<li><a href="<c:url value="/profile/"/>">Profile</a></li>
+									<li><a href="<c:url value="/profile/update"/>">Update
+											Profile</a></li>
+								</ul></li>
+							<li><a href="<c:url value="/client/list"/>">Applications</a>
+								<ul class="sub-menu">
+									<li><a href="<c:url value="/client/list"/>">My
+											Application</a></li>
+									<li><a href="<c:url value="/client/"/>">New
+											Application</a></li>
+								</ul></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 
 			<div id="content-body">
@@ -42,40 +73,42 @@
 								<c:out value="${app.clientId }" />
 							</div>
 							<div class="widget-body">
-								<div>
-									<label>Application Id:</label><label><c:out
+								<div class="line">
+									<label class="left">Application Id:</label><label class="right"><c:out
 											value="${app.clientId }" /></label>
 								</div>
-								<div>
-									<label>Client Secret:</label><label><c:out
+								<div class="line">
+									<label class="left">Client Secret:</label><label class="right"><c:out
 											value="${app.clientSecret }" /></label>
 								</div>
-								<div>
-									<label>Authorized Grant Types:</label><label><c:out
+								<div class="line">
+									<label class="left">Authorized Grant Types:</label><label
+										class="right"><c:out
 											value="${app.authorizedGrantTypes }" /></label>
 								</div>
-								<div>
-									<label>Authorities:</label><label><c:out
+								<div class="line">
+									<label class="left">Authorities:</label><label class="right"><c:out
 											value="${app.authorities }" /></label>
 								</div>
-								<div>
-									<label>Resource Ids:</label><label><c:out
+								<div class="line">
+									<label class="left">Resource Ids:</label><label class="right"><c:out
 											value="${app.resourceIds }" /></label>
 								</div>
-								<div>
-									<label>Scope:</label><label><c:out
+								<div class="line">
+									<label class="left">Scope:</label><label class="right"><c:out
 											value="${app.clientId }" /></label>
 								</div>
-								<div>
-									<label>Redirect Uri:</label><label><c:out
+								<div class="line">
+									<label class="left">Redirect Uri:</label><label class="right"><c:out
 											value="${app.scope }" /></label>
 								</div>
-								<div>
-									<label>Additional Info:</label><label><c:out
-											value="${app.additionalInfo }" /></label>
+								<div class="line">
+									<label class="left">Additional Info:</label><label
+										class="right"><c:out value="${app.additionalInfo }" /></label>
 								</div>
-								<div>
-									<a href='<c:url value="/client/delete/${app.clientId }"/>'>Delete</a>
+								<div class="line">
+									<label class="left"><a
+										href='<c:url value="/client/delete/${app.clientId }"/>'>Delete</a></label>
 								</div>
 							</div>
 						</div>

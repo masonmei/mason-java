@@ -7,9 +7,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Home</title>
-<link type="text/css" rel="stylesheet"
-	href="<c:url value="/resources/css/default.css"/>" />
+<c:url var="defaultCss" value="/resources/css/default.css" />
+
+<title>Open Auth Platform</title>
+<link rel="stylesheet" href="${defaultCss }" />
 </head>
 <body>
 	<div id="container">
@@ -38,7 +39,7 @@
 		<div id="content">
 			<div id="content-header">
 				<div id="content-header-left">
-					<h2>Welcome to OAuth Platform</h2>
+					<h2>Change Password</h2>
 				</div>
 				<div id="content-header-right">
 					<div id="menu-bar">
@@ -64,12 +65,54 @@
 				</div>
 			</div>
 			<div id="content-body">
-				<h1>You have been login!</h1>
-				<hr>
-				<h3>Welcome to Open Oauth Platform</h3>
+				<div id="login-form">
+					<div id="login-form-header">Change Password</div>
+					<div id="login-form-content">
+						<c:url value="/profile/changesecret" var="updateSecret" />
+						<form id="loginForm" name="changePasswordForm"
+							action="${updateSecret }" method="post">
+							<c:if test="${null != msg}">
+								<div style="color: red;">
+									<label>Result: <c:out value="${msg }"></c:out></label>
+								</div>
+							</c:if>
+							<s:hasBindErrors htmlEscape="true" name="changePasswordForm">
+								<c:if test="${errors.errorCount gt 0}">
+									<h4>Errors:</h4>
+									<font color="red"> <c:forEach
+											items="${errors.allErrors}" var="error">
+											<s:message code="${error.code}"
+												arguments="${error.arguments}"
+												text="${error.defaultMessage}" />
+											<br />
+										</c:forEach>
+									</font>
+								</c:if>
+							</s:hasBindErrors>
+							<div class="line">
+								<label class="left">Old Password: </label><input type="password"
+									name='oldPassword' class="right" />
+							</div>
+							<div class="line">
+								<label class="left">New Password: </label><input type="password"
+									name='newPassword' class="right" />
+							</div>
+							<div class="line">
+								<label class="left">Repeat Password: </label><input
+									type="password" name='repeatPassword' class="right" />
+							</div>
+							<div class="line">
+								<input class="left" name="login" value="Change Password"
+									type="submit">
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
+
 		</div>
 	</div>
+
 	<div id="footer">Copyright &copy 2013 oauth.com. All rights
 		reserved.</div>
 </body>

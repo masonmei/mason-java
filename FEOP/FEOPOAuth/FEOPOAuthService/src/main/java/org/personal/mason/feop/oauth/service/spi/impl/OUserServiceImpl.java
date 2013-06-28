@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 @Service
 public class OUserServiceImpl implements OUserService {
 	private OauthUserDao userDao;
@@ -49,7 +47,14 @@ public class OUserServiceImpl implements OUserService {
 	@Override
 	@Transactional
 	public void update(OauthUser user) {
-		throw new NotImplementedException();
+		userDao.udpate(user);
+	}
+	
+	@Transactional
+	public void updatePassword(OauthUser user, String password) {
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		userDao.udpate(user);
 	}
 
 	@Override

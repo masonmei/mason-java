@@ -3,13 +3,15 @@
 <%@ taglib prefix="authz"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="Signup" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Home</title>
+<title><c:out value="${pageTitle }" /></title>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/resources/css/default.css"/>" />
+
 </head>
 <body>
 	<div id="container">
@@ -38,7 +40,7 @@
 		<div id="content">
 			<div id="content-header">
 				<div id="content-header-left">
-					<h2>Welcome to OAuth Platform</h2>
+					<h2>User Profile</h2>
 				</div>
 				<div id="content-header-right">
 					<div id="menu-bar">
@@ -64,9 +66,36 @@
 				</div>
 			</div>
 			<div id="content-body">
-				<h1>You have been login!</h1>
-				<hr>
-				<h3>Welcome to Open Oauth Platform</h3>
+				<div id="login-form">
+					<div id="login-form-header">User Profile</div>
+					<c:if test="${userForm != null}"></c:if>
+					<div id="login-form-content">
+						<c:url value="/profile/update" var="update" />
+						<div class="line">
+							<label class="left">User Id:</label><label class="right"><c:out
+									value="${userForm.userId }" /></label>
+						</div>
+						<div class="line">
+							<label class="left">User Name:</label><label class="right"><c:out
+									value="${userForm.userName }" /></label>
+						</div>
+						<div class="line">
+							<label class="left">Email:</label><label class="right"><c:out
+									value="${userForm.email }" /></label>
+						</div>
+						<div class="line">
+							<label class="left">Phone:</label><label class="right"><c:out
+									value="${userForm.phone }" /></label>
+						</div>
+						<div class="line">
+							<label class="left">Status:</label><label class="right"><c:out
+									value="${userForm.activated }" /></label>
+						</div>
+						<div class="line">
+							<label class="left"><a href="${update }">Edit Profile</a></label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

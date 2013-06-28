@@ -51,9 +51,9 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		log.debug("start save entity [" + entity + "]");
 		try {
 			EntityManager entityManager = getEntityManager();
-			 entityManager.getTransaction().begin();
-			 entityManager.persist(entity);
-			 entityManager.getTransaction().commit();
+			entityManager.getTransaction().begin();
+			entityManager.persist(entity);
+			entityManager.getTransaction().commit();
 			log.debug("end save entity [" + entity + "]");
 		} catch (Exception e) {
 			log.debug("exception save entity [" + entity + "]");
@@ -69,7 +69,10 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	public void udpate(T entity) {
 		log.debug("start update entity [" + entity + "]");
 		try {
-			getEntityManager().merge(entity);
+			EntityManager entityManager = getEntityManager();
+			entityManager.getTransaction().begin();
+			entityManager.merge(entity);
+			entityManager.getTransaction().commit();
 			log.debug("end update entity [" + entity + "]");
 		} catch (Exception e) {
 			log.debug("exception delete entity [" + entity + "]");
@@ -92,7 +95,10 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 	public void removeObject(T entity) {
 		log.debug("exception delete entity [" + entity + "]");
 		try {
-			getEntityManager().remove(entity);
+			EntityManager entityManager = getEntityManager();
+			entityManager.getTransaction().begin();
+			entityManager.remove(entity);
+			entityManager.getTransaction().commit();
 			log.debug("exception delete entity");
 		} catch (Exception e) {
 			log.debug("exception delete entity", e);

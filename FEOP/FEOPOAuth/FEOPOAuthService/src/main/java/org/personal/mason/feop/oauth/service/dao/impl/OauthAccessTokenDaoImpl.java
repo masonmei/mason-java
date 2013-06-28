@@ -39,6 +39,7 @@ public class OauthAccessTokenDaoImpl extends GenericDaoImpl<OauthAccessToken> im
 	public void removeAccessTokenByTokenId(String tokenId) {
 		try {
 			EntityManager entityManager = getEntityManager();
+			entityManager.getTransaction().begin();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			CriteriaDelete<OauthAccessToken> criteriaDelete = criteriaBuilder.createCriteriaDelete(OauthAccessToken.class);
 			Root<OauthAccessToken> root = criteriaDelete.from(OauthAccessToken.class);
@@ -46,6 +47,7 @@ public class OauthAccessTokenDaoImpl extends GenericDaoImpl<OauthAccessToken> im
 			criteriaDelete.where(wherePredicate);
 			Query query = entityManager.createQuery(criteriaDelete);
 			query.executeUpdate();
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 		}
 	}
@@ -54,6 +56,7 @@ public class OauthAccessTokenDaoImpl extends GenericDaoImpl<OauthAccessToken> im
 	public void removeAccessTokenByRefreshToken(String refreshToken) {
 		try {
 			EntityManager entityManager = getEntityManager();
+			entityManager.getTransaction().begin();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			CriteriaDelete<OauthAccessToken> criteriaDelete = criteriaBuilder.createCriteriaDelete(OauthAccessToken.class);
 			Root<OauthAccessToken> root = criteriaDelete.from(OauthAccessToken.class);
@@ -61,6 +64,7 @@ public class OauthAccessTokenDaoImpl extends GenericDaoImpl<OauthAccessToken> im
 			criteriaDelete.where(wherePredicate);
 			Query query = entityManager.createQuery(criteriaDelete);
 			query.executeUpdate();
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 		}
 	}

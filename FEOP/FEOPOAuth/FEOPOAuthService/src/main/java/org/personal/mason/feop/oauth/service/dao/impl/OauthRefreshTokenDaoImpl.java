@@ -36,6 +36,7 @@ public class OauthRefreshTokenDaoImpl extends GenericDaoImpl<OauthRefreshToken> 
 	public void removeRefreshTokenByTokenId(String tokenId) {
 		try {
 			EntityManager entityManager = getEntityManager();
+			entityManager.getTransaction().begin();
 			CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 			CriteriaDelete<OauthRefreshToken> criteriaDelete = criteriaBuilder.createCriteriaDelete(OauthRefreshToken.class);
 			Root<OauthRefreshToken> root = criteriaDelete.from(OauthRefreshToken.class);
@@ -43,6 +44,7 @@ public class OauthRefreshTokenDaoImpl extends GenericDaoImpl<OauthRefreshToken> 
 			criteriaDelete.where(wherePredicate);
 			Query query = entityManager.createQuery(criteriaDelete);
 			query.executeUpdate();
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 		}
 	}

@@ -3,13 +3,15 @@
 <%@ taglib prefix="authz"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="Signup" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Home</title>
+<title><c:out value="${pageTitle }" /></title>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/resources/css/default.css"/>" />
+
 </head>
 <body>
 	<div id="container">
@@ -38,7 +40,7 @@
 		<div id="content">
 			<div id="content-header">
 				<div id="content-header-left">
-					<h2>Welcome to OAuth Platform</h2>
+					<h2>User Profile</h2>
 				</div>
 				<div id="content-header-right">
 					<div id="menu-bar">
@@ -64,9 +66,37 @@
 				</div>
 			</div>
 			<div id="content-body">
-				<h1>You have been login!</h1>
-				<hr>
-				<h3>Welcome to Open Oauth Platform</h3>
+				<div id="login-form">
+					<div id="login-form-header">User Profile</div>
+					<c:if test="${userForm != null}"></c:if>
+					<div id="login-form-content">
+						<c:url value="/profile/update" var="update" />
+						<form action="${update }" method="post">
+							<div class="line">
+								<label class="left">User Id:</label><input type="text"
+									value="${userForm.userId }" name="userForm.userId"
+									disabled="disabled" class="right" />
+							</div>
+							<div class="line">
+								<label class="left">User Name:</label><input type="text"
+									value="${userForm.userName }" name="userForm.userName"
+									class="right" />
+							</div>
+							<div class="line">
+								<label class="left">Email:</label><input type="text"
+									value="${userForm.email }" name="userForm.email"
+									disabled="disabled" class="right" />
+							</div>
+							<div class="line">
+								<label class="left">Phone:</label><input type="text"
+									value="${userForm.phone }" name="userForm.phone" class="right" />
+							</div>
+							<div class="line">
+								<input type="submit" value="Update Profile" class="left" />
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
