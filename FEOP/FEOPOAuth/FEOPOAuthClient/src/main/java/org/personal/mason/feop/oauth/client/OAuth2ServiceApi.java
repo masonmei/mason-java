@@ -9,14 +9,14 @@ import org.scribe.utils.OAuthEncoder;
 
 public class OAuth2ServiceApi extends DefaultApi20 {
 
-	private static final String PREFIX = "http://http://oauth.aws.af.cm/";
+	private static final String PREFIX = "http://localhost:8888/";
 
-	private static final String AUTHORIZE_URL = PREFIX + "/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
+	private static final String AUTHORIZE_URL = PREFIX + "oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
 	private static final String SCOPED_AUTHORIZE_URL = AUTHORIZE_URL + "&scope=%s";
 
 	@Override
 	public String getAccessTokenEndpoint() {
-		return PREFIX + "/oauth/token?grant_type=authorization_code";
+		return PREFIX + "oauth/token?grant_type=authorization_code";
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class OAuth2ServiceApi extends DefaultApi20 {
 
 	@Override
 	public Verb getAccessTokenVerb() {
-		return Verb.POST;
+		return Verb.GET;
 	}
 
 	@Override

@@ -27,5 +27,6 @@
 		<module>FEOPOAuthResource</module>
 		<module>FEOPOAuthService</module>
 		<module>FEOPOAuthService2</module>
+		<module>FEOPOAuthCommon</module>
 	</modules>
 </project>

@@ -11,15 +11,15 @@ import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
 public class Main {
-	private static final String PROTECTED_RESOURCE_URL = "http://www.baidu.com/";
+	private static final String PROTECTED_RESOURCE_URL = "http://localhost:8888/oauth2/";
 	
-//	private static final String SECRET_KEY = "5546407edc3af59f";
-//	private static final String API_KEY = "authcode";
-	private static final String SECRET_KEY = "Stxaivj1986";
-	private static final String API_KEY = "mason.mei@gmail.com";
+	private static final String SECRET_KEY = "7c3eb26cd5449a49";
+	private static final String API_KEY = "test";
+//	private static final String SECRET_KEY = "Stxaivj1986";
+//	private static final String API_KEY = "mason.mei@gmail.com";
 	private static final Token EMPTY_TOKEN = null;
 
-	private static final String CALLBACK = "http://www.baidu.com/";
+	private static final String CALLBACK = "http://localhost:8888/oauth2/";
 	
 	public static void main(String[] args) {
 		OAuthService service = new ServiceBuilder().provider(OAuth2ServiceApi.class).apiKey(API_KEY).apiSecret(SECRET_KEY).callback(CALLBACK).build();
