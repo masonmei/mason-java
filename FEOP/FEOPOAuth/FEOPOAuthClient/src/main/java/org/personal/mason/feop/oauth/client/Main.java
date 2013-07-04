@@ -11,20 +11,21 @@ import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
 public class Main {
-	private static final String PROTECTED_RESOURCE_URL = "http://www.baidu.com/";
+	private static final String PROTECTED_RESOURCE_URL = "http://oauth.aws.af.cm/";
 	
-//	private static final String SECRET_KEY = "5546407edc3af59f";
-//	private static final String API_KEY = "authcode";
-	private static final String SECRET_KEY = "Stxaivj1986";
-	private static final String API_KEY = "mason.mei@gmail.com";
+//	private static final String SECRET_KEY = "Stxaivj1986";
+//	private static final String API_KEY = "mason.mei@gmail.com";
+	private static final String SECRET_KEY = "df8cd692eebcbe76";
+	private static final String API_KEY = "mason-test";
 	private static final Token EMPTY_TOKEN = null;
 
-	private static final String CALLBACK = "http://www.baidu.com/";
+	private static final String CALLBACK = "http://oauth.aws.af.cm/";
 	
 	public static void main(String[] args) {
 		OAuthService service = new ServiceBuilder().provider(OAuth2ServiceApi.class).apiKey(API_KEY).apiSecret(SECRET_KEY).callback(CALLBACK).build();
 		Scanner in = new Scanner(System.in);
 
+		
 	    System.out.println("=== Oauth2's OAuth Workflow ===");
 	    System.out.println();
 

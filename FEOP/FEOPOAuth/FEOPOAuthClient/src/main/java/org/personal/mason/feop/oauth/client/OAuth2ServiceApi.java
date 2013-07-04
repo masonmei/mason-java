@@ -9,7 +9,7 @@ import org.scribe.utils.OAuthEncoder;
 
 public class OAuth2ServiceApi extends DefaultApi20 {
 
-	private static final String PREFIX = "http://http://oauth.aws.af.cm/";
+	private static final String PREFIX = "http://oauth.aws.af.cm/";
 
 	private static final String AUTHORIZE_URL = PREFIX + "/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
 	private static final String SCOPED_AUTHORIZE_URL = AUTHORIZE_URL + "&scope=%s";
