@@ -17,11 +17,10 @@
 
 	<security:http pattern="/resources/**" security="none" />
 	<security:global-method-security pre-post-annotations="enabled" proxy-target-class="true">
-		<!--you could also wire in the expression handler up at the layer of the http filters. See https://jira.springsource.org/browse/SEC-1452 -->
 		<security:expression-handler ref="oauthExpressionHandler" />
 	</security:global-method-security>
+	
 	<oauth2:expression-handler id="oauthExpressionHandler" />
-
 	<oauth2:web-expression-handler id="oauthWebExpressionHandler" />
 
 	<!-- 获取Accesson Token -->
@@ -34,19 +33,26 @@
 		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
 	</security:http>
 
-	<security:http pattern="/oauth/(users|clients)/.*" request-matcher="regex" create-session="stateless" entry-point-ref="oauthAuthenticationEntryPoint"
-		use-expressions="true">
-		<security:anonymous enabled="false" />
-		<security:intercept-url pattern="/oauth/users/([^/].*?)/tokens/.*"
-			access="#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('write')" method="DELETE" />
-		<security:intercept-url pattern="/oauth/users/.*"
-			access="#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('read')" method="GET" />
-		<security:intercept-url pattern="/oauth/clients/.*"
-			access="#oauth2.clientHasRole('ROLE_CLIENT') and #oauth2.isClient() and #oauth2.hasScope('read')" method="GET" />
-		<security:intercept-url pattern="/**" access="denyAll()" />
-		<security:custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
-		<security:access-denied-handler ref="oauthAccessDeniedHandler" />
-		<security:expression-handler ref="oauthWebExpressionHandler" />
+<!-- 	<security:http pattern="/oauth/(users|clients)/.*" request-matcher="regex" create-session="stateless" entry-point-ref="oauthAuthenticationEntryPoint" -->
+<!-- 		use-expressions="true"> -->
+<!-- 		<security:anonymous enabled="false" /> -->
+<!-- 		<security:intercept-url pattern="/oauth/users/([^/].*?)/tokens/.*" -->
+<!-- 			access="#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('write')" method="DELETE" /> -->
+<!-- 		<security:intercept-url pattern="/oauth/users/.*" -->
+<!-- 			access="#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('read')" method="GET" /> -->
+<!-- 		<security:intercept-url pattern="/oauth/clients/.*" -->
+<!-- 			access="#oauth2.clientHasRole('ROLE_CLIENT') and #oauth2.isClient() and #oauth2.hasScope('read')" method="GET" /> -->
+<!-- 		<security:intercept-url pattern="/**" access="denyAll()" /> -->
+<!-- 		<security:custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" /> -->
+<!-- 		<security:access-denied-handler ref="oauthAccessDeniedHandler" /> -->
+<!-- 		<security:expression-handler ref="oauthWebExpressionHandler" /> -->
+<!-- 	</security:http> -->
+	
+	<security:http pattern="/token/**" create-session="stateless" authentication-manager-ref="clientAuthenticationManager">
+		<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+		<security:anonymous enabled="false"/>
+		<security:http-basic entry-point-ref="clientAuthenticationEntryPoint"/>
+		<security:access-denied-handler ref="oauthAccessDeniedHandler"/>
 	</security:http>
 
 	<!-- The OAuth2 protected resources are separated out into their own block so we can deal with authorization and error handling separately. This 

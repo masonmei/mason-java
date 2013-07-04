@@ -5,7 +5,10 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="context-root" value="FEOPOAuthClient"/>
+        <dependent-module archiveName="feopoauthcommon-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/FEOPOAuthCommon/FEOPOAuthCommon">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/FEOPOAuthClient/target/classes"/>
+        <property name="context-root" value="feopoauthclient"/>
     </wb-module>
 </project-modules>
