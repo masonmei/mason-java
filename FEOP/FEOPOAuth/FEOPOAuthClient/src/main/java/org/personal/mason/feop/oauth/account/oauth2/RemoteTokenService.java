@@ -1,10 +1,10 @@
-package org.personal.mason.feop.oauth.client.oauth2;
+package org.personal.mason.feop.oauth.account.oauth2;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.personal.mason.feop.oauth.common.AppToken;
+import org.personal.mason.feop.oauth.common.oauth.AppToken;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

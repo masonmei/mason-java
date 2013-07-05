@@ -14,7 +14,7 @@ public class UserAddress extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id", insertable=false, updatable=false)
 	private AccountUser accountUser;
 	@Column(name = "line_one", nullable = false)
 	private String lineOne;

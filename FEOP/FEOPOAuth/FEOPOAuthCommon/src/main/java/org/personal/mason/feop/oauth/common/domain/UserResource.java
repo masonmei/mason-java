@@ -24,7 +24,7 @@ public class UserResource extends AbstractPersistable<Long> {
 	@Column(name = "desc")
 	private String description;
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id", insertable=false, updatable=false)
 	private AccountUser accountUser;
 
 	public String getResourcename() {

@@ -1,10 +1,10 @@
 package org.personal.mason.feop.oauth.service.repository;
 
-import org.personal.mason.feop.oauth.service.domain.OauthCode;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.lang.String;
 import java.util.List;
 
-public interface OauthCodeRepository extends JpaRepository<OauthCode, Long> {
+import org.personal.mason.feop.oauth.common.data.FEOPJpaRepository;
+import org.personal.mason.feop.oauth.service.domain.OauthCode;
+
+public interface OauthCodeRepository extends FEOPJpaRepository<OauthCode, Long> {
 	List<OauthCode> findByCode(String code);
 }

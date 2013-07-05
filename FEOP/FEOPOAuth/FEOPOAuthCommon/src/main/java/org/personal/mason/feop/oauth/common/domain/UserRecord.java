@@ -18,7 +18,7 @@ public class UserRecord extends AbstractPersistable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id", insertable=false, updatable=false)
 	private AccountUser accountUser;
 
 	@Column(name = "type")

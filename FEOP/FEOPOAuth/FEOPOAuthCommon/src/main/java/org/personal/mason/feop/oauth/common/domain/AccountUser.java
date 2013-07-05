@@ -11,6 +11,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.personal.mason.feop.oauth.common.utils.DateUtils;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -28,6 +29,8 @@ public class AccountUser extends AbstractPersistable<Long> {
 	private String preferName;
 	@Column(name = "birth")
 	private Date birth;
+	@Column(name = "birth_month_day")
+	private String birthMonthDay;
 	@Column(name = "nation")
 	private String nation;
 	@Lob
@@ -78,6 +81,9 @@ public class AccountUser extends AbstractPersistable<Long> {
 	}
 
 	public Date getBirth() {
+		if (this.birthMonthDay == null) {
+			this.birthMonthDay = DateUtils.getMonthAndDay(birth);
+		}
 		return birth;
 	}
 
@@ -165,4 +171,11 @@ public class AccountUser extends AbstractPersistable<Long> {
 		this.resources = resources;
 	}
 
+	public String getBirthMonthDay() {
+		return birthMonthDay;
+	}
+
+	public void setBirthMonthDay(String birthMonthDay) {
+		this.birthMonthDay = birthMonthDay;
+	}
 }

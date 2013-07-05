@@ -36,7 +36,7 @@
 
 	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
 
-	<bean id="tokenServices" class="org.personal.mason.feop.oauth.client.oauth2.RemoteTokenService">
+	<bean id="tokenServices" class="org.personal.mason.feop.oauth.account.oauth2.RemoteTokenService">
 		<property name="checkTokenEntryPointUri" value="${checkTokenEntryPointUri}" />
 		<property name="clientId" value="${clientId}" />
 		<property name="clientSecret" value="${clientSecret}" />

@@ -1,8 +1,8 @@
 package org.personal.mason.feop.oauth.service.mvc.controllers;
 
-import org.personal.mason.feop.oauth.common.AccessTokenConverter;
-import org.personal.mason.feop.oauth.common.AppToken;
-import org.personal.mason.feop.oauth.common.DefaultTokenConverter;
+import org.personal.mason.feop.oauth.common.oauth.AccessTokenConverter;
+import org.personal.mason.feop.oauth.common.oauth.AppToken;
+import org.personal.mason.feop.oauth.common.oauth.DefaultTokenConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;

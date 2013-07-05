@@ -6,7 +6,7 @@
 		<artifactId>feopoauth</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>FEOPOAuthService2</artifactId>
+	<artifactId>feopoauthservice2</artifactId>
 	<packaging>war</packaging>
 	<description>This will be using the spring-data-jpa instead.</description>
 
@@ -205,7 +205,7 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.personal.mason.feop.oauth</groupId>
+			<groupId>org.personal.mason.feop.oauth.common</groupId>
 			<artifactId>feopoauthcommon</artifactId>
 			<version>1.0</version>
 		</dependency>

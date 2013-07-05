@@ -1,4 +1,4 @@
-package org.personal.mason.feop.oauth.common;
+package org.personal.mason.feop.oauth.common.oauth;
 
 import java.util.Collection;
 import java.util.HashSet;
