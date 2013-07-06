@@ -13,8 +13,8 @@
 		</property>
 	</bean>
 
-	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
-		p:username="${jdbc.username}" p:password="${jdbc.password}" />
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" p:driverClassName="${oauth2.jdbc.driverClassName}" p:url="${oauth2.jdbc.url}"
+		p:username="${oauth2.jdbc.username}" p:password="${oauth2.jdbc.password}" />
 
 
 
@@ -38,7 +38,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-		
+
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 </beans>

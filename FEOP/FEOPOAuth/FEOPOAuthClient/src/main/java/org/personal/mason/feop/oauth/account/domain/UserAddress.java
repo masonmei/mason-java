@@ -5,16 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+@XmlRootElement
 @Entity
-@Table(name = "user_address")
+@Table(name = "user_address", schema = "account")
 public class UserAddress extends AbstractPersistable<Long> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5226962214469019278L;
+
 	@ManyToOne
-	@JoinColumn(name = "id", insertable=false, updatable=false)
+	@JoinColumn(insertable = false, updatable = false)
 	private AccountUser accountUser;
 	@Column(name = "line_one", nullable = false)
 	private String lineOne;
@@ -24,8 +27,8 @@ public class UserAddress extends AbstractPersistable<Long> {
 	private String lineThree;
 	@Column(name = "postcode")
 	private String postcode;
-	@Column(name = "primary")
-	private Boolean primary = false;
+	@Column(name = "prefer")
+	private boolean primary = false;
 
 	public AccountUser getAccountUser() {
 		return accountUser;
@@ -67,11 +70,11 @@ public class UserAddress extends AbstractPersistable<Long> {
 		this.postcode = postcode;
 	}
 
-	public Boolean getPrimary() {
+	public boolean isPrimary() {
 		return primary;
 	}
 
-	public void setPrimary(Boolean primary) {
+	public void setPrimary(boolean primary) {
 		this.primary = primary;
 	}
 

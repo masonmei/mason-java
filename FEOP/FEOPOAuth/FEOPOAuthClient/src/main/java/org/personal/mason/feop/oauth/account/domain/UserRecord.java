@@ -8,25 +8,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+@XmlRootElement
 @Entity
-@Table(name = "user_record")
+@Table(name = "user_record", schema = "account")
 public class UserRecord extends AbstractPersistable<Long> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1107596563882680513L;
 
 	@ManyToOne
-	@JoinColumn(name = "id", insertable=false, updatable=false)
+	@JoinColumn(name = "account_id", insertable = false, updatable = false)
 	private AccountUser accountUser;
 
 	@Column(name = "type")
 	private String type;
 	@Column(name = "start_date")
-	private Date startdate;
+	private Date startDate;
 	@Column(name = "end_date")
-	private Date enddate;
+	private Date endDate;
 	@Lob
 	@Column(name = "accomplishment")
 	private String accomplishment;
@@ -50,20 +52,20 @@ public class UserRecord extends AbstractPersistable<Long> {
 		this.type = type;
 	}
 
-	public Date getStartdate() {
-		return startdate;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getEnddate() {
-		return enddate;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getAccomplishment() {

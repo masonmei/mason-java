@@ -5,23 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+@XmlRootElement
 @Entity
-@Table(name = "user_im")
+@Table(name = "user_im", schema = "account")
 public class UserIM extends AbstractPersistable<Long> {
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 3198628485147962004L;
 	@ManyToOne
-	@JoinColumn(name = "id", insertable=false, updatable=false)
+	@JoinColumn(insertable = false, updatable = false)
 	private AccountUser accountUser;
 	@Column(name = "label")
 	private String label;
 	@Column(name = "content")
 	private String content;
-	@Column(name = "primary")
-	private Boolean primary = false;
+	@Column(name = "prefer")
+	private boolean primary = false;
 
 	public AccountUser getAccountUser() {
 		return accountUser;
@@ -47,11 +49,11 @@ public class UserIM extends AbstractPersistable<Long> {
 		this.content = content;
 	}
 
-	public Boolean getPrimary() {
+	public boolean isPrimary() {
 		return primary;
 	}
 
-	public void setPrimary(Boolean primary) {
+	public void setPrimary(boolean primary) {
 		this.primary = primary;
 	}
 

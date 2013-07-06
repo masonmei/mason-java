@@ -8,39 +8,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+@XmlRootElement
 @Entity
-@Table(name = "user_resource")
+@Table(name = "user_resource", schema = "account")
 public class UserResource extends AbstractPersistable<Long> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5091483402074546672L;
 	@Column(name = "resource_name")
-	private String resourcename;
+	private String resourceName;
 	@Column(name = "build_date")
-	private Date builddate;
+	private Date buildDate;
 	@Lob
-	@Column(name = "desc")
+	@Column(name = "description")
 	private String description;
 	@ManyToOne
-	@JoinColumn(name = "id", insertable=false, updatable=false)
+	@JoinColumn(name = "account_id", insertable = false, updatable = false)
 	private AccountUser accountUser;
 
-	public String getResourcename() {
-		return resourcename;
+	public String getResourceName() {
+		return resourceName;
 	}
 
-	public void setResourcename(String resourcename) {
-		this.resourcename = resourcename;
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
 	}
 
-	public Date getBuilddate() {
-		return builddate;
+	public Date getBuildDate() {
+		return buildDate;
 	}
 
-	public void setBuilddate(Date builddate) {
-		this.builddate = builddate;
+	public void setBuildDate(Date buildDate) {
+		this.buildDate = buildDate;
 	}
 
 	public String getDescription() {

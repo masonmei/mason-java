@@ -9,4 +9,7 @@
   <groupId>org.personal.mason.feop.server</groupId>
   <artifactId>feopserver</artifactId>
   <packaging>pom</packaging>
+  <modules>
+  	<module>FEOPServerBlog</module>
+  </modules>
 </project>

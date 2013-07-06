@@ -10,17 +10,19 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.personal.mason.feop.oauth.common.utils.DateUtils;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+@XmlRootElement
 @Entity
-@Table(name = "account_info")
+@Table(name = "account_info", schema = "account")
 public class AccountUser extends AbstractPersistable<Long> {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5893645164696913949L;
 
-	@Column(name = "user_id", nullable = false, unique = true, columnDefinition = "this is the unique id of the system user, this is from the oauth system")
+	@Column(name = "user_id", nullable = false, unique = true)
 	private String userId;
 
 	@Column(name = "user_name")

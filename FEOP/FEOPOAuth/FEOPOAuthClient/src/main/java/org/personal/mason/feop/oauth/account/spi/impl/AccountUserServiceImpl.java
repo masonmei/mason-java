@@ -9,6 +9,7 @@ import org.personal.mason.feop.oauth.account.spi.AccountUserService;
 import org.personal.mason.feop.oauth.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AccountUserServiceImpl implements AccountUserService {
@@ -20,32 +21,34 @@ public class AccountUserServiceImpl implements AccountUserService {
 		this.accountUserRepository = accountUserRepository;
 	}
 
+	@Transactional
 	public AccountUser findUserByUserId(String userId) {
 		List<AccountUser> accountUsers = accountUserRepository.findByUserId(userId);
 		return accountUsers.isEmpty() ? null : accountUsers.get(0);
 	}
 
+	@Transactional
 	public List<AccountUser> findUsersByBirth(Date date) {
 		String birthMonthAndDay = DateUtils.getMonthAndDay(date);
 		return accountUserRepository.findByBirthMonthDay(birthMonthAndDay);
 	}
 
+	@Transactional
 	@Override
 	public AccountUser findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountUserRepository.findOne(id);
 	}
 
+	@Transactional
 	@Override
 	public void createAccount(AccountUser accountUser) {
-		// TODO Auto-generated method stub
-
+		accountUserRepository.save(accountUser);
 	}
 
+	@Transactional
 	@Override
 	public AccountUser updateAccount(AccountUser accountUser) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountUserRepository.saveAndFlush(accountUser);
 	}
 
 }
