@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
+	xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2-1.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:property-placeholder location="classpath:META-INF/spring/*.properties" />
+
+	<oauth2:resource id="feop" client-id="${client.id}" access-token-uri="${access.token.uri}" type="authorization_code"
+		client-secret="${client.secret}" user-authorization-uri="${user.authorization.uri}" />
+
+	<bean id="feopService" class="org.personal.mason.feop.server.blog.mvc.oauth.FEOPService">
+		<property name="feopRestTemplate">
+			<oauth2:rest-template resource="feop" />
+		</property>
+	</bean>
+
+	<sec:http auto-config="true" use-expressions="true" access-denied-page="/denied">
+		<sec:intercept-url pattern="/resources/**" access="permitAll" />
+		<sec:intercept-url pattern="/m**" access="IS_AUTHENTICATED_FULLY" />
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<sec:custom-filter ref="oauth2ServiceFilter" position="PRE_AUTH_FILTER" />
+		<sec:anonymous />
+	</sec:http>
+
+	<sec:authentication-manager />
+
+	<!-- <bean id="tokenServices" class="com.jagex.sdp.mockesb.oauth.RemoteTokenServices">
+		<property name="checkTokenEndpointUrl" value="http://localhost:8080/authserver/check_token" />
+		<property name="clientId" value="robsgames" />
+		<property name="clientSecret" value="robssecret" />
+	</bean>
+ -->
+
+</beans>
