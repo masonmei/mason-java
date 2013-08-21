@@ -3,30 +3,21 @@ package org.personal.mason.feop.server.blog.mvc.controllers;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import org.personal.mason.feop.server.blog.mvc.oauth.FEOPService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
-	private FEOPService feopService;
 
-	@Autowired
-	public void setFeopService(FEOPService feopService) {
-		this.feopService = feopService;
-	}
+	@RequestMapping(value = { "/me/info" }, method = RequestMethod.GET)
+	public String myInfo(Model model) {
 
-	@RequestMapping(value = { "/signin" }, method = RequestMethod.GET)
-	public String signin(@RequestParam("type") String type) {
-		String authRedirectUri = getAuthenticationUrl(type);
-		if (authRedirectUri != null) {
-			System.out.println("");
-			return String.format("redirect:%s", authRedirectUri);
-		}
-		return null;
+		model.addAttribute("errormsg", "login failed");
+
+		return "app.homepage";
 	}
 
 	@RequestMapping(value = { "/signin/oauth" })

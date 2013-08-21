@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:security="http://www.springframework.org/schema/security" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" default-autowire="byName"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd"
-	default-autowire="byName">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<context:annotation-config />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
@@ -25,15 +23,30 @@
 
 	<mvc:default-servlet-handler />
 
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-				<property name="paramName" value="locale"></property>
-			</bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> 
+		<property name="paramName" value="locale"></property> </bean> </mvc:interceptor> </mvc:interceptors> -->
 
+
+	<context:property-placeholder location="classpath:META-INF/spring/*.properties" />
+
+	<bean id="configuration" class="org.personal.mason.feop.server.blog.client.oauth.ClientConfiguration" p:responseType="${response.type}"
+		p:clientId="${client.id}" p:clientSecret="${client.secret}" p:authUrl="${user.authorization.uri}" p:tokenAccessUrl="${access.token.uri}" />
+
+	<bean id="loginProcessor" class="org.personal.mason.feop.server.blog.client.oauth.code.AuthorizationCodeLoginInfoProvider"
+		p:configuration-ref="configuration" />
+
+	<bean id="processor" class="org.personal.mason.feop.server.blog.client.HTTPAuthorityProcessor">
+		<constructor-arg name="interceptors">
+			<list>
+				<bean class="org.personal.mason.feop.server.blog.client.AuthorityInterceptor" p:pattern="/resources/.*" p:security="false" />
+				<bean class="org.personal.mason.feop.server.blog.client.AuthorityInterceptor" p:pattern="/.*.ico" p:security="false" />
+				<bean class="org.personal.mason.feop.server.blog.client.AuthorityInterceptor" p:pattern="/m.*" p:access="ROLE_USER" />
+				<bean class="org.personal.mason.feop.server.blog.client.AuthorityInterceptor" p:pattern="/.*" p:access="allow" />
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"> <property name="interceptors"> 
+		<bean class="" p:loginProcessor-ref="loginProcessor" p:processor-ref="processor" /> </property> </bean> -->
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -57,20 +70,21 @@
 		<property name="order" value="1" />
 	</bean>
 
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="order" value="1" />
-		<property name="exceptionMappings">
-			<util:map>
-				<entry key="ResourceNotFoundException" value="notFoundError" />
-			</util:map>
+	<bean id="contentViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+			</map>
 		</property>
-		<property name="statusCodes">
-			<util:map>
-				<entry key="notFoundError" value="404" />
-			</util:map>
+		<property name="defaultViews">
+			<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 		</property>
-		<property name="defaultStatusCode" value="500" />
-		<property name="defaultErrorView" value="systemError" />
-		<property name="warnLogCategory" value="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" />
 	</bean>
+	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> <property name="order" value="1" /> <property name="exceptionMappings"> 
+		<util:map> <entry key="ResourceNotFoundException" value="notFoundError" /> </util:map> </property> <property name="statusCodes"> <util:map> <entry 
+		key="notFoundError" value="404" /> </util:map> </property> <property name="defaultStatusCode" value="500" /> <property name="defaultErrorView" value="systemError" 
+		/> <property name="warnLogCategory" value="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" /> </bean> -->
+	<mvc:interceptors>
+		<bean class="org.personal.mason.feop.server.blog.client.OAuthAuthorityInterceptor" />
+	</mvc:interceptors>
 </beans>

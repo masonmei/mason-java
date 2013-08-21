@@ -2,7 +2,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 <header>
@@ -16,7 +15,7 @@
 	</div>
 
 	<div id="header-right">
-		<a class="darkgray" href='<c:url value="/signin?type=feop"/>'>Login</a> <a class="gray" href="">Regist</a>
+		<a class="darkgray" href='<c:url value="/me/info"/>'>My Info</a> <a class="darkgray" href='<c:url value="/signin?type=feop"/>'>Login</a> <a class="gray" href="">Regist</a>
 	</div>
 </header>
 

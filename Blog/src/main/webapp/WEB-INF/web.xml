@@ -7,50 +7,28 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
             classpath:META-INF/spring/applicationContext.xml
-            classpath:META-INF/spring/spring-security.xml
+            classpath:META-INF/spring/blog-oauth.xml
         </param-value>
 	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- <filter> <filter-name>characterEncodingFilter</filter-name> <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+		<init-param> <param-name>encoding</param-name> <param-value>UTF-8</param-value> </init-param> <init-param> <param-name>forceEncoding</param-name> 
+		<param-value>true</param-value> </init-param> </filter> <filter-mapping> <filter-name>characterEncodingFilter</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> -->
 	<!-- <filter>
-		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>characterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
- -->
-	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
-	<!-- <filter>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
- -->
+	<!-- <filter> <filter-name>Spring OpenEntityManagerInViewFilter</filter-name> <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>Spring OpenEntityManagerInViewFilter</filter-name> <url-pattern>/*</url-pattern> </filter-mapping> -->
 	<servlet>
 		<servlet-name>blog</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -63,30 +41,4 @@
 	</servlet-mapping>
 
 
-	<!-- <jsp-config> <jsp-property-group> <url-pattern>*.jsp</url-pattern> <el-ignored>false</el-ignored> <page-encoding>UTF-8</page-encoding> <scripting-invalid>false</scripting-invalid> 
-		<include-prelude>/WEB-INF/views/common/include.jsp</include-prelude> </jsp-property-group> </jsp-config> -->
-	<!-- <error-page>
-		<error-code>400</error-code>
-		<location>/WEB-INF/views/systemError.jsp?exceptionCode=e.tm.9400</location>
-	</error-page>
-	<error-page>
-		<error-code>401</error-code>
-		<location>/WEB-INF/views/systemError.jsp?exceptionCode=e.tm.9401</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/WEB-INF/views/notFoundError.jsp?exceptionCode=e.tm.9404</location>
-	</error-page>
-	<error-page>
-		<error-code>405</error-code>
-		<location>/WEB-INF/views/systemError.jsp?exceptionCode=e.tm.9405</location>
-	</error-page>
-	<error-page>
-		<error-code>409</error-code>
-		<location>/WEB-INF/views/tokenError.jsp?exceptionCode=e.tm.9409</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/WEB-INF/views/systemError.jsp?exceptionCode=e.tm.9500</location>
-	</error-page> -->
 </web-app>
