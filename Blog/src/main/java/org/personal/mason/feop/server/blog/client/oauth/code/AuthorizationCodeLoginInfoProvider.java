@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.ClientProtocolException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -51,7 +52,7 @@ public class AuthorizationCodeLoginInfoProvider extends OAuthLoginInfoProvider {
 	}
 
 	@Override
-	public String getAccessTokenRequestUrl() {
+	public String getAccessTokenRequestUrl(String callback) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -101,50 +102,27 @@ public class AuthorizationCodeLoginInfoProvider extends OAuthLoginInfoProvider {
 			// //TODO:
 			// }
 
-			// HttpPost post = new
-			// HttpPost(getConfiguration().getTokenAccessUrl());
-			// List<NameValuePair> params = new ArrayList<>();
-			// params.add(new BasicNameValuePair("grant_type",
-			// "authorization_code"));
-			// params.add(new BasicNameValuePair("code",
-			// request.getParameter("code")));
-			//
-			// String callback = request.getRequestURL().toString();
-			// if (callback != null) {
-			// try {
-			// params.add(new BasicNameValuePair("redirect_uri",
-			// URLEncoder.encode(callback, "UTF-8")));
-			// } catch (UnsupportedEncodingException e) {
-			// }
-			// }
-			//
-			// params.add(new BasicNameValuePair("client_id",
-			// getConfiguration().getClientId()));
-			// params.add(new BasicNameValuePair("client_secret",
-			// getConfiguration().getClientSecret()));
-			// try {
-			// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(params,
-			// "UTF-8");
-			// post.setEntity(entity);
-			// // post.setHeader("Content-Type",
-			// // "application/x-www-form-urlencoded");
-			// } catch (UnsupportedEncodingException e) {
-			// }
 			try {
 				String uri = String.format(urlPattern.toString(), params.toArray());
-//				HttpResponse tokenResponse = new DefaultHttpClient().execute(new HttpGet(uri));
-//				tokenResponse.getEntity().
 				ObjectMapper mapper = new ObjectMapper();
-				Map readValue = mapper.readValue(new URL(uri), Map.class);
-				System.out.println(readValue);
+				@SuppressWarnings("unchecked")
+				Map<String, String> properties = mapper.readValue(new URL(uri), Map.class);
+				HttpSession session = request.getSession(true);
+
+				session.setAttribute(AUTHENTICATIOIN, new AuthorizationCodeAuthentication(properties));
+				response.sendRedirect(request.getRequestURI());
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public boolean isDirectlyRequestToken(HttpServletRequest request) {
+		String referer = request.getHeader("referer");
+		return referer != null && referer.contains(getConfiguration().getAuthUrl());
 	}
 
 }

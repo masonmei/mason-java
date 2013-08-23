@@ -2,8 +2,10 @@ package org.personal.mason.feop.server.blog.client.oauth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public abstract class OAuthLoginInfoProvider {
+	protected static final String AUTHENTICATIOIN = "authentication";
 
 	private ClientConfiguration configuration;
 
@@ -15,21 +17,25 @@ public abstract class OAuthLoginInfoProvider {
 
 	public abstract void processAccessToken(HttpServletRequest request, HttpServletResponse response);
 
-	public abstract String getAccessTokenRequestUrl();
+	public abstract String getAccessTokenRequestUrl(String callback);
 
-	public boolean isRefererFromOServer(HttpServletRequest request) {
-		String referer = request.getHeader("referer");
-		return referer != null && referer.contains(configuration.getAuthUrl());
-	}
+	public abstract boolean isDirectlyRequestToken(HttpServletRequest request);
 
 	public ClientConfiguration getConfiguration() {
 		return configuration;
 	}
 
 	// ===================================================================//
-	public boolean isLogin() {
-		// TODO Auto-generated method stub
+	public boolean isLogin(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session == null) {
+			return false;
+		}
+		FEOPAuthentication authentication = (FEOPAuthentication) session.getAttribute(AUTHENTICATIOIN);
+		if (authentication != null && authentication.hasValidToken()) {
+			return true;
+		}
 		return false;
 	}
-	
+
 }

@@ -28,10 +28,10 @@ public class OAuthAuthorityInterceptor extends HandlerInterceptorAdapter {
 		String requestURI = request.getRequestURI();
 
 		if (processor.needProcess(requestURI)) {
-			if (loginProcessor.isLogin()) {
+			if (loginProcessor.isLogin(request)) {
 				return true;
 			} else {
-				if (loginProcessor.isRefererFromOServer(request)) {
+				if (loginProcessor.isDirectlyRequestToken(request)) {
 					loginProcessor.processAccessToken(request, response);
 				} else {
 					response.sendRedirect(loginProcessor.getAuthorizationRequestUrl(request.getRequestURL().toString()));

@@ -32,8 +32,9 @@
 	<bean id="configuration" class="org.personal.mason.feop.server.blog.client.oauth.ClientConfiguration" p:responseType="${response.type}"
 		p:clientId="${client.id}" p:clientSecret="${client.secret}" p:authUrl="${user.authorization.uri}" p:tokenAccessUrl="${access.token.uri}" />
 
-	<bean id="loginProcessor" class="org.personal.mason.feop.server.blog.client.oauth.code.AuthorizationCodeLoginInfoProvider"
-		p:configuration-ref="configuration" />
+	<!-- <bean id="loginProcessor" class="org.personal.mason.feop.server.blog.client.oauth.code.AuthorizationCodeLoginInfoProvider" p:configuration-ref="configuration" 
+		/> -->
+	<bean id="loginProcessor" class="org.personal.mason.feop.server.blog.client.oauth.implicit.ImplicitLoginInfoProvider" p:configuration-ref="configuration" />
 
 	<bean id="processor" class="org.personal.mason.feop.server.blog.client.HTTPAuthorityProcessor">
 		<constructor-arg name="interceptors">
